@@ -1,0 +1,220 @@
+.left1,
+.right1 {
+    display: flex;
+    flex-direction: column;
+    min-width: 50%;
+}
+
+.zoomIn {
+    position: absolute;
+}
+
+.wrapper {
+    display: flex;
+    margin: 7px;
+    padding: 2px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: lightgray;
+    opacity: 83%;
+    border-radius: 30px;
+    width: fit-content;
+    height: fit-content;
+    min-width: 50%;
+    transition: .5s ease;
+}
+
+.center {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+
+.traitsTable {
+    display: flex;
+    justify-content: center;
+    overflow-wrap: normal;
+}
+
+.traitsTable table {
+    width: 80%;
+}
+
+.traitsTable tr {
+    display: flex;
+    justify-content: space-between;
+}
+
+.traitsTable td {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.traitsTable td p {
+    white-space: nowrap;
+}
+
+.trait {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: underline;
+}
+
+.price {
+    color: #3e8e41;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: larger;
+    margin: 2px;
+    transition: 0.7s;
+}
+
+.price:hover {
+    transform: scale(1.05);
+}
+
+.buy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.some {
+    display: flex;
+    flex-direction: row;
+    min-width: 100%;
+}
+
+.imageDetails {
+
+
+
+    display: flex;
+    flex-direction: column;
+
+    width: 95%;
+    transition: 0.5s ease;
+    transform: scale(1);
+}
+
+.zoom {
+    transition: 0.5s ease;
+    transform: scale(1.15);
+}
+
+.imageDetails img {
+    border-radius: 10px;
+}
+
+@media all and (max-width: 870px) {
+    .some {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .imageDetails {
+        height: 50%;
+        width: 50%;
+    }
+
+    .left1,
+    .right1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media all and (max-width: 726px) {
+    .some {
+        max-width: 300px;
+    }
+
+    .right1 {
+        max-width: 250px;
+    }
+
+    .traitsTable td p {
+        white-space: normal;
+    }
+}
+
+@media all and (max-width: 300px) {
+    .some {
+        max-width: 300px;
+    }
+
+    .right1 {
+        max-width: 222px;
+        min-width: 222px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .traitsTable tr {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .traitsTable td p {
+        white-space: normal;
+    }
+}
+
+.zoomIn {
+    transform: scale(1.2);
+    /* Adjust the scale factor as desired for zoom in */
+    transition: transform 0.3s ease-in-out;
+    /* Adjust the duration as needed */
+    position: relative;
+    z-index: 2;
+}
+
+
+.zoomOut {
+
+    transform: scale(1);
+    transition: transform 0.3s ease-in;
+    position: relative;
+    z-index: 0;
+}
+
+.zoomButton {
+
+
+    top: 10px;
+    /* Adjust the top position as needed */
+    left: 10px;
+    /* Adjust the left position as needed */
+    z-index: 1;
+    /* Ensures the button is above the image */
+}
+
+.heart {
+
+    position: relative;
+    animation: pulsate 2s infinite;
+}
+
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

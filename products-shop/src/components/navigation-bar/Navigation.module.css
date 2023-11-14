@@ -1,0 +1,80 @@
+.green {
+
+    background-color: #28a745;
+}
+
+.whiteText {
+    color: #fff;
+}
+
+.hidden {
+
+    display: none;
+}
+
+.hiding{
+
+    display: flex;
+    position:absolute;
+    bottom:100px;
+    opacity: 100%;
+    z-index: 3;
+}
+
+.itemAdded {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 85px;
+    transition: opacity 3s ease-in;
+    opacity: 0%;
+    z-index: 3
+}
+
+.cart {
+    position: relative;
+}
+
+.absolute{
+
+    bottom: 20px;
+    left: 230px;
+    color: whitesmoke;
+    position: absolute;
+    transition: transform 0.3s ease-out;
+    transform: scale(1.2);
+}
+
+
+
+.cartCounter {
+
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left:80.5%;
+    bottom: 39%;
+    margin-left: 1px;
+    margin-bottom: 1px;
+    color: white;
+    background-color: red;
+    border-radius: 100px;
+    height: 15px;
+    width: 15px;
+    font-size: 12px;
+    line-height: 15px; /* Center the text vertically */
+    text-align: center;
+    transition: transform 0.3s ease-out;
+    z-index: 5;
+    transform: scale(1.2);
+}
+
+.cartCounter:hover {
+    background-color: orangered;
+    transform: scale(1.6);
+
+}
+
+

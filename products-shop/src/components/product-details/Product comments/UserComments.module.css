@@ -1,0 +1,87 @@
+
+.commentWrapper {
+    display: flex;
+    margin: 7px;
+    padding: 2px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    background-color: lightgray;
+    opacity: 83%;
+    border-radius: 30px;
+    width: fit-content;
+    height: fit-content;
+    min-width: 50%;
+    transition: .5s ease;
+}
+
+.comment {
+
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items:center;
+    gap: 50px;
+    background-color: whitesmoke;
+    width: 95%;
+    height: fit-content;
+    border-radius: 8px;
+}
+
+.avatar{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: darkseagreen;
+    color: whitesmoke;
+    height: 60px;
+    width: 60px;
+    font-size: 20px;
+    font-weight: bolder;
+    line-height: 20px; /* Center the text vertically */
+    text-align: center;
+
+}
+
+.userName {
+
+
+    font-size: 15px;
+    line-height: 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-right: 10px;
+    text-wrap:wrap;
+    color: #3e8e41;
+    transform:scale(1.1)
+}
+
+.userName:hover{
+
+
+    text-decoration: underline;
+    transition: ease-in 0.5s;
+
+}
+
+
+.userDetails {
+
+    margin-top:8px;
+    margin-bottom: 8px;
+    margin-left: 8px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.header{
+
+    margin: 8px;
+}

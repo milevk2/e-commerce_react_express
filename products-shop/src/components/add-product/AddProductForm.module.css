@@ -1,0 +1,104 @@
+
+.contentManager  {
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+    background-color: #3e8e41;
+    border-radius: 40px;
+    min-height: 50%;
+    opacity: 83%;
+    width:fit-content;
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.managerInput {
+
+    margin-right: 20px;
+    border-radius: 5px;
+    min-height: 20px;
+    width: 100%
+}
+
+
+
+.whiteText {
+
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    margin: 15px;
+    padding: 5px;
+
+}
+
+.hidden {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 28.5%;
+    position: absolute;
+    background-color: #ffcccc;
+    color: darkred;
+    border: 1px solid darkred;
+    border-radius: 5px;
+    height:50px;
+    padding:2px;
+    opacity: 0;
+    transition: opacity 1s ease-out;
+
+}
+  .error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28.5%;
+    position: absolute;
+    opacity: 1;
+    background-color: #ffcccc;
+    color: darkred;
+    border: 1px solid darkred;
+    border-radius: 5px;
+    height:50px;
+    padding:2px;
+   
+  }
+
+.managerSubmitBtn {
+
+    width: 100%;
+    display: block;
+    align-items: center;
+    justify-content: right;
+    width: fit-content;
+    margin:3%;
+    margin-top: 10px;
+    text-align: center;
+    border-radius: 8px;
+    border:#3e8e41 1px solid;
+    position: absolute;
+    left: 45%;
+}
+
+.managerSubmitBtn:hover {
+
+    background-color:#3e8e41 ;
+    border: whitesmoke 1px solid;
+
+}
+
+@media all and (max-width:870px) {
+
+    .contentManager form td{
+
+        display: flex;
+        flex-direction: column;
+    }
+}

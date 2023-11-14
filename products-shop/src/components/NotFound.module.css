@@ -1,0 +1,29 @@
+.redirectButton {
+
+
+    border-radius: 8px;
+    border-color: whitesmoke;
+    background-color: #28a745;
+    color: whitesmoke;
+    font-family: "Roboto", Arial, sans-serif;
+    opacity: 75%;
+    box-shadow: inset;
+    margin-top: 10px;
+    margin-bottom: 25%
+}
+
+.redirectButton:hover{
+
+    scale:calc(1.1);
+    
+
+}
+
+.centered{
+
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+
+
+}

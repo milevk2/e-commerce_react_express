@@ -1,0 +1,62 @@
+.backButton {
+
+    min-width: 100%;
+    border-radius: 8px;
+    border-color: whitesmoke;
+    background-color: #28a745;
+    color: whitesmoke;
+    font-family: "Roboto", Arial, sans-serif;
+    opacity: 75%;
+    box-shadow: inset;
+    margin-top: 1%
+    
+}
+
+.flexCenterColumn{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+
+}
+
+.defaultGreenText{
+
+    color: #3e8e41
+
+}
+
+.defaultGreenBackground{
+
+    background-color: #3e8e41;
+
+}
+
+.defaultButton {
+
+    background-color: #3e8e41;
+    color:whitesmoke;
+    box-shadow: 0.2cm;
+    border-radius: 8px;
+
+}
+
+.defaultButton:hover{
+
+    border: 1px solid whitesmoke;
+    background-color:#28a745;
+}
+
+.headerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+    width: 95%;
+    height: fit-content;
+    background-color: #3e8e41;
+    color: white;
+    border-radius: 10px;
+}
