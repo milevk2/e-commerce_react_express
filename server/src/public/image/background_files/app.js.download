@@ -1,0 +1,26 @@
+import page from "./node_modules/page/page.mjs"
+import { addProductView } from "./views/addProductView.js"
+import { homeView } from "./views/homeView.js"
+import { showProduct } from "./views/showProduct.js"
+import { shopView } from "./views/shopView.js"
+import { deleteProduct, editView } from "./views/productActions.js"
+
+page('/', homeView)
+page('/Home', ()=>{window.location.href = '/'})
+page('/phones', shopView)
+page('/Phones/:id', showProduct)
+page('/tablets', shopView)
+page('/Tablets/:id', showProduct)
+page('/protectors', shopView)
+page('/Protectors/:id', showProduct)
+page('/glass', shopView)
+page('/Glass/:id', showProduct)
+page('/cables', shopView)
+page('/Cables/:id', showProduct)
+page('/Edit/:category/:id', editView)
+page('/Delete/:category/:id', deleteProduct)
+page('/chargers', shopView)
+page('/Chargers/:id', showProduct)
+page('/addProduct', addProductView)
+page('*', homeView)
+page.start()

@@ -1,0 +1,199 @@
+.left1{
+    display: flex;
+    justify-content: left;
+    align-items:flex-start;
+    flex-direction: column;
+    min-width: 50%;
+}
+
+.right1{
+    display: flex;
+    justify-content:left;
+    flex-direction: column;
+    min-width: 50%;
+}
+
+.headerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+    width: 95%;
+    height: 28px;
+    background-color: #3e8e41;
+    color: white;
+    border-radius: 10px;
+}
+
+.traitsTable{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-wrap:normal;
+}
+
+.traitsTable table{
+
+    width: 80%;
+}
+
+.traitsTable tr{
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.traitsTable td{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+.traitsTable td p{
+    white-space: nowrap;
+    
+}
+
+.trait{
+    display: flex;
+    text-decoration: underline;
+    align-items: center;
+    justify-content: center;
+    text-decoration: underline;
+}
+
+
+.price {
+    color: #3e8e41;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: larger;
+    margin: 2px;
+    transition: 0.7s;
+}
+
+.headerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+    width: 95%;
+    height: 28px;
+    background-color: #3e8e41;
+    color: white;
+    border-radius: 10px;
+}
+
+.price:hover {
+
+    transform: scale(1.05);
+}
+
+.buy{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.some {
+    display: flex;
+    flex-direction: row;
+    min-width: 100%;
+}
+
+.imageDetails {
+    display: flex;
+    flex-direction: column;
+    width: 97%;
+    transition: 0.5s ease;
+    transform: scale(1);
+    
+}
+
+.zoom{
+
+    transition: 0.5s ease;
+    transform: scale(1.15);    
+    
+}
+
+.imageDetails img {
+    border-radius: 10px;
+    
+}
+
+@media all and (max-width:870px) {
+
+    .some {
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .imageDetails {
+
+        height: 50%;
+        width: 50%;
+    }
+
+    .left1 {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media all and (max-width:726px) {
+
+    .some {
+        max-width: 300px;
+    }
+
+    .right1{
+
+        max-width: 250px;
+    }
+
+    .traitsTable td p{
+        white-space:normal;
+        
+    }
+
+}
+
+@media all and (max-width:300px) {
+
+    .some {
+        max-width: 300px;
+    }
+
+    .right1{
+
+        max-width: 222px;
+        min-width: 222px;
+        display: flex;
+        justify-content: end;
+    }
+
+    .traitsTable tr{
+
+        display: flex;
+        justify-content: end;
+    }
+    .traitsTable tr{
+
+        display: flex;
+        justify-content: end;
+    }
+    
+    .traitsTable td p{
+        white-space:normal;
+        
+    }
+}

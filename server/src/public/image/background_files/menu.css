@@ -1,0 +1,99 @@
+#collapsibleNavId {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar.navbar-expand-sm.navbar-dark {
+
+    z-index: 1;
+}
+
+.fifty{
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    width: 180px;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: thick;
+    border-color: white;
+    border-width: 0.5px;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    border-width: 1px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0%;
+    background-color: #4CAF50;
+    color: white;
+    min-width: 150px;
+    z-index: 2;
+    border-width: 1px;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-width: 1px;
+    transition: 0.5s ease;
+}
+
+.dropdown-content a:hover {
+    transform: scale(1.5);
+    background-color: #3e8e41;
+    border: solid;
+    color: white;
+    border-color: white;
+    border-width: 1px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    border-width: 1px;
+
+}
+
+.dropdown:hover .dropbtn {
+
+    background-color: #3e8e41;
+}
+
+.dropbtn a {
+
+    text-decoration: none;
+    color: white;
+}
+
+.leftmenu {
+
+    display: inline-flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 2;
+}
+button.dropbtn a:hover {
+
+    text-decoration: inherit;
+    color: inherit;
+}
+
