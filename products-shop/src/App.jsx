@@ -5,9 +5,11 @@ import NotFound from './components/NotFound.jsx';
 import ProductDetails from './components/product-details/ProductDetails.jsx';
 import NavigationBar from './components/navigation-bar/NavigationBar.jsx';
 import AddProductForm from './components/add-product/AddProductForm.jsx';
+import ProductList from './components/product-list/ProductList.jsx';
 import '../public/styles/default.css'
 import styles from './App.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
 
@@ -22,8 +24,9 @@ function App() {
 
         <Routes>
           <Route path="/" element={<HomeLoad />} />
-          <Route path="/product_details" element={<ProductDetails setCart={setCart}/>} />
+          <Route path="/products/:id" element={<ProductDetails setCart={setCart}/>} />
           <Route path="/add_product" element={<AddProductForm />}/>
+          <Route path="/products" element={<ProductList />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
