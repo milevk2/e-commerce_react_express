@@ -20,19 +20,33 @@ catch (err) {
 }
 
 // Endpoints:
-app.get('/', async (req, res) => {
+app.get('/products', async (req, res) => {
 
     console.log(` GET ALL products`);
 
     try {
         const electronics = await electonicsService.getAll();
-        res.json((electronics));
+        res.json(electronics);
 
     }
     catch (err) {
-        res.send('NO USERS')
+        res.send('Currently there are not products!')
         console.log(err);
     }
+})
+
+app.get('/products/:id', async (req, res) => {
+
+    const id = req.params.id;
+
+    try {
+        const userDetails = await electonicsService.getOne(id);
+        res.json(userDetails)
+    }
+    catch (err) {
+        res.send(err)
+        console.log(err);
+    } 
 })
 
 app.post('/products', async (req, res) => {
@@ -61,19 +75,7 @@ app.post('/jsonstore/users', async (req, res) => {
         res.send(err)
     }
 })
-app.get('/jsonstore/users/:id', async (req, res) => {
 
-    const id = req.params.id
-    console.log(` GET /jsonstore/users/${id}`);
-    try {
-        const userDetails = await userService.getUser(id);
-        res.send(JSON.stringify(userDetails))
-    }
-    catch (err) {
-        res.send(err)
-        console.log(err);
-    } 
-})
 
 app.put('/products/:id', async (req, res) => {
     console.log(` EDIT ${req.params.id}`);
