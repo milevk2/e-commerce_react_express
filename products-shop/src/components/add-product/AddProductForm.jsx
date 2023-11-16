@@ -1,61 +1,62 @@
 import { useEffect, useState } from 'react';
 import styles from './AddProductForm.module.css'
 import { testSetErrors } from './util.js';
+import { createProduct } from '../../services/productService.js';
+import { defaultValues } from './EmptyProductForm.js';
 
 const AddProductForm = () => {
 
-    const [formData, setFormData] = useState({
-        name: '',
-        announced: '',
-        description: '',
-        price: '',
-        image: '',
-        quantity: '',
-        cpu: '',
-        gpu: '',
-        displaySize: '',
-        battery: '',
-        ram: '',
-        storage: '',
-        operating_system: '',
-        category: '',
-    })
-
-    const [isError, setIsError] = useState(false);
+    const [formData, setFormData] = useState({ ...defaultValues })
+    const [isQuantityError, setIsQuantityError] = useState(false);
     const [isPriceError, setIsPriceError] = useState(false);
+    const [generalError, setGeneralError] = useState(false);
+    const [generalErrorMessage, setGeneralErrorMessage] = useState('');
 
-    function addProductHandler(e) {
+    async function addProductHandler(e) {
 
         e.preventDefault();
-        const formData = new FormData(e.target);
-        console.log(formData);
+        //abort function in case of existing error:
+        if (isQuantityError || isPriceError) return;
+
+        //return if any of the input fields is empty and send error box to the user:
+        if (Object.values(formData).some(input => input == '')) {
+
+            setGeneralError(true);
+            setGeneralErrorMessage('All fields are required!');
+            return;
+        }
+
+        try {
+            await createProduct(formData);
+        }
+        catch (err) {
+
+            setGeneralError(true);
+            setGeneralErrorMessage(err.message);
+        }
+        setFormData({ ...defaultValues })
     }
-    
-    
+
     function inputChangeHandler(e) {
-  
+
         formData[e.target.name] = e.target.value;
         setFormData({ ...formData });
+        setGeneralError(false);
     }
-    
+
+    //Checks for input errors on quantity and price and sets their respective error box if there is error:
     function onBlurHandler(e) {
-    
+
         const targetName = e.target.name;
         const targetValue = e.target.value;
         if (targetName !== 'quantity' && targetName !== 'price') return;
-    
+
         const errorFields = {
-            quantity: ()=> testSetErrors(targetValue, setIsError),
-            price: ()=> testSetErrors(targetValue, setIsPriceError)
+            quantity: () => testSetErrors(targetValue, setIsQuantityError),
+            price: () => testSetErrors(targetValue, setIsPriceError)
         }
         return errorFields[targetName]();
     }
-   
-    useEffect(() => {
-
-        isError ? console.log('Not a number') : null
-
-    }, [isError])
 
     return (
 
@@ -85,7 +86,7 @@ const AddProductForm = () => {
 
 
                             <td><input onBlur={onBlurHandler} type="text" id="quantity" name="quantity" placeholder="Quantity" value={formData.quantity} className={styles.managerInput} onChange={inputChangeHandler} />
-                                <div className={isError ? styles.error : styles.hidden}>Quantity must contain only numbers!</div>
+                                <div className={isQuantityError ? styles.error : styles.hidden}>Quantity must contain only numbers!</div>
 
                             </td>
                         </tr>
@@ -113,17 +114,15 @@ const AddProductForm = () => {
                             <td><label htmlFor="battery" className={styles.whiteText}>Battery:</label></td>
                             <td><input type="text" id="battery" name="battery" placeholder="battery" value={formData.battery} className={styles.managerInput} onChange={inputChangeHandler} /></td>
                             <td><label htmlFor="displaySize" className={styles.whiteText}>Display:</label></td>
-                            <td><input type="number" id="displaySize" name="displaySize" placeholder="Inches" value={formData.displaySize} className={styles.managerInput} onChange={inputChangeHandler} /></td>
+                            <td><input type="text" id="displaySize" name="displaySize" placeholder="Inches" value={formData.displaySize} className={styles.managerInput} onChange={inputChangeHandler} /></td>
                         </tr>
                     </tbody>
                 </table>
-
+                <div className={generalError ? styles.error : styles.hidden}>{generalErrorMessage}</div>
                 <button type="submit" id="add" className={styles.managerSubmitBtn} >Submit</button>
             </form>
-
         </div>
     )
-
 }
 
 export default AddProductForm;
