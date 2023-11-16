@@ -1,5 +1,5 @@
 
-async function request(method, url, body=null) {
+async function request(method, url=null, body=null) {
 
     const options = {
 
@@ -24,7 +24,7 @@ async function request(method, url, body=null) {
         throw err;
     }
 }
-
-export const get = request.bind(null, 'GET');
+export const get = (url)=> request.call(null, 'GET', url);
 export const post = (url, body)=> request.call(null, 'POST', url, body);
-
+export const put = (url, body)=> request.call(null, 'PUT', url, body);
+export const del  = (url)=> request.call(null, 'DELETE', url);
