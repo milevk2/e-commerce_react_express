@@ -1,0 +1,16 @@
+export const defaultValues = {
+    name: '',
+    announced: '',
+    description: '',
+    price: '',
+    image: '',
+    quantity: '',
+    cpu: '',
+    gpu: '',
+    displaySize: '',
+    battery: '',
+    ram: '',
+    storage: '',
+    operating_system: '',
+    category: '',
+}
