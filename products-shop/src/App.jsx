@@ -24,7 +24,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<HomeLoad />} />
-          <Route path="/products/:id" element={<ProductDetails setCart={setCart}/>} />
+          <Route path="/products/:productId" element={<ProductDetails setCart={setCart}/>} />
           <Route path="/add_product" element={<AddProductForm />}/>
           <Route path="/products" element={<ProductList />}/>
           <Route path="*" element={<NotFound />} />
