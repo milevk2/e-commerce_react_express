@@ -1,11 +1,12 @@
 
-async function request(method, url=null, body=null) {
+async function request(method, url=null, additionalHeaders=null, body=null) {
+
+
 
     const options = {
 
         method: method,
         headers: {
-
             'Content-Type': 'application/json'
         },
     }
@@ -13,6 +14,11 @@ async function request(method, url=null, body=null) {
     if (body !== null) {
 
         options.body = JSON.stringify(body);
+    }
+
+    if(additionalHeaders !== null) {
+
+        options.headers = {...options.headers, ...additionalHeaders};
     }
 
     try {
@@ -24,7 +30,7 @@ async function request(method, url=null, body=null) {
         throw err;
     }
 }
-export const get = (url)=> request.call(null, 'GET', url);
-export const post = (url, body)=> request.call(null, 'POST', url, body);
-export const put = (url, body)=> request.call(null, 'PUT', url, body);
-export const del  = (url)=> request.call(null, 'DELETE', url);
+export const get = (url, headers)=> request.call(null, 'GET', url, headers );
+export const post = (url, headers, body)=> request.call(null, 'POST', url, headers, body);
+export const put = (url, headers, body)=> request.call(null, 'PUT', url, headers, body);
+export const del  = (url, headers)=> request.call(null, 'DELETE', url, headers);
