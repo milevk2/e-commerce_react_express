@@ -61,8 +61,6 @@ const AddProductForm = () => {
 
     return (
 
-       
-
             <div className={styles.contentManager}>
                 <GenerateDummyData />
                 <form onSubmit={addProductHandler}>
@@ -87,11 +85,8 @@ const AddProductForm = () => {
                                 <td><label htmlFor="image" className={styles.whiteText}>Image Url:</label></td>
                                 <td><input type="text" id="image" name="image" placeholder="Link to img" value={formData.image} className={styles.managerInput} onChange={inputChangeHandler} /></td>
                                 <td><label htmlFor="quantity" className={styles.whiteText}>Quantity:</label></td>
-
-
                                 <td><input onBlur={onBlurHandler} type="text" id="quantity" name="quantity" placeholder="Quantity" value={formData.quantity} className={styles.managerInput} onChange={inputChangeHandler} />
                                     <div className={isQuantityError ? styles.error : styles.hidden}>Quantity must contain only numbers!</div>
-
                                 </td>
                             </tr>
                             <tr>
@@ -126,7 +121,6 @@ const AddProductForm = () => {
                     <button type="submit" id="add" className={styles.managerSubmitBtn} >Submit</button>
                 </form>
             </div>
-        
     )
 }
 
