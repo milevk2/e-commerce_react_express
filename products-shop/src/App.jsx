@@ -9,7 +9,7 @@ import ProductList from './components/product-list/ProductList.jsx';
 import '../public/styles/default.css'
 import styles from './App.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import WeatherApi from './components/weather-api/WeatherApi.jsx';
 
 function App() {
 
@@ -18,15 +18,17 @@ function App() {
   return (
 
     <>
-      <NavigationBar cart={cart}/>
+      <NavigationBar cart={cart} />
+      
 
       <div className={styles.main}>
-
+        
+      <WeatherApi />
         <Routes>
           <Route path="/" element={<HomeLoad />} />
-          <Route path="/products/:productId" element={<ProductDetails setCart={setCart}/>} />
-          <Route path="/add_product" element={<AddProductForm />}/>
-          <Route path="/products" element={<ProductList />}/>
+          <Route path="/products/:productId" element={<ProductDetails setCart={setCart} />} />
+          <Route path="/add_product" element={<AddProductForm />} />
+          <Route path="/products" element={<ProductList />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
