@@ -1,26 +1,35 @@
 const puppeteer = require('puppeteer');
 const constants = require('../src/constants.js')
 const electonicsService = require('../src/services/electronicsService.js')
-const {dbConnect} = require ('../src/lib/dataBase.js')
-const {phonesPaths, phoneData, selectors} = require('./settings.js') 
-const {wait} = require('../src/lib/util.js')
+const { dbConnect } = require('../src/lib/dataBase.js')
+const { phonesPaths, phoneData, selectors } = require('./settings.js')
+const { wait } = require('../src/lib/util.js')
 
-async function scrape(phoneModel) {
+async function scrape(phoneModel, quantity = null) {
 
     try {
-       await dbConnect(constants.URL);
+        await dbConnect(constants.URL);
         console.log('Successfully connected to the DB!');
     }
     catch (err) {
         console.log(err);
+        return err.message;
     }
 
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    const linksArray = await getPhonesArray(phoneModel, page)
-    await retrievePhoneData(linksArray, page);
-    await browser.close();
-    console.log('Data successfully saved!');
+    try {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        const linksArray = await getPhonesArray(phoneModel, page);
+        await retrievePhoneData(linksArray, page, quantity);
+        await browser.close();
+        return 'Database filled successfully!'
+    }
+    catch (err) {
+
+        console.log(err.message);
+        return err.message;
+    }
+
 }
 
 async function getPhonesArray(phoneModel, page) {
@@ -38,11 +47,16 @@ async function getPhonesArray(phoneModel, page) {
     return linksArray;
 }
 
-async function retrievePhoneData(linksArray, page) {
+async function retrievePhoneData(linksArray, page, quantity = null) {
+
+    if (quantity == null) quantity = linksArray.length;
 
     let counter = 0;
 
     for (link of linksArray) {
+
+        if (counter >= quantity) return;
+
         console.log(`Navigating to ${link}`);
         await page.goto(link);
 
@@ -73,6 +87,8 @@ async function retrievePhoneData(linksArray, page) {
         counter++;
     }
 }
+
+module.exports = { scrape }
 
 // try {
 //     const elementHandle = await page.waitForSelector('h1[data-spec="modelname"]', { timeout: 1000 });
