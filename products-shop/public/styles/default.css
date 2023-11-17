@@ -60,3 +60,19 @@
     color: white;
     border-radius: 10px;
 }
+
+.wrapper {
+    display: flex;
+    margin: 7px;
+    padding: 2px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: lightgray;
+    opacity: 83%;
+    border-radius: 30px;
+    width: fit-content;
+    height: fit-content;
+    min-width: 50%;
+    transition: .5s ease;
+}
