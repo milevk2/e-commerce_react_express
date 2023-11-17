@@ -5,8 +5,10 @@ const electonicsService = require('./services/electronicsService.js')
 const { dbConnect } = require('./lib/dataBase.js')
 const { handlebarsConfig } = require('./configs/handlebarsConfig.js')
 const { expressConfig } = require('./configs/expressConfig.js')
+const { scrape } = require('../web-scrapper/gsmArena.js')
+const {APIkey} = require('./APIkey.js')
+
 const app = express();
-const {scrape} = require('../web-scrapper/gsmArena.js')
 
 handlebarsConfig(app);
 expressConfig(app);
@@ -73,14 +75,31 @@ app.post('/autofill', async (req, res) => {
         const response = await scrape(brand, quantity);
         res.json(response);
     }
-    catch(err) {
+    catch (err) {
 
         console.log(err.message);
         res.json(err.message)
     }
-   
+})
+
+app.get('/getWeather', async (req, res) => {
+
+    const url = `http://api.weatherstack.com/current?access_key=${APIkey}&query=Sofia`
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        res.setHeader('Cache-Control','no-store, no-cache')// 'no-store, no-cache, must-revalidate, private')
+        res.send(data)
+    }
+    catch (err) {
+
+        res.send(err.message).status(404)
+    }
+
 
 })
+
 
 app.post('/jsonstore/users', async (req, res) => {
 
