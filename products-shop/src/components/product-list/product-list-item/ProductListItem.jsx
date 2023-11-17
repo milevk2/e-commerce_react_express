@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import styles from './ProductListItem.module.css'
+import { NavLink } from "react-router-dom";
 
 const ProductListItem = ({ item }) => {
-
 
     useEffect(() => {
 
@@ -11,10 +11,8 @@ const ProductListItem = ({ item }) => {
     })
 
     return (
-
-
         <li className={styles.wrapped}>
-            <a href={`/products/${item._id}`}>
+            <NavLink  to={`/products/${item._id}`}>
                
                 <div className={styles.column}>
                     <img src={item.image} className={styles.preview} />
@@ -23,11 +21,9 @@ const ProductListItem = ({ item }) => {
                     <div>{item.description}</div>
                     <div>{item.price}</div>
                 </div>
-            </a>
+            </NavLink>
         </li>
-
     )
-
 }
 
 export default ProductListItem;
