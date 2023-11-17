@@ -50,6 +50,7 @@ function NavigationBar({ cart }) {
         <Nav className="me-auto">
           <Nav.Link as={NavLink} to="/" style={linkStyle}>Home</Nav.Link>
           <Nav.Link as={NavLink} to="/add_product" style={linkStyle}>Add Products</Nav.Link>
+          <Nav.Link as={NavLink} to="/products" style={linkStyle}>Products</Nav.Link>
         </Nav>
 
         <div className={styles.cart}>
