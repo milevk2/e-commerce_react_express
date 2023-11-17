@@ -8,20 +8,25 @@ async function createProduct(productBody) {
 
     if (!response.ok) throw new Error(`Error! ${response.status}`)
 
-    const result = await response.json();
+    const data = await response.json();
 
-    return result;
+    return data;
 }
 
-async function getAllProducts() {
+//if we do not pass an ID - it gets all products, if we pass an ID it gets a certain product by ID.
+async function getProduct(id=null) {
 
-    const response = await request.get(baseUrl);
+    let fetchUrl = baseUrl;
+
+    if (id !==null) fetchUrl = `${fetchUrl}/${id}`
+
+    const response = await request.get(fetchUrl);
 
     if (!response.ok) throw new Error(`Error! ${response.status}`)
 
     const data = await response.json();
-    
+
     return data;
 }
 
-export { createProduct, getAllProducts }
+export { createProduct, getProduct }
