@@ -32,9 +32,7 @@ const ProductDetails = ({ setCart }) => {
 
     useEffect(() => {
 
-
         getProduct(productId).then(product => setProductDetails({ ...product })).catch(err => console.log(err));
-
 
     }, [])
 
