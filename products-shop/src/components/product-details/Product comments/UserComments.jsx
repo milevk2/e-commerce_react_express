@@ -19,7 +19,7 @@ const UserComments = () => {
                     <div className={styles.userName}>UserName</div>
 
                 </div>
-                <div> This is a commentasasasasaasasasasasaaadddddddddddddddddddddddddddddddddddaa</div>
+                <div className={styles.comment}>Comment</div>
 
                 <div>This is a postDatetime</div>
 
@@ -33,7 +33,7 @@ const UserComments = () => {
                     <div className={styles.userName}>UserName</div>
 
                 </div>
-                <div> This is a commentasasasasaasasasasasaaadddddddddddddddddddddddddddddddddddaa</div>
+                <div className={styles.comment}>Comment2</div>
 
                 <div>This is a postDatetime</div>
 

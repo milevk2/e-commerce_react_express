@@ -1,25 +1,22 @@
-.left1{
+.left1 {
     display: flex;
     justify-content: left;
-    align-items:flex-start;
+    align-items: flex-start;
     flex-direction: column;
     min-width: 50%;
 }
 
-.right1{
+.right1 {
     display: flex;
-    justify-content:left;
+    justify-content: left;
     flex-direction: column;
     min-width: 50%;
 }
 
-.zoomIn {
-    position: absolute;
-}
 
 .wrapper {
     display: flex;
-    margin: 7px;
+    margin: 7px;    
     padding: 2px;
     justify-content: center;
     align-items: center;
@@ -27,8 +24,8 @@
     background-color: lightgray;
     opacity: 83%;
     border-radius: 30px;
-    width: fit-content;
-    height: fit-content;
+    width: 110%;
+    height: 100%;
     min-width: 50%;
     transition: .5s ease;
 }
@@ -45,14 +42,13 @@
 .traitsTable {
     display: flex;
     flex-direction: column;
-    justify-content:  left;
+    justify-content: left;
     align-items: flex-start;
     overflow-wrap: normal;
     border: 1px solid #3e8e41;
     border-radius: 10px;
-    margin-right:15px;
+    margin-right: 15px;
 }
-
 
 .trait {
     display: flex;
@@ -60,15 +56,15 @@
     justify-content: left;
     text-align: left;
     margin-left: 15px;
-    
+
 }
 
-.specHeader{
+.specHeader {
 
     color: #3e8e41;
     font-weight: bold;
     text-decoration: underline;
-    
+
 }
 
 .price {
@@ -100,39 +96,54 @@
 }
 
 .imageDetails {
-
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 95%;
-    transition: 0.5s ease;
-    transform: scale(1);
+    height: 55%;
 }
 
-.zoom {
-    transition: 0.5s ease;
-    transform: scale(1.15);
-}
 
-.imageDetails img {
+.zoomIn {
+    transform: scale(1.2);
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+    z-index: 2;
+    width: 85%;
+    height: 90%;
     border-radius: 10px;
 }
 
-@media all and (max-width:870px) {
+
+.zoomOut {
+    width: 85%;
+    height: 90%;
+    transform: scale(1);
+    transition: transform 0.3s ease-in;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+
+.zoomButton {
+    width: 85%;
+}
+
+@media all and (max-width:855) {
 
     .some {
-
         display: flex;
         flex-direction: column;
     }
 
     .imageDetails {
-
         height: 50%;
         width: 50%;
     }
 
     .left1 {
-
         display: flex;
         justify-content: center;
         align-items: center;
@@ -143,84 +154,92 @@
 
     .some {
         max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
-    .right1{
+    .left1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 50%;
 
-        max-width: 250px;
     }
 
-    .traitsTable td p{
-        white-space:normal;
-        
+    .right1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 50%;
     }
 
+    .traitsTable {
+        white-space: normal;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .trait {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
 }
 
 @media all and (max-width:300px) {
 
     .some {
-        max-width: 300px;
-    }
-
-    .right1{
-
-        max-width: 222px;
-        min-width: 222px;
+        max-width: 200px;
         display: flex;
+        align-items: center;
         justify-content: end;
+        overflow-wrap: break-word;
+        /* CSS3 standard */
+        word-wrap: break-word;
+        /* For compatibility with older browsers */
+        white-space: normal;
     }
 
-    .traitsTable tr{
+    .left1 {
 
+        width: 50%;
         display: flex;
+        align-items: center;
         justify-content: end;
-    }
-    .traitsTable tr{
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        white-space: normal;
 
+    }
+
+    .right1 {
+
+        width: 50%;
         display: flex;
+        align-items: center;
         justify-content: end;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        white-space: normal;
     }
-    
-    .traitsTable td p{
-        white-space:normal;
-        
+
+    .traitsTable {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        white-space: normal;
     }
-}
-
-.zoomIn {
-    transform: scale(1.2);
-    /* Adjust the scale factor as desired for zoom in */
-    transition: transform 0.3s ease-in-out;
-    /* Adjust the duration as needed */
-    position: relative;
-    z-index: 2;
-}
-
-
-.zoomOut {
-
-    width: 100%;
-    height: 90%;
-    transform: scale(1);
-    transition: transform 0.3s ease-in;
-    position: relative;
-    z-index: 0;
-}
-
-.zoomButton {
-
-
-    top: 10px;
-    /* Adjust the top position as needed */
-    left: 10px;
-    /* Adjust the left position as needed */
-    z-index: 1;
-    /* Ensures the button is above the image */
 }
 
 .heart {
-
     position: relative;
     animation: pulsate 2s infinite;
 }
