@@ -1,0 +1,31 @@
+.shopWrapper {
+    display: flex;
+    margin: 7px;
+    padding: 2px;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    background-color: lightgrey;
+    opacity: 75%;
+    border-radius: 30px;
+    width: fit-content;
+    height: fit-content;
+    min-width: 50%;
+    transition: .5s ease;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
+
+
+.notFound {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:25px;
+    width: 75%;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: grey;
+    opacity: 78%;
+}
