@@ -1,2 +1,3 @@
 /products-shop/node_modules/
 /server/node_modules/
+/server/src/APIkey.js
