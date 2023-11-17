@@ -1,6 +1,8 @@
 const phonesPaths = {
 
     samsung: 'samsung-phones-9.php',
+    xiaomi: 'xiaomi-phones-80.php',
+    nokia: 'nokia-phones-1.php'
 
 }
 
