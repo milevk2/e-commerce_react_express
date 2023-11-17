@@ -2,10 +2,11 @@ const express = require('express');
 const constants = require('./constants.js')
 const userService = require('./services/userService.js');
 const electonicsService = require('./services/electronicsService.js')
-const {dbConnect} = require('./lib/dataBase.js')
-const {handlebarsConfig} = require('./configs/handlebarsConfig.js')
-const {expressConfig} = require('./configs/expressConfig.js')
+const { dbConnect } = require('./lib/dataBase.js')
+const { handlebarsConfig } = require('./configs/handlebarsConfig.js')
+const { expressConfig } = require('./configs/expressConfig.js')
 const app = express();
+const {scrape} = require('../web-scrapper/gsmArena.js')
 
 handlebarsConfig(app);
 expressConfig(app);
@@ -46,7 +47,7 @@ app.get('/products/:id', async (req, res) => {
     catch (err) {
         res.send(err)
         console.log(err);
-    } 
+    }
 })
 
 app.post('/products', async (req, res) => {
@@ -60,6 +61,24 @@ app.post('/products', async (req, res) => {
         console.log(err);
         res.send(err)
     }
+
+})
+
+app.post('/autofill', async (req, res) => {
+
+    const { brand, quantity } = req.body;
+    console.log(brand, quantity);
+
+    try {
+        const response = await scrape(brand, quantity);
+        res.json(response);
+    }
+    catch(err) {
+
+        console.log(err.message);
+        res.json(err.message)
+    }
+   
 
 })
 
