@@ -1,7 +1,7 @@
 
 export function testSetErrors(targetValue, callback) {
 
-    const regExp = /^[0-9]+$/;
+    const regExp = /^\d+(\.\d{1,2})?$/
     if (!regExp.test(targetValue) && targetValue !== '') {
         return callback(true);
     }
