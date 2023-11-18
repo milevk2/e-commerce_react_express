@@ -34,7 +34,7 @@ const ProductDetails = ({ setCart }) => {
     }
 
     function exitEdit(){
-
+        
         setIsEdit(false);
     }
 
@@ -46,9 +46,7 @@ const ProductDetails = ({ setCart }) => {
 
     return (
 
-        
         <div className='flexCenterColumn'>
-
         {isEdit && <EditProduct exitForm={exitEdit} productDetails={productDetails}/>}
             {maxSize ? <PictureMaxSize imageSrc={image} closeImage={exitMaxSize} /> : <div className={styles.wrapper}>
                 <div className={styles.some}>
