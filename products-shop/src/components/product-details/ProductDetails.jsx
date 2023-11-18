@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import styles from './ProductDetails.module.css'
 import PictureMaxSize from './PictureMaxSize.jsx';
 import UserComments from './Product comments/UserComments.jsx';
+import EditProduct from './EditProduct.jsx';
 import { getProduct } from '../../services/productService.js'
 import { useParams } from 'react-router-dom';
+
 
 const image = "https://images.samsung.com/bg/smartphones/galaxy-s23-ultra/buy/03_Color_Selection/S23Ultra_Basic_Color/S23Ultra_Green_MO.jpg"
 
@@ -13,6 +15,7 @@ const ProductDetails = ({ setCart }) => {
     const [isZoomedIn, setIsZoomedIn] = useState(false);
     const [maxSize, setMaxSize] = useState(false);
     const [productDetails, setProductDetails] = useState({});
+    const [isEdit, setIsEdit] = useState(false);
 
     const toggleZoom = () => {
         setIsZoomedIn(!isZoomedIn);
@@ -30,6 +33,11 @@ const ProductDetails = ({ setCart }) => {
         setIsZoomedIn(false);
     }
 
+    function exitEdit(){
+
+        setIsEdit(false);
+    }
+
     useEffect(() => {
 
         getProduct(productId).then(product => setProductDetails({ ...product })).catch(err => console.log(err));
@@ -37,7 +45,11 @@ const ProductDetails = ({ setCart }) => {
     }, [])
 
     return (
+
+        
         <div className='flexCenterColumn'>
+
+        {isEdit && <EditProduct exitForm={exitEdit} productDetails={productDetails}/>}
             {maxSize ? <PictureMaxSize imageSrc={image} closeImage={exitMaxSize} /> : <div className={styles.wrapper}>
                 <div className={styles.some}>
                     <div className={styles.left1}>
@@ -91,7 +103,7 @@ const ProductDetails = ({ setCart }) => {
                         <div className="card-body">
                             <div className="row justify-content-around" id="adminPanel">
                                 <div className="price"><p>Количество:{productDetails.quantity}</p></div>
-                                <a className="btn btn-warning col-4" href="/Edit/Phones/-NWNWEnAWg2E9ydiavV3">EDIT</a>
+                                <a className="btn btn-warning col-4" onClick={()=> setIsEdit(true)}>EDIT</a>
                                 <a className="btn btn-danger col-4" href="/Delete/Phones/-NWNWEnAWg2E9ydiavV3">DELETE</a>
                             </div>
                         </div>
