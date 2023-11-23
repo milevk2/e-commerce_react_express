@@ -10,9 +10,9 @@ const GenerateDummyData = () => {
 
         const data = Object.fromEntries(new FormData(e.target))
         try {
-            const response = await post('http://localhost:3000/autofill', data)
+            const response = await post('http://localhost:3000/autofill', null, data)
 
-            console.log(JSON.parse(response))
+            console.log(response)
         }
         catch (err) {
 
