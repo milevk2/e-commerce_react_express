@@ -66,6 +66,21 @@ app.post('/products', async (req, res) => {
 
 })
 
+app.put('/products/:id', async (req, res) => {
+
+    try {
+        const product = await electonicsService.updateOne(req.body);
+        res.send(JSON.stringify(product));
+
+    }
+    catch (err) {
+        console.log(err);
+        res.send(err)
+    }
+
+})
+
+
 app.post('/autofill', async (req, res) => {
 
     const { brand, quantity } = req.body;
