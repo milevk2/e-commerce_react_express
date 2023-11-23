@@ -22,11 +22,23 @@ async function getProduct(id=null) {
 
     const response = await request.get(fetchUrl);
 
-    if (!response.ok) throw new Error(`Error! ${response.status}`)
+    if (!response.ok) throw new Error(`Error! ${response.status}`);
 
     const data = await response.json();
 
     return data;
 }
 
-export { createProduct, getProduct }
+async function updateProduct(productId, productBody) {
+
+    console.log(productId, productBody);
+    const response = await request.put(`${baseUrl}/${productId}`, null, productBody);
+
+    if (!response.ok) throw new Error(`Error! ${response.status}`);
+
+    const data = await response.json();
+
+    return data;
+}
+
+export { createProduct, getProduct, updateProduct }
