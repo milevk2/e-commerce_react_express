@@ -17,7 +17,7 @@ async function scrape(phoneModel, quantity = null) {
     }
 
     try {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({headless: "new"});
         const page = await browser.newPage();
         const linksArray = await getPhonesArray(phoneModel, page);
         await retrievePhoneData(linksArray, page, quantity);
