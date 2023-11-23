@@ -54,9 +54,8 @@ exports.buy = async (productId, buyer) => {
 
 exports.updateOne = async (data) => {
 
-    //fix the logic as it now returns the previous value and not the edited.
     try {
-       return await Electronics.findOneAndUpdate({ _id: data._id }, data)
+       return await Electronics.findOneAndUpdate({ _id: data._id }, data, { new: true })
     }
     catch (err) {
 
