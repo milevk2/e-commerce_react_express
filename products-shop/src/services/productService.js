@@ -31,7 +31,6 @@ async function getProduct(id=null) {
 
 async function updateProduct(productId, productBody) {
 
-    console.log(productId, productBody);
     const response = await request.put(`${baseUrl}/${productId}`, null, productBody);
 
     if (!response.ok) throw new Error(`Error! ${response.status}`);
