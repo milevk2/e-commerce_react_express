@@ -1,11 +1,11 @@
 //combine the components EditProduct and AddProductForm so it becomes one component;
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './EditProduct.module.css'
 import { testSetErrors } from '../add-product/util.js';
-//create and import a service for edit.
+import { updateProduct} from '../../services/productService.js';
 
-const EditProduct = ({ exitForm, productDetails }) => {
+const EditProduct = ({ exitForm, productDetails, productId, updateDetails }) => {
 
     const [formData, setFormData] = useState({ ...productDetails })
     const [isQuantityError, setIsQuantityError] = useState(false);
@@ -27,8 +27,9 @@ const EditProduct = ({ exitForm, productDetails }) => {
 
         try {
             
-            console.log('Product updated!');
-            //implement editProduct service
+            const updatedProduct = await updateProduct(productId, formData);
+            updateDetails(updatedProduct);
+
         }
         catch (err) {
 
