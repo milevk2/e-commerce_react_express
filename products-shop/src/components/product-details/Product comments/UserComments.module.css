@@ -3,7 +3,7 @@
     margin: 7px;
     padding: 2px;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     background-color: lightgray;
     opacity: 83%;
@@ -20,8 +20,9 @@
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 20px;
+    margin-right: 10px;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     gap: 50px;
     background-color: whitesmoke;
@@ -30,7 +31,41 @@
     border-radius: 8px;
 }
 
+.commentText{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: whitesmoke;
+    width: 95%;
+    height: fit-content;
+    border-radius: 8px;
 
+}
+
+.time {
+
+    margin-right: 10px;
+
+}
+
+.roundedBorder {
+
+    border-radius: 8px;
+
+}
+
+.rating{
+
+    position: flex;
+    flex-direction: row;
+
+}
+
+
+.checked {
+  color: orange;
+}
 
 .avatar {
 
@@ -88,7 +123,15 @@
     margin: 8px;
 }
 
+.addComment {
 
+    display: flex;
+    justify-content:  center;
+    align-items: center;
+    flex-direction: column;
+     margin: 5px;   
+     margin-bottom: 15px;
+}
 
 @media all and (max-width:855) {
 
