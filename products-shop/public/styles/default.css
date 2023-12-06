@@ -40,13 +40,14 @@
     color:whitesmoke;
     box-shadow: 0.2cm;
     border-radius: 8px;
-
+    border: 1px solid;
+    margin:10px;
 }
 
 .defaultButton:hover{
-
-    border: 1px solid whitesmoke;
+    
     background-color:#28a745;
+
 }
 
 .headerDiv {
