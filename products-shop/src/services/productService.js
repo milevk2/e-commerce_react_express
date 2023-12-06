@@ -4,7 +4,7 @@ const baseUrl = 'http://localhost:3000/products'
 
 async function createProduct(productBody) {
 
-    const response = await request.post(baseUrl, productBody);
+    const response = await request.post(baseUrl, null, productBody);
 
     if (!response.ok) throw new Error(`Error! ${response.status}`)
 
