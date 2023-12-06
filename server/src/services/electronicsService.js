@@ -54,6 +54,7 @@ exports.buy = async (productId, buyer) => {
 
 exports.updateOne = async (data) => {
 
+    console.log(data, 'data from db');
     try {
        return await Electronics.findOneAndUpdate({ _id: data._id }, data, { new: true })
     }
@@ -93,4 +94,17 @@ exports.search = async (name, type) => {
         throw err;
     }
 }
+
+exports.updateComments = async (electronicsId, newComment) => {
+    try {
+      const updatedElectronics = await Electronics.findOneAndUpdate(
+        { _id: electronicsId },
+        { $push: { comments: newComment } },
+        { new: true }
+      );
+      console.log('Updated Electronics Document:', updatedElectronics);
+    } catch (error) {
+      console.error('Error updating comments:', error);
+    }
+  };
 
