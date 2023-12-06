@@ -7,7 +7,7 @@ import { getProduct } from '../../services/productService.js'
 import { useParams } from 'react-router-dom';
 
 
-const image = "https://images.samsung.com/bg/smartphones/galaxy-s23-ultra/buy/03_Color_Selection/S23Ultra_Basic_Color/S23Ultra_Green_MO.jpg"
+//const image = "https://images.samsung.com/bg/smartphones/galaxy-s23-ultra/buy/03_Color_Selection/S23Ultra_Basic_Color/S23Ultra_Green_MO.jpg"
 
 const ProductDetails = ({ setCart }) => {
 
@@ -16,6 +16,7 @@ const ProductDetails = ({ setCart }) => {
     const [maxSize, setMaxSize] = useState(false);
     const [productDetails, setProductDetails] = useState({});
     const [isEdit, setIsEdit] = useState(false);
+    const [comments, setComments] = useState([]);
 
     const toggleZoom = () => {
         setIsZoomedIn(!isZoomedIn);
@@ -38,17 +39,32 @@ const ProductDetails = ({ setCart }) => {
         setIsEdit(false);
     }
 
+    function productDetailsUpdater(updatedProduct) {
+
+        setProductDetails({...updatedProduct})
+    }
+
     useEffect(() => {
 
-        getProduct(productId).then(product => setProductDetails({ ...product })).catch(err => console.log(err));
+        getProduct(productId).then(product => {
+
+            setProductDetails({ ...product });
+            setComments([...product.comments]);
+
+        }).catch(err => console.log(err));
 
     }, [])
 
+
+    function commentsHandler(comments) {
+
+        setComments([...comments])
+    }
     return (
 
         <div className='flexCenterColumn'>
-        {isEdit && <EditProduct exitForm={exitEdit} productDetails={productDetails}/>}
-            {maxSize ? <PictureMaxSize imageSrc={image} closeImage={exitMaxSize} /> : <div className={styles.wrapper}>
+        {isEdit && <EditProduct exitForm={exitEdit} productDetails={productDetails} productId={productId} updateDetails={productDetailsUpdater}/>}
+            {maxSize ? <PictureMaxSize imageSrc={productDetails.image} closeImage={exitMaxSize} /> : <div className={styles.wrapper}>
                 <div className={styles.some}>
                     <div className={styles.left1}>
                         <div className="headerDiv"><h4>{productDetails.name}</h4></div>
@@ -110,7 +126,7 @@ const ProductDetails = ({ setCart }) => {
                 </div>
             </div>}
 
-            <UserComments />
+            <UserComments comments={comments} setComments={commentsHandler} productId={productId}/>
         </div>)
 
 
