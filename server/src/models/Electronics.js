@@ -11,10 +11,11 @@ const mongoose = require('mongoose');
 // ⦁	owner – object ID (a reference to the User model)
 
 const userCommentsSchema = new mongoose.Schema({
-    title: String,
     content: String,
     userName: String,
-    user_id: String
+    user_id: String,
+    time: String,
+    rating: Number
   });
 
 const electronicsSchema = new mongoose.Schema({
