@@ -6,7 +6,7 @@ const { dbConnect } = require('./lib/dataBase.js')
 const { handlebarsConfig } = require('./configs/handlebarsConfig.js')
 const { expressConfig } = require('./configs/expressConfig.js')
 const { scrape } = require('../web-scrapper/gsmArena.js')
-const {APIkey} = require('./APIkey.js')
+const { APIkey } = require('./APIkey.js')
 
 const app = express();
 
@@ -68,15 +68,38 @@ app.post('/products', async (req, res) => {
 
 app.put('/products/:id', async (req, res) => {
 
-    try {
-        const product = await electonicsService.updateOne(req.body);
-        res.send(JSON.stringify(product));
+
+    const id = req.params.id;
+
+    if (req.body.comment) {
+
+        try {
+            const { userName, user_id, content, time, rating } = req.body;
+            await electonicsService.updateComments(id, { userName, user_id, content, time, rating });
+            res.send(JSON.stringify('Comment added!'));
+
+        }
+        catch (err) {
+            console.log(err);
+            res.send(err)
+        }
 
     }
-    catch (err) {
-        console.log(err);
-        res.send(err)
+    else {
+
+        try {
+            const product = await electonicsService.updateOne(req.body);
+            res.send(JSON.stringify(product));
+
+        }
+        catch (err) {
+            console.log(err);
+            res.send(err)
+        }
+
     }
+
+
 
 })
 
@@ -104,7 +127,7 @@ app.get('/getWeather', async (req, res) => {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        res.setHeader('Cache-Control','no-store, no-cache')// 'no-store, no-cache, must-revalidate, private')
+        res.setHeader('Cache-Control', 'no-store, no-cache')// 'no-store, no-cache, must-revalidate, private')
         res.send(data)
     }
     catch (err) {
