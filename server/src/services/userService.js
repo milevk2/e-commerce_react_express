@@ -1,6 +1,31 @@
 const User = require('../models/User.js')
 const { v4: uuidv4 } = require('uuid');
+const bcrypt = require('bcrypt');
+const jwt = require('../lib/jwt.js')
+const constants = require('../constants.js')
 
+exports.login = async (email, password) => {
+
+    const user = await User.findOne({ email: email })
+
+    if (user == null) throw new Error('Unable to find such user!');
+
+    if ( bcrypt.compare(password, user.password)) {
+
+        const payload = {
+
+            email,
+            _id: user._id
+        }
+       const token =  await jwt.sign(payload, constants.SECRET, { expiresIn: '3d' });
+        
+        return token;
+    }
+    else{
+
+        throw new Error('Passwords do not match!');
+    }
+}
 
 exports.getAll = async () => {
 
@@ -28,8 +53,6 @@ exports.getUser = async (id) => {
 }
 
 exports.updateUser = async (updated) => {
-
-
 
 
     await User.updateOne({ _id: updated._id }, {
@@ -74,8 +97,6 @@ exports.deleteUser = async (id) => {
     } catch (err) {
         console.error('Error deleting document:', err);
     }
-
-
 }
 
 
