@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Form, Button } from 'react-bootstrap';
 import styles from './Navigation.module.css'
 import { Link, NavLink } from 'react-router-dom'
+import { logout } from '../../services/userService.js';
 
 function NavigationBar({ cart }) {
 
@@ -9,8 +10,6 @@ function NavigationBar({ cart }) {
   const [cartCounter, setCartCounter] = useState(0);
 
   useEffect(() => {
-
-    
 
     if (cart) {
 
@@ -27,6 +26,26 @@ function NavigationBar({ cart }) {
 
 
   }, [cart])
+
+  async function onUserLogOut() {
+
+    const token = localStorage.getItem('authToken')
+    const response = await logout(token);
+    const isLoggedOut = await response.json();
+
+    console.log(isLoggedOut);
+
+    if(isLoggedOut) {
+
+      localStorage.removeItem('authToken')
+
+    }
+    else {
+
+      console.log('Problem with logging out!');
+    }
+    
+  }
 
   const navbarStyle = {
     backgroundColor: '#4CAF50',
@@ -51,6 +70,9 @@ function NavigationBar({ cart }) {
           <Nav.Link as={NavLink} to="/" style={linkStyle}>Home</Nav.Link>
           <Nav.Link as={NavLink} to="/add_product" style={linkStyle}>Add Products</Nav.Link>
           <Nav.Link as={NavLink} to="/products" style={linkStyle}>Products</Nav.Link>
+          <Nav.Link as={NavLink} to="/Register" style={linkStyle}>Register</Nav.Link>
+          <Nav.Link as={NavLink} to="/Login" style={linkStyle}>Login</Nav.Link>
+          <Nav.Link style={linkStyle} onClick={onUserLogOut}>Logout</Nav.Link>
         </Nav>
 
         <div className={styles.cart}>
