@@ -6,10 +6,14 @@ import ProductDetails from './components/product-details/ProductDetails.jsx';
 import NavigationBar from './components/navigation-bar/NavigationBar.jsx';
 import AddProductForm from './components/add-product/AddProductForm.jsx';
 import ProductList from './components/product-list/ProductList.jsx';
+import RegisterComponent from './components/user-register/RegisterComponent.jsx';
+import LoginComponent from './components/user-login/LoginComponent.jsx';
+import WeatherApi from './components/weather-api/WeatherApi.jsx';
 import '../public/styles/default.css'
 import styles from './App.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import WeatherApi from './components/weather-api/WeatherApi.jsx';
+
+
 
 function App() {
 
@@ -29,6 +33,8 @@ function App() {
           <Route path="/products/:productId" element={<ProductDetails setCart={setCart} />} />
           <Route path="/add_product" element={<AddProductForm />} />
           <Route path="/products" element={<ProductList />} />
+          <Route path="/Register" element={<RegisterComponent />} />
+          <Route path="/Login" element={<LoginComponent />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
