@@ -33,8 +33,6 @@ function NavigationBar({ cart }) {
     const response = await logout(token);
     const isLoggedOut = await response.json();
 
-    console.log(isLoggedOut);
-
     if(isLoggedOut) {
 
       localStorage.removeItem('authToken')
