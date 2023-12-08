@@ -22,6 +22,8 @@ catch (err) {
     console.log(err)
 }
 
+const sessions = {};
+
 // Endpoints:
 app.get('/products', async (req, res) => {
 
@@ -57,50 +59,52 @@ app.post('/products', async (req, res) => {
     try {
         const product = await electonicsService.create(req.body);
         res.send(JSON.stringify(product));
-
     }
     catch (err) {
         console.log(err);
         res.send(err)
     }
-
 })
 
 app.put('/products/:id', async (req, res) => {
 
-
     const id = req.params.id;
 
     if (req.body.comment) {
-
         try {
             const { userName, user_id, content, time, rating } = req.body;
             await electonicsService.updateComments(id, { userName, user_id, content, time, rating });
             res.send(JSON.stringify('Comment added!'));
-
         }
         catch (err) {
             console.log(err);
             res.send(err)
         }
-
     }
     else {
-
         try {
             const product = await electonicsService.updateOne(req.body);
             res.send(JSON.stringify(product));
-
         }
         catch (err) {
             console.log(err);
             res.send(err)
         }
-
     }
+})
 
+app.delete('/products/:id', async (req, res) => {
 
+    console.log(`DELETE ${req.params.id}`);
+    try {
+        await electonicsService.deleteOne(req.params.id);
+        setTimeout(() => { res.send(JSON.stringify({ response: `User ID ${req.params.id} successfully Deleted!` })) }, 2000);
+    }
+    catch (err) {
 
+        res.send(JSON.stringify(err));
+        console.log(err);
+    }
 })
 
 
@@ -135,13 +139,11 @@ app.get('/getWeather', async (req, res) => {
         res.send(err.message).status(404)
     }
 
-
 })
 
 
-app.post('/jsonstore/users', async (req, res) => {
+app.post('/users/register', async (req, res) => {
 
-    console.log(` POST /jsonstore/users`);
     try {
         const user = await userService.create(req.body)
         setTimeout(() => { res.send(JSON.stringify(user)) }, 3000) // simulate network delay
@@ -152,30 +154,43 @@ app.post('/jsonstore/users', async (req, res) => {
     }
 })
 
+app.post('/users/login', async (req, res) => {
 
-app.put('/products/:id', async (req, res) => {
-    console.log(` EDIT ${req.params.id}`);
+    const { email, password } = req.body;
+
     try {
-        const updated = await electonicsService.updateOne({ ...req.body, _id: req.params.id });
-        setTimeout(() => { res.send(JSON.stringify(updated)) }, 2000) //simulate network delay
+        const token = await userService.login(email, password)
+        sessions[token] = true;
+        res.json(token);
     }
     catch (err) {
-        res.send(err)
-        console.log(err);
+        res.json(err)
     }
 })
 
-app.delete('/products/:id', async (req, res) => {
+app.post('/users/logout', async (req, res) => {
 
-    console.log(`DELETE ${req.params.id}`);
+    console.log('/users/logout post');
+
+    console.log(sessions);
+    const {authToken} = req.body;
+
     try {
-        await electonicsService.deleteOne(req.params.id);
-        setTimeout(() => { res.send(JSON.stringify({ response: `User ID ${req.params.id} successfully Deleted!` })) }, 2000);
+        if (sessions[authToken]) {
+
+            delete sessions[authToken];
+            res.json(true)
+        }
     }
     catch (err) {
-
-        res.send(JSON.stringify(err));
-        console.log(err);
+        res.json(false)
     }
+    finally{
+
+        console.log(sessions);
+    }
+
 })
+
+
 app.listen(constants.PORT, () => { console.log(`The server is listening on PORT  ${constants.PORT}`); })
