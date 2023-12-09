@@ -79,9 +79,7 @@ exports.updateUser = async (updated) => {
         updatedAt: updated.updatedAt,
         createdAt:updated.createdAt,
         address: updated.address
-
     }
-
 }
 
 exports.deleteUser = async (id) => {
