@@ -41,4 +41,15 @@ async function updateProduct(productId, productBody) {
     return data;
 }
 
-export { createProduct, getProduct, updateProduct }
+async function deleteProduct(productId) {
+
+    const response = await request.del(`${baseUrl}/${productId}`);
+
+    if (!response.ok) throw new Error(`Error! ${response.status}`);
+
+    const data = await response.json();
+
+    return data;
+}
+
+export { createProduct, getProduct, updateProduct, deleteProduct }
