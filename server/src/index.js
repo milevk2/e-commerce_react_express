@@ -112,7 +112,7 @@ app.delete('/products/:id', async (req, res) => {
     console.log(`DELETE ${req.params.id}`);
     try {
         await electonicsService.deleteOne(req.params.id);
-        setTimeout(() => { res.send(JSON.stringify({ response: `User ID ${req.params.id} successfully Deleted!` })) }, 2000);
+        setTimeout(() => { res.json({ response: `User ID ${req.params.id} successfully Deleted!` }) }, 2000);
     }
     catch (err) {
 
