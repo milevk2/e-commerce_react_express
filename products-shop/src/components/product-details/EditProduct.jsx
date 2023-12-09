@@ -17,7 +17,7 @@ const EditProduct = ({ exitForm, productDetails, productId, updateDetails }) => 
 
         e.preventDefault();
         if (isQuantityError || isPriceError) return;
-
+        delete formData.comments // delete comments as if the array is empty the below logic will not work properly.
         if (Object.values(formData).some(input => input.toString() == '')) {
 
             setGeneralError(true);
@@ -26,13 +26,11 @@ const EditProduct = ({ exitForm, productDetails, productId, updateDetails }) => 
         }
 
         try {
-            
             const updatedProduct = await updateProduct(productId, formData);
             updateDetails(updatedProduct);
 
         }
         catch (err) {
-
             setGeneralError(true);
             setGeneralErrorMessage(err.message);
         }
