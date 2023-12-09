@@ -3,7 +3,8 @@ import styles from './UserComments.module.css'
 import getDateTime from '../../../lib/getDateTime.js';
 import Comment from './Comment.jsx';
 import { updateProduct } from '../../../services/productService.js';
-
+import jwtParser from '../../../lib/jwtParser.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const UserComments = ({ comments, setComments, productId }) => {
 
@@ -12,15 +13,18 @@ const UserComments = ({ comments, setComments, productId }) => {
     async function addNewComment(e) {
 
         e.preventDefault();
+        const userDetails = jwtParser(); // takes the userInfo from the localStorage
         const formData = Object.fromEntries(new FormData(e.target));
+        formData.userName = userDetails.email;   
+        formData.user_id = userDetails._id;
         formData.time = getDateTime();
         formData.rating = rating;
         formData.comment = true;
+        formData.commentId = uuidv4();
         const updatedComments = [...comments, formData];
-
+        
         try {
-            const response = await updateProduct(productId, formData);
-            console.log(response);
+           await updateProduct(productId, formData);
             setComments(updatedComments);
         }
         catch (err) {
@@ -48,27 +52,19 @@ const UserComments = ({ comments, setComments, productId }) => {
 
     return (
 
-
         <div id="user-comments" className={styles.commentWrapper}>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
             <h2 className="headerDiv" >Samsung Galaxy Tab A9+ - user opinions and reviews</h2>
 
             {comments && comments.length > 0 && comments.map(data => (
-                <Comment comment={data} key={data._id || data.user_id} />
+               
+                <Comment comment={data} key={data.commentId} />
             ))}
-
 
             <form className={styles.addComment} onSubmit={addNewComment}>
 
-                <label htmlFor='userName'>Your user name:</label>
-                <input className={styles.roundedBorder} name='userName'></input>
-
-                <label htmlFor='user_id'>Your user id:</label>
-                <input className={styles.roundedBorder} name='user_id'></input>
-
-                <label htmlFor='user_id'>Add comment:</label>
+                <label htmlFor='content'>Add comment:</label>
                 <textarea name='content' className={styles.roundedBorder}></textarea>
-
                 <label htmlFor='rating'>Your rating:</label>
 
                 <div className={styles.rating} onClick={ratingHandler}>
@@ -83,9 +79,6 @@ const UserComments = ({ comments, setComments, productId }) => {
 
                 <button type='submit' className='defaultButton'>Submit</button>
             </form>
-
-
-
         </div>
 
     )
