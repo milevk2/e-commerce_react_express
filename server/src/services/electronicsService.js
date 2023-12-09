@@ -76,20 +76,13 @@ exports.deleteOne = async (identifier) => {
 
 
 }
-exports.search = async (name, type) => {
+exports.search = async (ownerId) => {
 
-    const criteria1 = { name };
-    const criteria2 = { type };
-
-    console.log(criteria1, criteria2);
-
+    const criteria = { ownerId };
     try {
-
-        return await Electronics.find({ $and: [criteria1, criteria2] }).lean();
-
+        return await Electronics.find(criteria).lean();
     }
     catch (err) {
-
         console.log(err);
         throw err;
     }
