@@ -1,14 +1,7 @@
-import { useEffect } from "react";
 import styles from './ProductListItem.module.css'
 import { NavLink } from "react-router-dom";
 
 const ProductListItem = ({ item }) => {
-
-    useEffect(() => {
-
-        console.log(item, 'details');
-
-    })
 
     return (
         <li className={styles.wrapped}>
