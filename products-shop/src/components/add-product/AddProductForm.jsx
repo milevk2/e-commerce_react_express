@@ -4,6 +4,7 @@ import { testSetErrors } from './util.js';
 import { createProduct } from '../../services/productService.js';
 import { defaultValues } from './EmptyProductForm.js';
 import GenerateDummyData from './generate-dummy-data/GenerateDummyData.jsx'
+import jwtParser from '../../lib/jwtParser.js';
 
 const AddProductForm = () => {
 
@@ -28,7 +29,10 @@ const AddProductForm = () => {
         }
 
         try {
-            await createProduct(formData);
+            const payload = jwtParser();
+            const ownerId = payload._id;
+            const body = {...formData, ownerId};
+            await createProduct(body);
         }
         catch (err) {
 
