@@ -25,6 +25,8 @@
 }
 
 .error {
+    position:absolute;
+    bottom:30%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,6 +44,8 @@
 }
 
 .hidden {
+    position:absolute;
+    bottom:30%;
     display: flex;
     align-items: center;
     justify-content: center;

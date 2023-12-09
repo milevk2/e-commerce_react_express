@@ -1,11 +1,13 @@
 import styles from './LoginComponent.module.css'
 import { login } from '../../services/userService.js'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
 
 
 const LoginComponent = ({ setIsLogged }) => {
 
   const navigate = useNavigate();
+  const [logError, setLogError] = useState(false)
 
   async function handleSubmit(e) {
 
@@ -15,21 +17,24 @@ const LoginComponent = ({ setIsLogged }) => {
     try {
 
       const response = await login(formData);
+
+      if (!response.ok) return setLogError(true);
       const token = await response.json();
       localStorage.setItem('authToken', token);
       setIsLogged(true)
-      navigate('/')
+      navigate('/my_products')
 
     }
     catch (err) {
 
       console.log('Login failed:', err);
+      setLogError(true)
     }
 
   }
 
   return (
-
+    <>
     <form className={styles.loginPanel} onSubmit={handleSubmit}>
       <label htmlFor="email">Email:</label>
       <input
@@ -50,7 +55,10 @@ const LoginComponent = ({ setIsLogged }) => {
       <button type="submit" className={styles.submitButton}>
         Login
       </button>
-    </form>)
+    </form>
+    {logError? <div className={logError ? styles.error : styles.hidden}>User email or password do not match!</div> : ''}
+    </>
+    )
 
 }
 
