@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Form, Button } from 'react-bootstrap';
 import styles from './Navigation.module.css'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { logout } from '../../services/userService.js';
 
-function NavigationBar({ cart }) {
+
+function NavigationBar({ cart, isLogged, setIsLogged, token, setToken, userId }) {
 
   const [isHidden, setIsHidden] = useState(true);
   const [cartCounter, setCartCounter] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -23,20 +26,21 @@ function NavigationBar({ cart }) {
 
       }, 3000)
     }
-
-
   }, [cart])
 
+  
   async function onUserLogOut() {
 
-    const token = localStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken');
     const response = await logout(token);
     const isLoggedOut = await response.json();
 
     if(isLoggedOut) {
 
-      localStorage.removeItem('authToken')
-
+      localStorage.removeItem('authToken');
+      setIsLogged(false);
+      setToken('');
+      navigate('/');
     }
     else {
 
@@ -66,11 +70,21 @@ function NavigationBar({ cart }) {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link as={NavLink} to="/" style={linkStyle}>Home</Nav.Link>
-          <Nav.Link as={NavLink} to="/add_product" style={linkStyle}>Add Products</Nav.Link>
+          
           <Nav.Link as={NavLink} to="/products" style={linkStyle}>Products</Nav.Link>
-          <Nav.Link as={NavLink} to="/Register" style={linkStyle}>Register</Nav.Link>
-          <Nav.Link as={NavLink} to="/Login" style={linkStyle}>Login</Nav.Link>
-          <Nav.Link style={linkStyle} onClick={onUserLogOut}>Logout</Nav.Link>
+          { isLogged ? 
+          <div className={styles.user}>
+          <Nav.Link  as={NavLink} to={`/my_products`} style={linkStyle}>My Products</Nav.Link>
+          <Nav.Link as={NavLink} to="/add_product" style={linkStyle}>Add Products</Nav.Link>
+          <Nav.Link as={NavLink} to="javascript:void(0)"style={linkStyle} onClick={onUserLogOut}>Logout</Nav.Link>
+          </div> 
+          : 
+          <div className={styles.guest}>
+            <Nav.Link as={NavLink} to="/Register" style={linkStyle}>Register</Nav.Link>
+            <Nav.Link as={NavLink} to="/Login" style={linkStyle}>Login</Nav.Link>
+          </div>}
+          
+          
         </Nav>
 
         <div className={styles.cart}>

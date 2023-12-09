@@ -3,6 +3,18 @@
     background-color: #28a745;
 }
 
+.guest {
+
+    display: flex;
+    flex-direction: row;
+}
+
+.user{
+
+    display: flex;
+    flex-direction: row;
+}
+
 .whiteText {
     color: #fff;
 }
