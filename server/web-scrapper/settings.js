@@ -33,10 +33,6 @@ const phoneData = {
     quantity: 5,
     storage: 'default',
     category: 'default',
-    comments: [
-        { username: 'Stefan', comment: 'Great product!' },
-        { username: 'Georgi', comment: 'I love it!' },
-    ]
 };
 
 
