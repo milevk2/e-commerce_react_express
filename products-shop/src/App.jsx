@@ -31,35 +31,28 @@ function App() {
       setUserId(decodedPayload._id)
       console.log(decodedPayload);
     }
-    console.log(isLogged);
-
   },[isLogged])
 
   return (
 
     <>
       <NavigationBar cart={cart} isLogged={isLogged} setIsLogged={setIsLogged} token={token} setToken={setToken} userId={userId}/>
-      
-
-      <div className={styles.main}>
-        
-      <WeatherApi />
+    
+      <div className={styles.main}> 
+        <WeatherApi />
         <Routes>
           <Route path="/" element={<HomeLoad />} />
           <Route path="/products/:productId" element={<ProductDetails setCart={setCart} />} />
           <Route path="/add_product" element={isLogged? <AddProductForm /> : <NotFound />} />
           <Route path="/products" element={<ProductList />} />
-          <Route path="/my_products" element={<ProductList logged={true}/>} />
+          <Route path="/my_products" element={<ProductList myProducts={true}/>} />
           <Route path="/Register" element={!isLogged? <RegisterComponent /> : <NotFound />} />
           <Route path="/Login" element={!isLogged?<LoginComponent setIsLogged={setIsLogged}/> : <NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <footer className={styles.footer}><p>All rights reserved &copy;</p></footer>
-
     </>
-
-
   )
 }
 
