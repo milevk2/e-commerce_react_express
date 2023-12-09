@@ -14,11 +14,12 @@ async function createProduct(productBody) {
 }
 
 //if we do not pass an ID - it gets all products, if we pass an ID it gets a certain product by ID.
-async function getProduct(id=null) {
+async function getProduct(id=null, userId=null) {
 
     let fetchUrl = baseUrl;
 
-    if (id !==null) fetchUrl = `${fetchUrl}/${id}`
+    if (id !==null) fetchUrl = `${fetchUrl}/${id}`;
+    if (userId !== null) fetchUrl  = `${fetchUrl}/user/${userId}`;
 
     const response = await request.get(fetchUrl);
 
