@@ -45,6 +45,20 @@ app.get('/products/:id', async (req, res) => {
     const id = req.params.id;
 
     try {
+        const electronics = await electonicsService.getOne(id);
+        res.json(electronics)
+    }
+    catch (err) {
+        res.send(err)
+        console.log(err);
+    }
+})
+
+app.get('/products/user/:id', async (req, res) => {
+
+    const id = req.params.id;
+    //redo the endpoint so it filters devices by userId
+    try {
         const userDetails = await electonicsService.getOne(id);
         res.json(userDetails)
     }
@@ -53,6 +67,7 @@ app.get('/products/:id', async (req, res) => {
         console.log(err);
     }
 })
+
 
 app.post('/products', async (req, res) => {
 
