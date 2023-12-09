@@ -17,7 +17,6 @@ const LoginComponent = ({ setIsLogged }) => {
     try {
 
       const response = await login(formData);
-
       if (!response.ok) return setLogError(true);
       const token = await response.json();
       localStorage.setItem('authToken', token);
