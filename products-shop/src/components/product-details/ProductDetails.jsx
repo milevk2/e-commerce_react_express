@@ -3,8 +3,8 @@ import styles from './ProductDetails.module.css'
 import PictureMaxSize from './PictureMaxSize.jsx';
 import UserComments from './Product comments/UserComments.jsx';
 import EditProduct from './EditProduct.jsx';
-import { getProduct } from '../../services/productService.js'
-import { useParams } from 'react-router-dom';
+import { deleteProduct, getProduct } from '../../services/productService.js'
+import { useNavigate, useParams } from 'react-router-dom';
 import jwtParser from '../../lib/jwtParser.js';
 
 
@@ -19,6 +19,7 @@ const ProductDetails = ({ setCart }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [comments, setComments] = useState([]);
     const [isOwner, setIsOwner] = useState(false);
+    const navigate = useNavigate();
 
     const toggleZoom = () => {
         setIsZoomedIn(!isZoomedIn);
@@ -45,6 +46,22 @@ const ProductDetails = ({ setCart }) => {
         setProductDetails({ ...updatedProduct })
     }
 
+    async function onProductDelete() {
+
+        const isConfirmed = window.confirm("Are you sure you want to delete this product?");
+
+        if (isConfirmed) {
+
+            try {
+                await deleteProduct(productId);
+                navigate('/my_products');
+            }
+            catch (err) {
+                navigate('*')
+            }
+        }
+    }
+
     useEffect(() => {
 
         getProduct(productId).then(product => {
@@ -59,7 +76,7 @@ const ProductDetails = ({ setCart }) => {
     useEffect(() => {
 
         const payload = jwtParser();
-        
+
         if (payload) {
 
             const userId = payload._id
@@ -139,9 +156,9 @@ const ProductDetails = ({ setCart }) => {
                         </div> : ''}
                         <div className="card-body">
                             {isOwner && <div className="row justify-content-around" id="adminPanel">
-                                <div className="price"><p>Количество:{productDetails.quantity}</p></div>
+                                <div className="price"><p>Quantity:{productDetails.quantity}</p></div>
                                 <a className="btn btn-warning col-4" onClick={() => setIsEdit(true)}>EDIT</a>
-                                <a className="btn btn-danger col-4" href="/Delete/Phones/-NWNWEnAWg2E9ydiavV3">DELETE</a>
+                                <a className="btn btn-danger col-4" onClick={onProductDelete}>DELETE</a>
                             </div>}
                         </div>
                     </div>
