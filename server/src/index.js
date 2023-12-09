@@ -57,9 +57,8 @@ app.get('/products/:id', async (req, res) => {
 app.get('/products/user/:id', async (req, res) => {
 
     const id = req.params.id;
-    //redo the endpoint so it filters devices by userId
     try {
-        const userDetails = await electonicsService.getOne(id);
+        const userDetails = await electonicsService.search(id);
         res.json(userDetails)
     }
     catch (err) {
@@ -179,7 +178,7 @@ app.post('/users/login', async (req, res) => {
         res.json(token);
     }
     catch (err) {
-        res.json(err)
+        res.status(404).json(err);
     }
 })
 
