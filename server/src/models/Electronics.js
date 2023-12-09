@@ -81,6 +81,12 @@ const electronicsSchema = new mongoose.Schema({
     },
 
     comments: [userCommentsSchema],
+    
+    ownerId: {
+        type: String,
+        required: true
+    },
+
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
