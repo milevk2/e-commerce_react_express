@@ -79,7 +79,7 @@ async function retrievePhoneData(linksArray, page, quantity = null) {
 
         phoneData.price = phoneData['price'] += 50;
         phoneData.quantity = phoneData['quantity'] += 5;
-
+        phoneData.ownerId = 'BotGenerated';
         await electonicsService.create(phoneData);
         console.log('Saving ', phoneData.name);
         await wait(5); //wait 5 seconds to be gentle to the server as per robots.txt
