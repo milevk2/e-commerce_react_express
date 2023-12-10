@@ -8,7 +8,7 @@ const HomeLoad = () => {
 
     return (
 
-        <div class="welcome-text">
+        <div className="welcome-text">
             <h1>Welcome to Bultelecom Shop - Your Ultimate Destination for Smartphones!</h1>
 
             <p>Discover the latest in cutting-edge technology and elevate your mobile experience with our premium selection
@@ -32,7 +32,7 @@ const HomeLoad = () => {
                 local service ensures you get the support you need, whenever you need it.</p>
 
             <h2>Why Choose Us?</h2>
-            <ul class="feature-list">
+            <ul className="feature-list">
                 <li>Wide Range of Smartphones</li>
                 <li>Secure and Convenient Shopping</li>
                 <li>Expert Customer Support</li>
