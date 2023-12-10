@@ -8,12 +8,11 @@ import AddProductForm from './components/add-product/AddProductForm.jsx';
 import ProductList from './components/product-list/ProductList.jsx';
 import RegisterComponent from './components/user-register/RegisterComponent.jsx';
 import LoginComponent from './components/user-login/LoginComponent.jsx';
+import UserProfile from './components/user-profile/UserProfile.jsx';
 import WeatherApi from './components/weather-api/WeatherApi.jsx';
 import '../public/styles/default.css'
 import styles from './App.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 
 function App() {
 
@@ -33,6 +32,7 @@ function App() {
     }
   },[isLogged])
 
+  
   return (
 
     <>
@@ -48,6 +48,7 @@ function App() {
           <Route path="/my_products" element={<ProductList myProducts={true}/>} />
           <Route path="/Register" element={!isLogged? <RegisterComponent /> : <NotFound />} />
           <Route path="/Login" element={!isLogged?<LoginComponent setIsLogged={setIsLogged}/> : <NotFound />} />
+          <Route path="/profile" element={isLogged && <UserProfile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

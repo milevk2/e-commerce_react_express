@@ -75,6 +75,7 @@ function NavigationBar({ cart, isLogged, setIsLogged, token, setToken, userId })
           <div className={styles.user}>
           <Nav.Link  as={NavLink} to={`/my_products`} style={linkStyle}>My Products</Nav.Link>
           <Nav.Link as={NavLink} to="/add_product" style={linkStyle}>Add Products</Nav.Link>
+          <Nav.Link as={NavLink} to="/profile" style={linkStyle}>Profile</Nav.Link>
           <Nav.Link as={NavLink} to="/"style={linkStyle} onClick={onUserLogOut}>Logout</Nav.Link>
           </div> 
           : 
