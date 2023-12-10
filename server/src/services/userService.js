@@ -17,7 +17,8 @@ exports.login = async (email, password) => {
         const payload = {
 
             email,
-            _id: user._id
+            _id: user._id,
+            userName: user.userName
         }
        const token =  await jwt.sign(payload, constants.SECRET, { expiresIn: '3d' });
         
