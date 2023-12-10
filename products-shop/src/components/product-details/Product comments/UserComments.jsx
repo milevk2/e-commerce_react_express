@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './UserComments.module.css'
 import getDateTime from '../../../lib/getDateTime.js';
 import Comment from './Comment.jsx';
@@ -9,11 +9,11 @@ import { v4 as uuidv4 } from 'uuid';
 const UserComments = ({ comments, setComments, productId }) => {
 
     const [rating, setRating] = useState(0);
+    const [userDetails, setUserDetails] = useState(jwtParser()); // takes the userInfo from the localStorage
 
     async function addNewComment(e) {
 
         e.preventDefault();
-        const userDetails = jwtParser(); // takes the userInfo from the localStorage
         const formData = Object.fromEntries(new FormData(e.target));
         formData.userName = userDetails.email;   
         formData.user_id = userDetails._id;
@@ -61,7 +61,7 @@ const UserComments = ({ comments, setComments, productId }) => {
                 <Comment comment={data} key={data.commentId} />
             ))}
 
-            <form className={styles.addComment} onSubmit={addNewComment}>
+           { userDetails && <form className={styles.addComment} onSubmit={addNewComment}>
 
                 <label htmlFor='content'>Add comment:</label>
                 <textarea name='content' className={styles.roundedBorder}></textarea>
@@ -78,7 +78,7 @@ const UserComments = ({ comments, setComments, productId }) => {
                 </div>
 
                 <button type='submit' className='defaultButton'>Submit</button>
-            </form>
+            </form>}
         </div>
 
     )
