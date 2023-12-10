@@ -19,6 +19,7 @@ const ProductDetails = ({ setCart }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [comments, setComments] = useState([]);
     const [isOwner, setIsOwner] = useState(false);
+    const [userDetails, setUserDetails] = useState(jwtParser())
     const navigate = useNavigate();
 
     const toggleZoom = () => {
@@ -75,11 +76,10 @@ const ProductDetails = ({ setCart }) => {
 
     useEffect(() => {
 
-        const payload = jwtParser();
+    
+        if (userDetails) {
 
-        if (payload) {
-
-            const userId = payload._id
+            const userId = userDetails._id
             if (productDetails.ownerId == userId) {
 
                 setIsOwner(true);
@@ -114,7 +114,7 @@ const ProductDetails = ({ setCart }) => {
                             <img className={isZoomedIn ? styles.zoomIn : styles.zoomOut} src={productDetails.image} />
 
 
-                            <button type="button" className={`defaultGreenText ${styles.zoomButton}`} onClick={seeMaxSize} >
+                            {userDetails && <button type="button" className={`defaultGreenText ${styles.zoomButton}`} onClick={seeMaxSize} >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-zoom-in" viewBox="0 0 16 16">
                                     <path fillRule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z">
                                     </path>
@@ -123,7 +123,7 @@ const ProductDetails = ({ setCart }) => {
                                     <path fillRule="evenodd" d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5z">
                                     </path>
                                 </svg>
-                            </button>
+                            </button>}
                         </div>
                     </div>
 
@@ -146,13 +146,13 @@ const ProductDetails = ({ setCart }) => {
                             {productDetails.description}
                         </p>
                         <div className={`${styles.price} ${styles.heart}`}><p>Price: {productDetails.price}bgn</p></div>
-                        {!isOwner ? <div className={styles.center}><button type="button" className="btn btn-success buy" onClick={() => { setCart(true); setTimeout(() => { setCart(false) }, 2000) }}>
+                        {!isOwner ? <div className={styles.center}>{userDetails && <button type="button" className="btn btn-success buy" onClick={() => { setCart(true); setTimeout(() => { setCart(false) }, 2000) }}>
                             Add to cart
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart" viewBox="0 0 16 16">
                                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z">
                                 </path>
                             </svg>
-                        </button>
+                        </button>}
                         </div> : ''}
                         <div className="card-body">
                             {isOwner && <div className="row justify-content-around" id="adminPanel">
