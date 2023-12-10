@@ -8,9 +8,11 @@ exports.login = async (email, password) => {
 
     const user = await User.findOne({ email: email })
 
-    if (user == null) throw new Error('Unable to find such user!');
+    if (!user) throw new Error('Unable to find such user!');
 
-    if ( bcrypt.compare(password, user.password)) {
+    const compare = await bcrypt.compare(password, user.password)
+
+    if (compare) {
 
         const payload = {
 
