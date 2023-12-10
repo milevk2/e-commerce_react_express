@@ -30,20 +30,20 @@ To get started with this project, follow these steps:
 The react components are structured in the following way:
 
 - **add-product/**
-  - `AddProductForm.jsx`
+  - `AddProductForm.jsx` - controlled form used
   - **generate-dummy-data/**
-    - `GenerateDummyData.jsx`
+    - `GenerateDummyData.jsx`  - stateless component
 
 - **navigation-bar/**
   - `NavigationBar.jsx`
 
 - **product-details/**
   - `ProductDetails.jsx`
-    - `EditProduct.jsx`
-    - `PictureMaxSize.jsx`
+    - `EditProduct.jsx` - controlled form used
+    - `PictureMaxSize.jsx`  - stateless component
     - **product-comments/**
-      - `UserComments.jsx`
-        - `Comment.jsx`
+      - `UserComments.jsx` -uncontrolled form used
+        - `Comment.jsx` 
 
 - **product-list/**
   - `ProductList.jsx`
@@ -51,16 +51,16 @@ The react components are structured in the following way:
       - `ProductListItem.jsx`
 
 - **user-login/**
-  - `LoginComponent.jsx`
+  - `LoginComponent.jsx` -uncontrolled form used
 
 - **user-register/**
-  - `RegisterComponent.jsx`
+  - `RegisterComponent.jsx` - controlled form used
 
 - **weather-api/**
   - `WeatherApi.jsx`
 
-- `HomeLoad.jsx`
-- `NotFound.jsx`
+- `HomeLoad.jsx` - stateless component
+- `NotFound.jsx` - stateless component
 
 
 Each component has its own corresponding .module.css file.
