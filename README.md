@@ -53,6 +53,9 @@ The react components are structured in the following way:
 - **user-login/**
   - `LoginComponent.jsx` -uncontrolled form used
 
+- **user-profile/**
+  - `UserProfile.jsx` -uncontrolled form used    
+
 - **user-register/**
   - `RegisterComponent.jsx` - controlled form used
 
@@ -62,6 +65,9 @@ The react components are structured in the following way:
 - `HomeLoad.jsx` - stateless component
 - `NotFound.jsx` - stateless component
 
+AddProductForm.jsx - controlled form used;
+UserProfile.jsx -uncontrolled form used;
+HomeLoad.jsx - stateless component;
 
 Each component has its own corresponding .module.css file.
 
