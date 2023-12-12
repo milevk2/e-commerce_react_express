@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import styles from './ProductDetails.module.css'
 import PictureMaxSize from './PictureMaxSize.jsx';
 import UserComments from './Product comments/UserComments.jsx';
@@ -6,7 +6,7 @@ import EditProduct from './EditProduct.jsx';
 import { deleteProduct, getProduct } from '../../services/productService.js'
 import { useNavigate, useParams } from 'react-router-dom';
 import jwtParser from '../../lib/jwtParser.js';
-
+import { LoadingContext } from '../../LoadingContext.jsx';
 
 //const image = "https://images.samsung.com/bg/smartphones/galaxy-s23-ultra/buy/03_Color_Selection/S23Ultra_Basic_Color/S23Ultra_Green_MO.jpg"
 
@@ -20,6 +20,7 @@ const ProductDetails = ({ setCart }) => {
     const [comments, setComments] = useState([]);
     const [isOwner, setIsOwner] = useState(false);
     const [userDetails, setUserDetails] = useState(jwtParser())
+    const { isLoading, toggleLoading } = useContext(LoadingContext);
     const navigate = useNavigate();
 
     const toggleZoom = () => {
@@ -55,10 +56,15 @@ const ProductDetails = ({ setCart }) => {
 
             try {
                 await deleteProduct(productId);
+                
                 navigate('/my_products');
             }
             catch (err) {
-                navigate('*')
+              
+                navigate('*');
+            }
+            finally{
+                toggleLoading();
             }
         }
     }
@@ -146,7 +152,7 @@ const ProductDetails = ({ setCart }) => {
                             {productDetails.description}
                         </p>
                         <div className={`${styles.price} ${styles.heart}`}><p>Price: {productDetails.price}bgn</p></div>
-                        {!isOwner ? <div className={styles.center}>{userDetails && <button type="button" className="btn btn-success buy" onClick={() => { setCart(true); setTimeout(() => { setCart(false) }, 2000) }}>
+                        {!isOwner ? <div className={styles.center}>{userDetails && <button type="button" className="btn btn-success buy" onClick={() => { setCart(true); setTimeout(() => { setCart(false) }, 1700) }}>
                             Add to cart
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart" viewBox="0 0 16 16">
                                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z">
@@ -158,7 +164,9 @@ const ProductDetails = ({ setCart }) => {
                             {isOwner && <div className="row justify-content-around" id="adminPanel">
                                 <div className="price"><p>Quantity:{productDetails.quantity}</p></div>
                                 <a className="btn btn-warning col-4" onClick={() => setIsEdit(true)}>EDIT</a>
-                                <a className="btn btn-danger col-4" onClick={onProductDelete}>DELETE</a>
+                                <a className="btn btn-danger col-4" onClick={(e)=>{
+                                    toggleLoading();
+                                    onProductDelete(e);}}>DELETE</a>
                             </div>}
                         </div>
                     </div>

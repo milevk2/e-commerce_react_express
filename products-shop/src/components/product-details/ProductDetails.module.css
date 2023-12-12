@@ -157,7 +157,7 @@
 @media all and (max-width:726px) {
 
     .some {
-        max-width: 300px;
+        width: fit-content;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -170,6 +170,7 @@
         align-items: center;
         justify-content: center;
         max-width: 50%;
+        height: 100%;
 
     }
 
@@ -178,13 +179,15 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        max-width: 50%;
+        height: 100%;
     }
 
     .traitsTable {
+        width: 100%;
         white-space: normal;
         display: flex;
         flex-direction: column;
+        font-size: smaller;
     }
 
     .trait {
@@ -193,25 +196,32 @@
         justify-content: center;
         text-align: center;
     }
+
 }
 
-@media all and (max-width:300px) {
+@media all and (max-width:384px) {
 
-    .some {
-        max-width: 200px;
+    .main{
+
+        overflow: scroll;
+        overflow-x: auto;
+        font-size: small;
+    }
+    /* .some {
+        min-width: 350px;
         display: flex;
         align-items: center;
+        overflow:scroll;
         justify-content: end;
         overflow-wrap: break-word;
-        /* CSS3 standard */
         word-wrap: break-word;
-        /* For compatibility with older browsers */
         white-space: normal;
     }
 
     .left1 {
 
         width: 50%;
+        min-width: 175px;
         display: flex;
         align-items: center;
         justify-content: end;
@@ -224,6 +234,7 @@
     .right1 {
 
         width: 50%;
+        min-width: 175px;
         display: flex;
         align-items: center;
         justify-content: end;
@@ -231,7 +242,7 @@
         word-wrap: break-word;
         white-space: normal;
     }
-
+*/
     .traitsTable {
         width: 50%;
         display: flex;
@@ -240,7 +251,8 @@
         overflow-wrap: break-word;
         word-wrap: break-word;
         white-space: normal;
-    }
+        font-size: small;
+    } 
 }
 
 .heart {
