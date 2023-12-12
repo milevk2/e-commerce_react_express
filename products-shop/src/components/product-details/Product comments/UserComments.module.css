@@ -160,7 +160,7 @@
     }
 }
 
-@media all and (max-width:726px) {
+@media all and (max-width:632) {
 
     .commentWrapper {
 
@@ -170,7 +170,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: start;
         width:100%
     }
 
@@ -182,7 +182,7 @@
         width:50%;
         display: flex;
         align-items: center;
-        justify-content: left;
+        justify-content: start;
     }
 
     .header {
@@ -199,25 +199,72 @@
         flex-direction: column;
         width:10%;
         align-items: center;
-        justify-content: center;
+        justify-content: start;
     }
 
 }
 
-@media all and (max-width:300px) {
+@media all and (max-width:430px) {
 
     .commentWrapper {
 
-        overflow:unset
+        overflow-x: auto;
     }
 
     .comment {
-        overflow:unset
+
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        white-space: normal;
+        width:fit-content;
+        display: flex;
+        align-items: center;
+        justify-content:space-evenly;
+        
     }
 
-    .header {
-
-        overflow:unset
+    .commentText{
+        font-size: small;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        white-space: normal;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        min-width: 50%;
+        overflow-x: auto;
+        overflow-y: auto;
     }
 
+    .userDetails{
+
+        display: flex;
+        flex-direction: column;
+        width:15px;
+        height: 15px;
+        align-items: center;
+        justify-content: start;
+    
+    }
+
+    .avatar{
+
+        width: 7.5px;
+        height: 7.5px;
+    }
+
+    .userName{
+        display: flex;
+        flex-direction: row;
+        width: 7.5px;
+        height: 5px;
+        font-size: xx-small;
+
+    }
+
+    .time{
+
+        font-size: small;
+
+    }
 }
