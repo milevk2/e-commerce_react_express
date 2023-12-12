@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import HomeLoad from './components/HomeLoad.jsx';
 import NotFound from './components/NotFound.jsx';
 import ProductDetails from './components/product-details/ProductDetails.jsx';
@@ -10,9 +10,12 @@ import RegisterComponent from './components/user-register/RegisterComponent.jsx'
 import LoginComponent from './components/user-login/LoginComponent.jsx';
 import UserProfile from './components/user-profile/UserProfile.jsx';
 import WeatherApi from './components/weather-api/WeatherApi.jsx';
-import '../public/styles/default.css'
+import Spinner from './components/Spinner.jsx';
+import { LoadingContext } from './LoadingContext.jsx';
 import styles from './App.module.css'
+import '../public/styles/default.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
 
@@ -20,6 +23,7 @@ function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [token, setToken] = useState('');
   const [userId, setUserId] = useState('');
+  const { isLoading, toggleLoading } = useContext(LoadingContext);
 
   useEffect(()=> {
 
@@ -37,7 +41,7 @@ function App() {
 
     <>
       <NavigationBar cart={cart} isLogged={isLogged} setIsLogged={setIsLogged} token={token} setToken={setToken} userId={userId}/>
-    
+       {isLoading && <Spinner/>}
       <div className={styles.main}> 
         <WeatherApi />
         <Routes>

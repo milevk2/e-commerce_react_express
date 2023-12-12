@@ -1,9 +1,7 @@
 import * as request from '../lib/request.js'
+import {VITE_API_URL} from './host.js'
 
-const baseUrl = 'http://localhost:3000/users'
-
-
-
+const baseUrl = `${VITE_API_URL}/users`
 
 export const create = async (data) => {
 

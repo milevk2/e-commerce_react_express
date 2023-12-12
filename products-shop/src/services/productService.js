@@ -1,6 +1,7 @@
 import * as request from '../lib/request.js'
+import {VITE_API_URL} from './host.js'
 
-const baseUrl = 'http://localhost:3000/products'
+const baseUrl = `${VITE_API_URL}/products`
 
 async function createProduct(productBody) {
 
