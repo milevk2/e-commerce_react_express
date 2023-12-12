@@ -9,7 +9,7 @@
     flex-direction: row;
 }
 
-.user{
+.user {
 
     display: flex;
     flex-direction: row;
@@ -20,73 +20,92 @@
 }
 
 .hidden {
-
     display: none;
 }
 
-.hiding{
+@keyframes moveSouth {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
 
-    display: flex;
-    position:absolute;
-    bottom:100px;
-    opacity: 100%;
-    z-index: 3;
+    50% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
 }
 
-.itemAdded {
 
+.movingDiv {
+
+    opacity: 0%;
+    position: absolute;
+    padding: 5px;
+    bottom: 20%;
+    z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 85px;
-    transition: opacity 3s ease-in;
-    opacity: 0%;
-    z-index: 3
+    width: fit-content;
+    height: 50px;
+    border: 1px solid;
+    border-radius: 8px;
+    background-color: rgb(129, 214, 129);
+    color: #1d9e3d;
+    border-color: #1d9e3d;
+    animation: moveSouth 1.5s
 }
 
 .cart {
-    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: end;
+    width: 40vw;
+
 }
 
-.absolute{
-
-    bottom: 20px;
-    left: 230px;
-    color: whitesmoke;
-    position: absolute;
-    transition: transform 0.3s ease-out;
-    transform: scale(1.2);
+@media (max-width: 1024px) {
+    .cart {
+        width: 35%;
+    }
 }
 
-
+@media (max-width: 830px) {
+    .cart {
+        width: 25%;
+        display: flex;
+        justify-content: start;
+    }
+}
 
 .cartCounter {
-
-    align-items: center;
-    justify-content: center;
     position: absolute;
-    left:80.5%;
-    bottom: 39%;
-    margin-left: 1px;
-    margin-bottom: 1px;
-    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: red;
-    border-radius: 100px;
+    border-radius: 50%;
     height: 15px;
     width: 15px;
     font-size: 12px;
-    line-height: 15px; /* Center the text vertically */
+    line-height: 15px;
     text-align: center;
+    color: white;
     transition: transform 0.3s ease-out;
-    z-index: 5;
-    transform: scale(1.2);
 }
 
 .cartCounter:hover {
     background-color: orangered;
-    transform: scale(1.6);
-
+    transform: translate(-50%, -50%) scale(1.2);
 }
 
-
+.cartContainer {
+    position: relative;
+    color: white;
+    display: inline-block;
+}
