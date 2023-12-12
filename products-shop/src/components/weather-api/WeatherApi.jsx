@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { get } from '../../lib/request.js'
 import styles from './WeatherApi.module.css'
+import {VITE_API_URL} from '../../services/host.js'
 
-const url = 'http://localhost:3000/getWeather'
+const url = `${VITE_API_URL}/getWeather`
 
 const WeatherApi = () => {
 

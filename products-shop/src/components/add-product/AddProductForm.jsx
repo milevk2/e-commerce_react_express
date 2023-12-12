@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './AddProductForm.module.css'
 import { testSetErrors } from './util.js';
 import { createProduct } from '../../services/productService.js';
 import { defaultValues } from './EmptyProductForm.js';
 import GenerateDummyData from './generate-dummy-data/GenerateDummyData.jsx'
 import jwtParser from '../../lib/jwtParser.js';
+import { LoadingContext } from '../../LoadingContext.jsx';
 
 const AddProductForm = () => {
 
@@ -13,19 +14,20 @@ const AddProductForm = () => {
     const [isPriceError, setIsPriceError] = useState(false);
     const [generalError, setGeneralError] = useState(false);
     const [generalErrorMessage, setGeneralErrorMessage] = useState('');
+    const { isLoading, toggleLoading } = useContext(LoadingContext);
 
     async function addProductHandler(e) {
 
         e.preventDefault();
         //abort function in case of existing error:
-        if (isQuantityError || isPriceError) return;
+        if (isQuantityError || isPriceError) return toggleLoading();
 
         //return if any of the input fields is empty and send error box to the user:
         if (Object.values(formData).some(input => input == '')) {
 
             setGeneralError(true);
             setGeneralErrorMessage('All fields are required!');
-            return;
+            return toggleLoading();
         }
 
         try {
@@ -39,7 +41,12 @@ const AddProductForm = () => {
             setGeneralError(true);
             setGeneralErrorMessage(err.message);
         }
-        setFormData({ ...defaultValues })
+        finally{
+
+            toggleLoading();
+            setFormData({ ...defaultValues });
+        }
+        
     }
 
     function inputChangeHandler(e) {
@@ -67,7 +74,10 @@ const AddProductForm = () => {
 
             <div className={styles.contentManager}>
                 <GenerateDummyData />
-                <form onSubmit={addProductHandler}>
+                <form onSubmit={(e)=>{
+                    
+                    toggleLoading();
+                    addProductHandler(e)}}>
                     <table>
                         <tbody>
                             <tr>
