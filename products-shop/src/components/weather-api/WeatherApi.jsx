@@ -32,7 +32,7 @@ const WeatherApi = () => {
     useEffect(() => {
 
         getWeatherData();
-        const updateInterval = 600 * 1000  //10 mins
+        const updateInterval = 1200 * 1000  //20 mins
         const intervalId = setInterval(getWeatherData, updateInterval);
         
         return () => {
