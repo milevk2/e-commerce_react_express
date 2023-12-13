@@ -16,7 +16,7 @@
 
 .wrapper {
     display: flex;
-    margin: 7px;    
+    margin: 7px;
     padding: 2px;
     justify-content: center;
     align-items: center;
@@ -71,7 +71,7 @@
 
     color: #3e8e41;
     font-weight: bold;
-    text-decoration: underline;
+    
 
 }
 
@@ -201,48 +201,13 @@
 
 @media all and (max-width:384px) {
 
-    .main{
+    .main {
 
         overflow: scroll;
         overflow-x: auto;
         font-size: small;
     }
-    /* .some {
-        min-width: 350px;
-        display: flex;
-        align-items: center;
-        overflow:scroll;
-        justify-content: end;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-        white-space: normal;
-    }
 
-    .left1 {
-
-        width: 50%;
-        min-width: 175px;
-        display: flex;
-        align-items: center;
-        justify-content: end;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-        white-space: normal;
-
-    }
-
-    .right1 {
-
-        width: 50%;
-        min-width: 175px;
-        display: flex;
-        align-items: center;
-        justify-content: end;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-        white-space: normal;
-    }
-*/
     .traitsTable {
         width: 50%;
         display: flex;
@@ -252,8 +217,31 @@
         word-wrap: break-word;
         white-space: normal;
         font-size: small;
-    } 
+    }
 }
+
+.triggerContainer {
+    text-align: center;
+    margin: 20px;
+    width: 100%;
+}
+
+.triggerButton {
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    width: 100%;
+    background-color: #3e8e41;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.triggerButton:hover {
+    background-color: #3e8e41;
+}
+
 
 .heart {
     position: relative;

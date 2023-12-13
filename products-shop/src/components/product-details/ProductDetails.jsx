@@ -7,6 +7,8 @@ import { deleteProduct, getProduct } from '../../services/productService.js'
 import { useNavigate, useParams } from 'react-router-dom';
 import jwtParser from '../../lib/jwtParser.js';
 import { LoadingContext } from '../../LoadingContext.jsx';
+import ProductSpecs from './product-specs/ProductSpecs.jsx';
+import './ProductDetails.css'
 
 //const image = "https://images.samsung.com/bg/smartphones/galaxy-s23-ultra/buy/03_Color_Selection/S23Ultra_Basic_Color/S23Ultra_Green_MO.jpg"
 
@@ -19,8 +21,10 @@ const ProductDetails = ({ setCart }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [comments, setComments] = useState([]);
     const [isOwner, setIsOwner] = useState(false);
-    const [userDetails, setUserDetails] = useState(jwtParser())
+    const [userDetails, setUserDetails] = useState(jwtParser());
     const { isLoading, toggleLoading } = useContext(LoadingContext);
+    const [showSpecs, setShowSpecs] = useState(false);
+
     const navigate = useNavigate();
 
     const toggleZoom = () => {
@@ -56,14 +60,14 @@ const ProductDetails = ({ setCart }) => {
 
             try {
                 await deleteProduct(productId);
-                
+
                 navigate('/my_products');
             }
             catch (err) {
-              
+
                 navigate('*');
             }
-            finally{
+            finally {
                 toggleLoading();
             }
         }
@@ -82,7 +86,7 @@ const ProductDetails = ({ setCart }) => {
 
     useEffect(() => {
 
-    
+
         if (userDetails) {
 
             const userId = userDetails._id
@@ -135,7 +139,7 @@ const ProductDetails = ({ setCart }) => {
 
                     <div className={styles.right1}>
                         <div className="headerDiv"><h4>Specifications</h4></div>
-                        <div className={styles.traitsTable}>
+                        {/* <div className={styles.traitsTable}>
 
                             <div className={styles.trait}><div className={styles.specHeader}> Category:</div> {productDetails.category}</div>
                             <div className={styles.trait}><div className={styles.specHeader}>Announced:</div> {productDetails.announced}</div>
@@ -146,7 +150,47 @@ const ProductDetails = ({ setCart }) => {
                             <div className={styles.trait}><div className={styles.specHeader}>Os:</div> {productDetails.operating_system}</div>
                             <div className={styles.trait}><div className={styles.specHeader}>Battery:</div> {productDetails.battery}</div>
 
+                        </div> */}
+                        <div className="info-container">
+                            <div className="info-row">
+                                <div className="icon">
+                                </div>
+                                <div className="info-text">
+                                    <div>Announced: December 2023</div>
+                                </div>
+                            </div>
+
+                            <div className="info-row">
+                                <div className="icon">
+
+                                    <img src="../public/images/ram-icon.png" alt="RAM Icon" />
+                                </div>
+                                <div className="info-text">
+                                    <div><i>RAM:</i> 4GB</div>
+                                </div>
+                            </div>
+
+                            <div className="info-row">
+                                <div className="icon">
+
+                                    <img src="../public/images/cpu-icon.png" alt="CPU Icon" />
+                                </div>
+                                <div className="info-text">
+                                    <div><i>CPU:</i> Octa-core</div>
+                                </div>
+                            </div>
+
+                            <div className="info-row">
+                                <div className="icon">
+
+                                    <img src="../public/images/os-icon.png" alt="OS Icon" />
+                                </div>
+                                <div className="info-text">
+                                    <div><i>OS:</i> Android 13, MIUI 14</div>
+                                </div>
+                            </div>
                         </div>
+
                         <h4>Description</h4>
                         <p>
                             {productDetails.description}
@@ -164,17 +208,23 @@ const ProductDetails = ({ setCart }) => {
                             {isOwner && <div className="row justify-content-around" id="adminPanel">
                                 <div className="price"><p>Quantity:{productDetails.quantity}</p></div>
                                 <a className="btn btn-warning col-4" onClick={() => setIsEdit(true)}>EDIT</a>
-                                <a className="btn btn-danger col-4" onClick={(e)=>{
+                                <a className="btn btn-danger col-4" onClick={(e) => {
                                     toggleLoading();
-                                    onProductDelete(e);}}>DELETE</a>
+                                    onProductDelete(e);
+                                }}>DELETE</a>
                             </div>}
                         </div>
                     </div>
 
                 </div>
+
+                <div className={styles.triggerContainer}>
+                    <button className={styles.triggerButton} onClick={() => setShowSpecs(showSpecs => showSpecs ? false : true)}>Show Product Details</button>
+                </div>
+                {showSpecs && <ProductSpecs product={productDetails} />}
             </div>}
 
-            <UserComments comments={comments} setComments={commentsHandler} productId={productId} />
+            <UserComments comments={comments} setComments={commentsHandler} productId={productId} productDetails={productDetails}/>
         </div>)
 
 
