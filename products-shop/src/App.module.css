@@ -4,7 +4,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-image: url('../public/images/talking2.jpg');
     min-height: 95vh;
     position: relative;
 }
@@ -15,6 +14,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 30px;
+    background-color: aliceblue;
     text-decoration: underline;
     font-size: 1em;
     font-style: italic;
