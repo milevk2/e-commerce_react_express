@@ -1,3 +1,7 @@
 /products-shop/node_modules/
 /server/node_modules/
 /server/src/APIkey.js
+/server/functions/
+/server/.firebaserc
+/server/.gitignore
+/server/firebase.json
