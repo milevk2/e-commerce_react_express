@@ -109,3 +109,38 @@
     color: white;
     display: inline-block;
 }
+
+.encapsulated {
+       
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+}
+
+@media (max-width: 576px) {
+    .encapsulated {
+       
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .user{
+
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+
+    }
+
+    .guest{
+
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+    }
+}
