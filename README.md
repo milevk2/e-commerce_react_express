@@ -41,6 +41,8 @@ The react components are structured in the following way:
   - `ProductDetails.jsx`
     - `EditProduct.jsx` - controlled form used
     - `PictureMaxSize.jsx`  - stateless component
+    - **product-specs/**
+      - `ProductSpecs.jsx`
     - **product-comments/**
       - `UserComments.jsx` -uncontrolled form used
         - `Comment.jsx` 
@@ -64,10 +66,6 @@ The react components are structured in the following way:
 
 - `HomeLoad.jsx` - stateless component
 - `NotFound.jsx` - stateless component
-
-AddProductForm.jsx - controlled form used;
-UserProfile.jsx -uncontrolled form used;
-HomeLoad.jsx - stateless component;
 
 Each component has its own corresponding .module.css file.
 
