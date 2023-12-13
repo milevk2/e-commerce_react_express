@@ -6,7 +6,7 @@ import { updateProduct } from '../../../services/productService.js';
 import jwtParser from '../../../lib/jwtParser.js';
 import { v4 as uuidv4 } from 'uuid';
 
-const UserComments = ({ comments, setComments, productId }) => {
+const UserComments = ({ comments, setComments, productId, productDetails }) => {
 
     const [rating, setRating] = useState(0);
     const [userDetails, setUserDetails] = useState(jwtParser()); // takes the userInfo from the localStorage
@@ -54,7 +54,7 @@ const UserComments = ({ comments, setComments, productId }) => {
 
         <div id="user-comments" className={styles.commentWrapper}>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-            <h2 className="headerDiv" >Samsung Galaxy Tab A9+ - user opinions and reviews</h2>
+            <h2 className="headerDiv" >{productDetails.name} - user opinions and reviews</h2>
 
             {comments && comments.length > 0 && comments.map(data => (
                
