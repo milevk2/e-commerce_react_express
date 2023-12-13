@@ -8,9 +8,9 @@
     align-items: center;
     justify-content: center;
     top: 10px;
-    right:10px;
-   
-    
+    right: 10px;
+
+
 }
 
 .weatherSpec {
@@ -19,15 +19,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left:3px;
+    margin-left: 3px;
     margin-right: 3px;
 
 }
 
 .weatherBoxA {
 
-    color:#3e8e41;
-    text-decoration: none; 
+    color: #3e8e41;
+    text-decoration: none;
     height: fit-content;
     width: fit-content;
     display: flex;
@@ -38,19 +38,16 @@
     border-radius: 10px;
     opacity: 78%;
     top: 10px;
-    right:10px;
-    color:#3e8e41;
+    right: 10px;
+    color: #3e8e41;
     font-weight: bold;
-    
+
 }
 
 @media all and (max-width:1144px) {
 
-    .weatherBox{
-
-      position: relative;
-
-
+    .weatherBox {
+        position: relative;
+        margin: 30px;
     }
-
-  }
+}
