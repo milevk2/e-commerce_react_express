@@ -15,7 +15,7 @@ expressConfig(app);
 
 //connect to DB:
 try {
-    dbConnect(constants.URL);
+    dbConnect(constants.URL1);
     console.log('Successfully connected to the DB!');
 }
 catch (err) {
@@ -72,7 +72,9 @@ app.post('/products', async (req, res) => {
 
     try {
         const product = await electonicsService.create(req.body);
-        res.send(JSON.stringify(product));
+        
+        setTimeout(()=>{res.send(JSON.stringify(product))},2000) //simulate delay
+        
     }
     catch (err) {
         console.log(err);
@@ -187,7 +189,7 @@ app.post('/users/logout', async (req, res) => {
     console.log('/users/logout post');
 
     console.log(sessions);
-    const {authToken} = req.body;
+    const { authToken } = req.body;
 
     try {
         if (sessions[authToken]) {
@@ -199,7 +201,7 @@ app.post('/users/logout', async (req, res) => {
     catch (err) {
         res.json(false)
     }
-    finally{
+    finally {
 
         console.log(sessions);
     }
