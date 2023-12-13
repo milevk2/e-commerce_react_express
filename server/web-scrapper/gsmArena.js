@@ -8,7 +8,7 @@ const { wait } = require('../src/lib/util.js')
 async function scrape(phoneModel, quantity = null) {
 
     try {
-        await dbConnect(constants.URL);
+        await dbConnect(constants.URL1);
         console.log('Successfully connected to the DB!');
     }
     catch (err) {
