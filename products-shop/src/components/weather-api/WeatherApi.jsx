@@ -43,15 +43,16 @@ const WeatherApi = () => {
 
     return (
 
-        <a href='https://weatherstack.com/'>
         <div className={styles.weatherBox}>
+        <a href='https://weatherstack.com/' className={styles.weatherBoxA}>
+       
             <div className={styles.weatherSpec}>{weatherData.city}</div>
             <div className={styles.weatherSpec}><img src={weatherData.icon}></img></div>
             <div className={styles.weatherSpec}>{weatherData.temperature}°C</div>
             <div className={styles.weatherSpec}>{weatherData.description}</div>
             <div className={styles.weatherSpec}>{weatherData.time}</div>
-        </div>
         </a>
+        </div>
     )
 }
 
