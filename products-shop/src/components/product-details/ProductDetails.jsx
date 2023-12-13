@@ -163,7 +163,7 @@ const ProductDetails = ({ setCart }) => {
                             <div className="info-row">
                                 <div className="icon">
 
-                                    <img src="../public/images/ram-icon.png" alt="RAM Icon" />
+                                    <img src="/images/ram-icon.png" alt="RAM Icon" />
                                 </div>
                                 <div className="info-text">
                                     <div><i>RAM:</i> 4GB</div>
@@ -173,7 +173,7 @@ const ProductDetails = ({ setCart }) => {
                             <div className="info-row">
                                 <div className="icon">
 
-                                    <img src="../public/images/cpu-icon.png" alt="CPU Icon" />
+                                    <img src="/images/cpu-icon.png" alt="CPU Icon" />
                                 </div>
                                 <div className="info-text">
                                     <div><i>CPU:</i> Octa-core</div>
@@ -183,7 +183,7 @@ const ProductDetails = ({ setCart }) => {
                             <div className="info-row">
                                 <div className="icon">
 
-                                    <img src="../public/images/os-icon.png" alt="OS Icon" />
+                                    <img src="/images/os-icon.png" alt="OS Icon" />
                                 </div>
                                 <div className="info-text">
                                     <div><i>OS:</i> Android 13, MIUI 14</div>
@@ -191,10 +191,6 @@ const ProductDetails = ({ setCart }) => {
                             </div>
                         </div>
 
-                        <h4>Description</h4>
-                        <p>
-                            {productDetails.description}
-                        </p>
                         <div className={`${styles.price} ${styles.heart}`}><p>Price: {productDetails.price}bgn</p></div>
                         {!isOwner ? <div className={styles.center}>{userDetails && <button type="button" className="btn btn-success buy" onClick={() => { setCart(true); setTimeout(() => { setCart(false) }, 1700) }}>
                             Add to cart
