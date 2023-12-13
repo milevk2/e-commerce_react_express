@@ -1,7 +1,7 @@
 .wrapped {
     /* blanchedalmond; */
-    background-color:rgb(216, 241, 177);
-    width: 25%;
+    background-color: white;
+    width: 20%;
     box-sizing: border-box;
     border: 1px solid #ccc;
     padding: 10px;
@@ -10,11 +10,21 @@
     transition: 0.3s ease-out;
 }
 
-.wrapped:hover{
+.wrapped:hover {
 
     transform: scale(1.1);
     transition: 0.3s ease-in;
 
+}
+
+.wrapped:hover .price {
+
+    color: red;
+}
+
+.price {
+
+    color: grey;
 }
 
 .column {
@@ -23,13 +33,42 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin:5px;
 
 }
 
-.preview{
+.details {
 
+    width: 100%;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color:rgb(216, 241, 177); */
+    background-color: rgb(234, 240, 223);
+    padding: 5px;
+    margin: 5px;
+}
+
+.columnLink {
+
+    text-decoration: none;
+    color: #3e8e41;
+    font-weight: bold;
+}
+
+.preview {
+    width: 100%;
     max-width: 100%;
     max-height: 25%;
+}
 
+@media all and (max-width:442px) {
 
+    .wrapped{
+
+        background-color: transparent;
+
+    }
 }

@@ -29,3 +29,12 @@
     background-color: grey;
     opacity: 78%;
 }
+
+@media all and (max-width:442px) {
+
+    .shopWrapper{
+
+        flex-direction: column;
+
+    }
+}

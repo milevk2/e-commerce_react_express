@@ -5,16 +5,17 @@ const ProductListItem = ({ item }) => {
 
     return (
         <li className={styles.wrapped}>
-            <NavLink  to={`/products/${item._id}`}>
-               
-                <div className={styles.column}>
+
+            <div className={styles.column}>
+                <NavLink to={`/products/${item._id}`} className={styles.columnLink}>
                     <img src={item.image} className={styles.preview} />
+                    <div className={styles.details}>
                     <div>{item.name}</div>
                     <div>{item.announced}</div>
-                    <div>{item.description}</div>
-                    <div>{item.price}</div>
-                </div>
-            </NavLink>
+                    <div className={styles.price}>{item.price} bgn</div>
+                    </div>
+                </NavLink>
+            </div>
         </li>
     )
 }
