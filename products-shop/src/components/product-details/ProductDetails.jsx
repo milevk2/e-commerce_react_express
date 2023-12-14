@@ -5,11 +5,13 @@ import UserComments from './Product comments/UserComments.jsx';
 import EditProduct from './EditProduct.jsx';
 import { deleteProduct, getProduct } from '../../services/productService.js'
 import { useNavigate, useParams } from 'react-router-dom';
-import jwtParser from '../../lib/jwtParser.js';
 import { LoadingContext } from '../../LoadingContext.jsx';
 import ProductSpecs from './product-specs/ProductSpecs.jsx';
 import './ProductDetails.css'
+import { LoggerContext } from '../../LoggerContext.jsx';
 
+
+LoggerContext
 //const image = "https://images.samsung.com/bg/smartphones/galaxy-s23-ultra/buy/03_Color_Selection/S23Ultra_Basic_Color/S23Ultra_Green_MO.jpg"
 
 const ProductDetails = ({ setCart }) => {
@@ -21,8 +23,8 @@ const ProductDetails = ({ setCart }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [comments, setComments] = useState([]);
     const [isOwner, setIsOwner] = useState(false);
-    const [userDetails, setUserDetails] = useState(jwtParser());
-    const { isLoading, toggleLoading } = useContext(LoadingContext);
+    const { toggleLoading } = useContext(LoadingContext);
+    const { token, userId } = useContext(LoggerContext);
     const [showSpecs, setShowSpecs] = useState(false);
 
     const navigate = useNavigate();
@@ -49,7 +51,7 @@ const ProductDetails = ({ setCart }) => {
 
     function productDetailsUpdater(updatedProduct) {
 
-        setProductDetails({ ...updatedProduct })
+        setProductDetails({ ...updatedProduct });
     }
 
     async function onProductDelete() {
@@ -82,14 +84,12 @@ const ProductDetails = ({ setCart }) => {
 
         }).catch(err => console.log(err));
 
-    }, [])
+    }, []);
 
     useEffect(() => {
 
+        if (token) {
 
-        if (userDetails) {
-
-            const userId = userDetails._id
             if (productDetails.ownerId == userId) {
 
                 setIsOwner(true);
@@ -103,13 +103,14 @@ const ProductDetails = ({ setCart }) => {
             setIsOwner(false);
         }
 
-    }, [productDetails])
+    }, [productDetails]);
 
 
     function commentsHandler(comments) {
 
         setComments([...comments])
     }
+
     return (
 
         <div className='flexCenterColumn'>
@@ -124,7 +125,7 @@ const ProductDetails = ({ setCart }) => {
                             <img className={isZoomedIn ? styles.zoomIn : styles.zoomOut} src={productDetails.image} />
 
 
-                            {userDetails && <button type="button" className={`defaultGreenText ${styles.zoomButton}`} onClick={seeMaxSize} >
+                            {token && <button type="button" className={`defaultGreenText ${styles.zoomButton}`} onClick={seeMaxSize} >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-zoom-in" viewBox="0 0 16 16">
                                     <path fillRule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z">
                                     </path>
@@ -166,7 +167,7 @@ const ProductDetails = ({ setCart }) => {
                                     <img src="/images/ram-icon.png" alt="RAM Icon" />
                                 </div>
                                 <div className="info-text">
-                                    <div><i>RAM:</i> 4GB</div>
+                                    <div><i>RAM:</i> {productDetails.ram}</div>
                                 </div>
                             </div>
 
@@ -176,7 +177,7 @@ const ProductDetails = ({ setCart }) => {
                                     <img src="/images/cpu-icon.png" alt="CPU Icon" />
                                 </div>
                                 <div className="info-text">
-                                    <div><i>CPU:</i> Octa-core</div>
+                                    <div><i>CPU:</i> {productDetails.cpu}</div>
                                 </div>
                             </div>
 
@@ -186,13 +187,13 @@ const ProductDetails = ({ setCart }) => {
                                     <img src="/images/os-icon.png" alt="OS Icon" />
                                 </div>
                                 <div className="info-text">
-                                    <div><i>OS:</i> Android 13, MIUI 14</div>
+                                    <div><i>OS:</i> {productDetails.operating_system}</div>
                                 </div>
                             </div>
                         </div>
 
                         <div className={`${styles.price} ${styles.heart}`}><p>Price: {productDetails.price}bgn</p></div>
-                        {!isOwner ? <div className={styles.center}>{userDetails && <button type="button" className="btn btn-success buy" onClick={() => { setCart(true); setTimeout(() => { setCart(false) }, 1700) }}>
+                        {!isOwner ? <div className={styles.center}>{token && <button type="button" className="btn btn-success buy" onClick={() => { setCart(true); setTimeout(() => { setCart(false) }, 1700) }}>
                             Add to cart
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart" viewBox="0 0 16 16">
                                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z">

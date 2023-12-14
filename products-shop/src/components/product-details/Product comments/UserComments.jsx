@@ -1,22 +1,24 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styles from './UserComments.module.css'
 import getDateTime from '../../../lib/getDateTime.js';
 import Comment from './Comment.jsx';
 import { updateProduct } from '../../../services/productService.js';
 import jwtParser from '../../../lib/jwtParser.js';
 import { v4 as uuidv4 } from 'uuid';
+import { LoggerContext } from '../../../LoggerContext.jsx';
 
+LoggerContext
 const UserComments = ({ comments, setComments, productId, productDetails }) => {
 
     const [rating, setRating] = useState(0);
-    const [userDetails, setUserDetails] = useState(jwtParser()); // takes the userInfo from the localStorage
+    const {userName, userId, userEmail} = useContext(LoggerContext); // takes user data from the sessionStorage
 
     async function addNewComment(e) {
 
         e.preventDefault();
         const formData = Object.fromEntries(new FormData(e.target));
-        formData.userName = userDetails.email;   
-        formData.user_id = userDetails._id;
+        formData.userName = userName;
+        formData.user_id = userId;
         formData.time = getDateTime();
         formData.rating = rating;
         formData.comment = true;
@@ -61,7 +63,7 @@ const UserComments = ({ comments, setComments, productId, productDetails }) => {
                 <Comment comment={data} key={data.commentId} />
             ))}
 
-           { userDetails && <form className={styles.addComment} onSubmit={addNewComment}>
+           { userName && <form className={styles.addComment} onSubmit={addNewComment}>
 
                 <label htmlFor='content'>Add comment:</label>
                 <textarea name='content' className={styles.roundedBorder}></textarea>

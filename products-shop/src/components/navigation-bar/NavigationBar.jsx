@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Navbar, Nav, Form, Button } from 'react-bootstrap';
 import styles from './Navigation.module.css'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { logout } from '../../services/userService.js';
+import { LoggerContext } from '../../LoggerContext.jsx';
 
-function NavigationBar({ cart, isLogged, setIsLogged, token, setToken, userId }) {
+
+function NavigationBar({ cart }) {
 
   const [isHidden, setIsHidden] = useState(true);
   const [cartCounter, setCartCounter] = useState(0);
+  const { isLogged, logInLogOut, token } = useContext(LoggerContext);
 
   const navigate = useNavigate();
 
@@ -24,30 +27,24 @@ function NavigationBar({ cart, isLogged, setIsLogged, token, setToken, userId })
         setIsHidden(true);
 
       }, 1600)
-
-
     }
   }, [cart])
 
 
   async function onUserLogOut() {
 
-    const token = localStorage.getItem('authToken');
     const response = await logout(token);
     const isLoggedOut = await response.json();
 
     if (isLoggedOut) {
 
-      localStorage.removeItem('authToken');
-      setIsLogged(false);
-      setToken('');
+      logInLogOut()
       navigate('/');
     }
     else {
 
       console.log('Problem with logging out!');
     }
-
   }
 
   const navbarStyle = {

@@ -11,6 +11,7 @@
     width: fit-content;
     height: fit-content;
     min-width: 50%;
+    max-width: 85%;
     transition: .5s ease;
     flex-wrap: wrap;
     list-style-type: none;
@@ -28,6 +29,16 @@
     border-radius: 15px;
     background-color: grey;
     opacity: 78%;
+}
+
+
+@media all and (max-width:1142px) {
+
+    .shopWrapper{
+
+       max-width: 100%;
+
+    }
 }
 
 @media all and (max-width:442px) {

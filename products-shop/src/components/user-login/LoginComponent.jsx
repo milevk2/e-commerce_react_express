@@ -1,13 +1,15 @@
 import styles from './LoginComponent.module.css'
 import { login } from '../../services/userService.js'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { LoggerContext } from '../../LoggerContext.jsx';
 
 
 const LoginComponent = ({ setIsLogged }) => {
 
   const navigate = useNavigate();
-  const [logError, setLogError] = useState(false)
+  const [logError, setLogError] = useState(false);
+  const {logInLogOut} = useContext(LoggerContext);
 
   async function handleSubmit(e) {
 
@@ -19,9 +21,8 @@ const LoginComponent = ({ setIsLogged }) => {
       const response = await login(formData);
       if (!response.ok) return setLogError(true);
       const token = await response.json();
-      localStorage.setItem('authToken', token);
-      setIsLogged(true)
-      navigate('/my_products')
+      logInLogOut(token);
+      navigate('/my_products');
 
     }
     catch (err) {

@@ -1,20 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getProduct } from "../../services/productService.js";
 import ProductListItem from "./product-list-item/ProductListItem.jsx"
 import styles from './ProductList.module.css'
-import jwtParser from "../../lib/jwtParser.js";
+import { LoggerContext } from "../../LoggerContext.jsx";
 
+LoggerContext
 
 const ProductList = ({ myProducts }) => {
 
     const [products, setProducts] = useState([]);
+    const {userId} = useContext(LoggerContext)
 
     useEffect(() => {
 
         if (myProducts) {
 
-            const decodedPayload = jwtParser();
-            const userId = decodedPayload._id;
             getProduct(null, userId).then(products => setProducts([...products])).catch(err => console.log(err));
         }
         else {

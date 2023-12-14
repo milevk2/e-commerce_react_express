@@ -4,8 +4,9 @@ import { testSetErrors } from './util.js';
 import { createProduct } from '../../services/productService.js';
 import { defaultValues } from './EmptyProductForm.js';
 import GenerateDummyData from './generate-dummy-data/GenerateDummyData.jsx'
-import jwtParser from '../../lib/jwtParser.js';
 import { LoadingContext } from '../../LoadingContext.jsx';
+import { LoggerContext } from '../../LoggerContext.jsx';
+
 
 const AddProductForm = () => {
 
@@ -14,8 +15,8 @@ const AddProductForm = () => {
     const [isPriceError, setIsPriceError] = useState(false);
     const [generalError, setGeneralError] = useState(false);
     const [generalErrorMessage, setGeneralErrorMessage] = useState('');
-    const { isLoading, toggleLoading } = useContext(LoadingContext);
-
+    const { toggleLoading } = useContext(LoadingContext);
+    const { userId } = useContext(LoggerContext);
     async function addProductHandler(e) {
 
         e.preventDefault();
@@ -31,9 +32,8 @@ const AddProductForm = () => {
         }
 
         try {
-            const payload = jwtParser();
-            const ownerId = payload._id;
-            const body = {...formData, ownerId};
+    
+            const body = {...formData, 'ownerId': userId};
             await createProduct(body);
         }
         catch (err) {
