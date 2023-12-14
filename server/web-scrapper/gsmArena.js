@@ -1,20 +1,10 @@
 const puppeteer = require('puppeteer');
 const constants = require('../src/constants.js')
 const electonicsService = require('../src/services/electronicsService.js')
-const { dbConnect } = require('../src/lib/dataBase.js')
 const { phonesPaths, phoneData, selectors } = require('./settings.js')
 const { wait } = require('../src/lib/util.js')
 
 async function scrape(phoneModel, quantity = null) {
-
-    try {
-        await dbConnect(constants.URL1);
-        console.log('Successfully connected to the DB!');
-    }
-    catch (err) {
-        console.log(err);
-        return err.message;
-    }
 
     try {
         const browser = await puppeteer.launch({headless: "new"});
@@ -49,13 +39,13 @@ async function getPhonesArray(phoneModel, page) {
 
 async function retrievePhoneData(linksArray, page, quantity = null) {
 
-    if (quantity == null) quantity = linksArray.length;
+    if (quantity == null) quantity = 10; // scrape limit per request set to 10;
 
     let counter = 0;
 
     for (link of linksArray) {
-
-        if (counter >= quantity) return;
+        
+        if (counter > quantity) return;
 
         console.log(`Navigating to ${link}`);
         await page.goto(link);
@@ -79,13 +69,14 @@ async function retrievePhoneData(linksArray, page, quantity = null) {
 
         phoneData.price = phoneData['price'] += 50;
         phoneData.quantity = phoneData['quantity'] += 5;
-        phoneData.ownerId = 'BotGenerated';
+        phoneData.ownerId = '5746bbe9-342b-4cc9-ad60-5abafadf8b11'; // milev@abv.bg
         await electonicsService.create(phoneData);
         console.log('Saving ', phoneData.name);
         await wait(5); //wait 5 seconds to be gentle to the server as per robots.txt
         console.log(`Current index ${counter}`);
         counter++;
     }
+    return;
 }
 
 module.exports = { scrape }
