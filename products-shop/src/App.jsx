@@ -12,6 +12,7 @@ import UserProfile from './components/user-profile/UserProfile.jsx';
 import WeatherApi from './components/weather-api/WeatherApi.jsx';
 import Spinner from './components/Spinner.jsx';
 import { LoadingContext } from './LoadingContext.jsx';
+import { LoggerContext } from './LoggerContext.jsx';
 import styles from './App.module.css'
 import '../public/styles/default.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,38 +21,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
 
   const [cart, setCart] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
-  const [token, setToken] = useState('');
-  const [userId, setUserId] = useState('');
-  const { isLoading, toggleLoading } = useContext(LoadingContext);
+  const { isLoading } = useContext(LoadingContext);
+  const { isLogged } = useContext(LoggerContext);
 
-  useEffect(()=> {
-
-    if(token){
-
-      const [header, payload, signature] = token.split('.');
-      const decodedPayload = JSON.parse(atob(payload));
-      setUserId(decodedPayload._id)
-      console.log(decodedPayload);
-    }
-  },[isLogged])
-
-  
   return (
 
     <>
-      <NavigationBar cart={cart} isLogged={isLogged} setIsLogged={setIsLogged} token={token} setToken={setToken} userId={userId}/>
-       {isLoading && <Spinner/>}
-      <div className={styles.main}> 
+      <NavigationBar cart={cart} />
+      {isLoading && <Spinner />}
+      <div className={styles.main}>
         <WeatherApi />
         <Routes>
           <Route path="/" element={<HomeLoad />} />
           <Route path="/products/:productId" element={<ProductDetails setCart={setCart} />} />
-          <Route path="/add_product" element={isLogged? <AddProductForm /> : <NotFound />} />
+          <Route path="/add_product" element={isLogged ? <AddProductForm /> : <NotFound />} />
           <Route path="/products" element={<ProductList />} />
-          <Route path="/my_products" element={<ProductList myProducts={true}/>} />
-          <Route path="/Register" element={!isLogged? <RegisterComponent /> : <NotFound />} />
-          <Route path="/Login" element={!isLogged?<LoginComponent setIsLogged={setIsLogged}/> : <NotFound />} />
+          <Route path="/my_products" element={<ProductList myProducts={true} />} />
+          <Route path="/Register" element={!isLogged ? <RegisterComponent /> : <NotFound />} />
+          <Route path="/Login" element={!isLogged ? <LoginComponent /> : <NotFound />} /> 
           <Route path="/profile" element={isLogged && <UserProfile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
