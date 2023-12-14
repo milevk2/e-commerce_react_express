@@ -194,18 +194,18 @@ app.post('/users/logout', async (req, res) => {
     try {
         if (sessions[authToken]) {
 
+            console.log('Deleting user session', authToken );
             delete sessions[authToken];
             res.json(true)
         }
     }
     catch (err) {
-        res.json(false)
+        res.json(false);
     }
     finally {
 
-        console.log(sessions);
+        console.log('Current sessions: ', sessions);
     }
-
 })
 
 
