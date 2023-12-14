@@ -1,19 +1,18 @@
-import { useState } from "react";
-import jwtParser from "../../lib/jwtParser.js";
+import {useContext } from "react";
+import { LoggerContext } from "../../LoggerContext.jsx";
 
 
 const UserProfile = () => {
 
-   const [userData, setUserData ]= useState (jwtParser());
-
+    const {userName, userEmail, userId} = useContext(LoggerContext);
 
     return (
         <div className="wrapper flexCenterColumn">
             <div>
-                UserName: {userData.userName} <button className="defaultButton">Change Username</button>
+                UserName: {userName} <button className="defaultButton">Change Username</button>
             </div>
             <div>
-                Email: {userData.email}
+                Email: {userEmail}
             </div>
             <div>
                 Password <button className="defaultButton">Change Password</button>
