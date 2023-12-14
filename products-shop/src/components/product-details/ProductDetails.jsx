@@ -201,16 +201,16 @@ const ProductDetails = ({ setCart }) => {
                             </svg>
                         </button>}
                         </div> : ''}
-                        <div className="card-body">
-                            {isOwner && <div className="row justify-content-around" id="adminPanel">
+                        {isOwner &&< div className="card-body">
+                             <div className="row justify-content-around" id="adminPanel">
                                 <div className="price"><p>Quantity:{productDetails.quantity}</p></div>
                                 <a className="btn btn-warning col-4" onClick={() => setIsEdit(true)}>EDIT</a>
                                 <a className="btn btn-danger col-4" onClick={(e) => {
                                     toggleLoading();
                                     onProductDelete(e);
                                 }}>DELETE</a>
-                            </div>}
-                        </div>
+                            </div>
+                        </div>}
                     </div>
 
                 </div>
