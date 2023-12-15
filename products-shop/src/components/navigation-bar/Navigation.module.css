@@ -40,7 +40,6 @@
     }
 }
 
-
 .movingDiv {
 
     opacity: 0%;
@@ -61,26 +60,30 @@
     animation: moveSouth 1.5s
 }
 
+.language{
+    background-image: url('/images/bgenicon.png');
+    background-size: cover;
+    height: 20px;
+    width:30px;
+    margin: 10px;
+}
+
+.language:hover{
+    cursor:pointer;
+}
+
 .cart {
-    display: inline-flex;
+  
+    display: flex;
     align-items: center;
-    justify-content: end;
-    width: 40vw;
-
+    justify-content: center;
+    width: fit-content;
 }
 
-@media (max-width: 1024px) {
-    .cart {
-        width: 35%;
-    }
-}
+.utilities{
 
-@media (max-width: 830px) {
-    .cart {
-        width: 25%;
-        display: flex;
-        justify-content: start;
-    }
+    display: flex;
+    flex-direction: row;
 }
 
 .cartCounter {
@@ -118,6 +121,26 @@
     flex-direction: row;
 }
 
+
+@media (max-width: 1024px) {
+    .cart {
+        width: 35%;
+    }
+    .encapsulated{
+
+        font-size: small;
+        gap:0px;
+    }
+}
+
+@media (max-width: 830px) {
+    .cart {
+        width: 25%;
+        display: flex;
+        
+    }
+}
+
 @media (max-width: 576px) {
     .encapsulated {
        
@@ -137,6 +160,14 @@
     }
 
     .guest{
+
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .utilities{
 
         display: flex;
         justify-content: start;

@@ -4,13 +4,14 @@ import styles from './Navigation.module.css'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { logout } from '../../services/userService.js';
 import { LoggerContext } from '../../LoggerContext.jsx';
-
+import { LanguageContext } from '../../LanguageContext.jsx';
 
 function NavigationBar({ cart }) {
 
   const [isHidden, setIsHidden] = useState(true);
   const [cartCounter, setCartCounter] = useState(0);
   const { isLogged, logInLogOut, token } = useContext(LoggerContext);
+  const { isEnglish, setLanguage } = useContext(LanguageContext);
 
   const navigate = useNavigate();
 
@@ -67,45 +68,47 @@ function NavigationBar({ cart }) {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           <div className={styles.encapsulated}>
-            <Nav.Link as={NavLink} to="/" style={linkStyle}>Home</Nav.Link>
+            <Nav.Link as={NavLink} to="/" style={linkStyle}>{isEnglish ? 'Home' : 'Начало'}</Nav.Link>
 
-            <Nav.Link as={NavLink} to="/products" style={linkStyle}>Products</Nav.Link>
+            <Nav.Link as={NavLink} to="/products" style={linkStyle}>{isEnglish ? 'Products' : 'Продукти'}</Nav.Link>
             {isLogged ?
               <div className={styles.user}>
-                <Nav.Link as={NavLink} to={`/my_products`} style={linkStyle}>My Products</Nav.Link>
-                <Nav.Link as={NavLink} to="/add_product" style={linkStyle}>Add Products</Nav.Link>
-                <Nav.Link as={NavLink} to="/profile" style={linkStyle}>Profile</Nav.Link>
-                <Nav.Link as={NavLink} to="/" style={linkStyle} onClick={onUserLogOut}>Logout</Nav.Link>
-                <div className={styles.cart}>
+                <Nav.Link as={NavLink} to={`/my_products`} style={linkStyle}>{isEnglish ? 'My Products' : 'Моите Продукти'}</Nav.Link>
+                <Nav.Link as={NavLink} to="/add_product" style={linkStyle}>{isEnglish ? 'Add Products' : 'Добави Продукти'}</Nav.Link>
+                <Nav.Link as={NavLink} to="/profile" style={linkStyle}>{isEnglish ? 'Profile' : 'Профил'}</Nav.Link>
+                <Nav.Link as={NavLink} to="/" style={linkStyle} onClick={onUserLogOut}>{isEnglish ? 'Logout' : 'Изход'}</Nav.Link>
 
-                  <div className={` ${!isHidden ? styles.movingDiv : styles.hidden}`} role="alert">
-                    This item has been added to the cart!
-                  </div>
-
-                  <div className={styles.cartContainer}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" className="bi bi-cart cart" viewBox="0 0 16 16">
-                      <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
-                    </svg>
-                    <div className={`${styles.cartCounter} ${cartCounter < 1 ? styles.hidden : ''}`}>{`${cartCounter < 1 ? 0 : cartCounter}`}</div>
-                  </div>
-                </div>
               </div>
               :
               <div className={styles.guest}>
-                <Nav.Link as={NavLink} to="/Register" style={linkStyle}>Register</Nav.Link>
-                <Nav.Link as={NavLink} to="/Login" style={linkStyle}>Login</Nav.Link>
+                <Nav.Link as={NavLink} to="/Register" style={linkStyle}>{isEnglish ? 'Register' : 'Регистрация'}</Nav.Link>
+                <Nav.Link as={NavLink} to="/Login" style={linkStyle}>{isEnglish ? 'Login' : 'Вход'}</Nav.Link>
               </div>}
           </div>
         </Nav>
+        <div className={styles.utilities}>
 
+          {isLogged && <div className={styles.cart}>
 
+            <div className={` ${!isHidden ? styles.movingDiv : styles.hidden}`} role="alert">
+              {isEnglish ? 'This item has been added to the cart!' : 'Продуктът е добавен в кошницата!'}
+            </div>
 
-        <Form className="d-flex my-2 my-lg-0">
-          <Form.Control type="text" id="searchBar" placeholder="Search" />
-          <Button variant="outline-light" className="my-2 my-sm-0" type="submit">
-            Search
-          </Button>
-        </Form>
+            <div className={styles.cartContainer}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" className="bi bi-cart cart" viewBox="0 0 16 16">
+                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+              </svg>
+              <div className={`${styles.cartCounter} ${cartCounter < 1 ? styles.hidden : ''}`}>{`${cartCounter < 1 ? 0 : cartCounter}`}</div>
+            </div>
+          </div>}
+          <div className={styles.language} onClick={setLanguage}></div>
+          <Form className="d-flex my-2 my-lg-0">
+            <Form.Control type="text" id="searchBar" placeholder="Search" />
+            <Button variant="outline-light" className="my-2 my-sm-0" type="submit">
+              {isEnglish ? 'Search' : 'Търсене'}
+            </Button>
+          </Form>
+        </div>
 
       </Navbar.Collapse>
     </Navbar>
