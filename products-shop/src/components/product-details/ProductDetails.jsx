@@ -206,7 +206,7 @@ const ProductDetails = ({ setCart }) => {
                         {isOwner && < div className="card-body">
                             <div className="row justify-content-around" id="adminPanel">
                                 <div className="price"><p>{isEnglish?'Available in stock': 'Налично количество'}: {productDetails.quantity}</p></div>
-                                <a className="btn btn-warning col-4" onClick={() => setIsEdit(true)}>{isEnglish? 'EDIT' : 'Редактиране'}</a>
+                                <a className="btn btn-warning col-4" onClick={() => setIsEdit(true)}>{isEnglish? 'EDIT' : 'Промени'}</a>
                                 <a className="btn btn-danger col-4" onClick={(e) => {
                                     toggleLoading();
                                     onProductDelete(e);
