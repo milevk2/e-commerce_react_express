@@ -3,14 +3,12 @@ const constants = require('./constants.js')
 const userService = require('./services/userService.js');
 const electonicsService = require('./services/electronicsService.js')
 const { dbConnect } = require('./lib/dataBase.js')
-const { handlebarsConfig } = require('./configs/handlebarsConfig.js')
 const { expressConfig } = require('./configs/expressConfig.js')
 const { scrape } = require('../web-scrapper/gsmArena.js')
 const { APIkey } = require('./APIkey.js')
 
 const app = express();
 
-handlebarsConfig(app);
 expressConfig(app);
 
 //connect to DB:
