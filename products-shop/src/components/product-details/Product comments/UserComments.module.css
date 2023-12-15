@@ -31,7 +31,7 @@
     border-radius: 8px;
 }
 
-.commentText{
+.commentText {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -55,7 +55,7 @@
 
 }
 
-.rating{
+.rating {
 
     position: flex;
     flex-direction: row;
@@ -64,7 +64,7 @@
 
 
 .checked {
-  color: orange;
+    color: orange;
 }
 
 .avatar {
@@ -126,11 +126,11 @@
 .addComment {
 
     display: flex;
-    justify-content:  center;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
-     margin: 5px;   
-     margin-bottom: 15px;
+    margin: 5px;
+    margin-bottom: 15px;
 }
 
 @media all and (max-width:855) {
@@ -138,18 +138,18 @@
     .commentWrapper {
 
         width: 50%;
-        overflow-wrap: break-word; 
+        overflow-wrap: break-word;
         word-wrap: break-word;
         white-space: normal;
     }
 
     .comment {
 
-       
+
         overflow-wrap: break-word;
         word-wrap: break-word;
         white-space: normal;
-        width:25%;
+        width: 25%;
     }
 
     .header {
@@ -164,14 +164,14 @@
 
     .commentWrapper {
 
-        overflow-wrap: break-word; 
+        overflow-wrap: break-word;
         word-wrap: break-word;
         white-space: normal;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: start;
-        width:100%
+        width: 100%
     }
 
     .comment {
@@ -179,7 +179,7 @@
         overflow-wrap: break-word;
         word-wrap: break-word;
         white-space: normal;
-        width:50%;
+        width: 50%;
         display: flex;
         align-items: center;
         justify-content: start;
@@ -193,11 +193,11 @@
 
     }
 
-    .userDetails{
+    .userDetails {
 
         display: flex;
         flex-direction: column;
-        width:10%;
+        width: 10%;
         align-items: center;
         justify-content: start;
     }
@@ -213,17 +213,17 @@
 
     .comment {
 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         overflow-wrap: break-word;
         word-wrap: break-word;
         white-space: normal;
-        width:fit-content;
-        display: flex;
-        align-items: center;
-        justify-content:space-evenly;
-        
+        height: fit-content;
+        gap: 0px;
     }
 
-    .commentText{
+    .commentText {
         font-size: small;
         overflow-wrap: break-word;
         word-wrap: break-word;
@@ -236,33 +236,24 @@
         overflow-y: auto;
     }
 
-    .userDetails{
+    .userDetails {
 
         display: flex;
         flex-direction: column;
-        width:15px;
-        height: 15px;
         align-items: center;
         justify-content: start;
-    
+
     }
 
-    .avatar{
 
-        width: 7.5px;
-        height: 7.5px;
-    }
-
-    .userName{
+    .userName {
         display: flex;
         flex-direction: row;
-        width: 7.5px;
-        height: 5px;
-        font-size: xx-small;
+
 
     }
 
-    .time{
+    .time {
 
         font-size: small;
 
