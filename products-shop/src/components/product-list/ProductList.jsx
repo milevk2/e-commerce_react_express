@@ -3,13 +3,14 @@ import { getProduct } from "../../services/productService.js";
 import ProductListItem from "./product-list-item/ProductListItem.jsx"
 import styles from './ProductList.module.css'
 import { LoggerContext } from "../../LoggerContext.jsx";
+import { LanguageContext } from "../../LanguageContext.jsx";
 
-LoggerContext
 
 const ProductList = ({ myProducts }) => {
 
     const [products, setProducts] = useState([]);
-    const {userId} = useContext(LoggerContext)
+    const {userId} = useContext(LoggerContext);
+    const {specsEnum} = useContext(LanguageContext);
 
     useEffect(() => {
 
@@ -27,7 +28,7 @@ const ProductList = ({ myProducts }) => {
             {
                 products.length == 0 ?
                     <div className={styles.notFound}>
-                        <h1>Currently there are no products available...</h1>
+                        <h1>{specsEnum.noProducts}</h1>
                     </div>
                     :
                     <div>

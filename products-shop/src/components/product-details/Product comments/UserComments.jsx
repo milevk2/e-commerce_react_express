@@ -3,15 +3,16 @@ import styles from './UserComments.module.css'
 import getDateTime from '../../../lib/getDateTime.js';
 import Comment from './Comment.jsx';
 import { updateProduct } from '../../../services/productService.js';
-import jwtParser from '../../../lib/jwtParser.js';
 import { v4 as uuidv4 } from 'uuid';
 import { LoggerContext } from '../../../LoggerContext.jsx';
+import { LanguageContext } from '../../../LanguageContext.jsx';
 
-LoggerContext
+
 const UserComments = ({ comments, setComments, productId, productDetails }) => {
 
     const [rating, setRating] = useState(0);
-    const {userName, userId, userEmail} = useContext(LoggerContext); // takes user data from the sessionStorage
+    const {userName, userId} = useContext(LoggerContext);
+    const {isEnglish} = useContext(LanguageContext);
 
     async function addNewComment(e) {
 
@@ -21,7 +22,7 @@ const UserComments = ({ comments, setComments, productId, productDetails }) => {
         formData.user_id = userId;
         formData.time = getDateTime();
         formData.rating = rating;
-        formData.comment = true;
+        formData.comment = true; //this line is needed in order to trigger the correct userService in the backend;
         formData.commentId = uuidv4();
         const updatedComments = [...comments, formData];
         
@@ -56,7 +57,7 @@ const UserComments = ({ comments, setComments, productId, productDetails }) => {
 
         <div id="user-comments" className={styles.commentWrapper}>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-            <h2 className="headerDiv" >{productDetails.name} - user opinions and reviews</h2>
+            <h2 className="headerDiv" >{productDetails.name} - {isEnglish? 'user opinions and reviews:' : 'потребителски мнения и ревюта:'}</h2>
 
             {comments && comments.length > 0 && comments.map(data => (
                
@@ -65,9 +66,9 @@ const UserComments = ({ comments, setComments, productId, productDetails }) => {
 
            { userName && <form className={styles.addComment} onSubmit={addNewComment}>
 
-                <label htmlFor='content'>Add comment:</label>
+                <label htmlFor='content'>{isEnglish? 'Add comment:' : 'Добави коментар:'}</label>
                 <textarea name='content' className={styles.roundedBorder}></textarea>
-                <label htmlFor='rating'>Your rating:</label>
+                <label htmlFor='rating'>{isEnglish? 'Your rating:' : 'Вашата оценка:'}</label>
 
                 <div className={styles.rating} onClick={ratingHandler}>
 
@@ -79,7 +80,7 @@ const UserComments = ({ comments, setComments, productId, productDetails }) => {
 
                 </div>
 
-                <button type='submit' className='defaultButton'>Submit</button>
+                <button type='submit' className='defaultButton'>{isEnglish? 'Comment' : 'Коментирай'}</button>
             </form>}
         </div>
 

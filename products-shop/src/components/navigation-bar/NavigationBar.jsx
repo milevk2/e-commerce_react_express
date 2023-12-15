@@ -48,9 +48,6 @@ function NavigationBar({ cart }) {
     }
   }
 
-  const navbarStyle = {
-    backgroundColor: '#4CAF50',
-  };
 
   const linkStyle = {
     color: 'white',
@@ -58,31 +55,29 @@ function NavigationBar({ cart }) {
 
 
   return (
-    <Navbar bg="green" variant="green" expand="sm" style={navbarStyle}>
-      <Navbar.Brand as={Link} to="/" style={linkStyle}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
-          <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>
-        </svg>
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" style={{ color: 'white' }} />
+    <Navbar bg="green" variant="green" expand="sm" style={{backgroundColor: '#4CAF50'}}>
+
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" style={linkStyle} />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           <div className={styles.encapsulated}>
-            <Nav.Link as={NavLink} to="/" style={linkStyle}>{isEnglish ? 'Home' : 'Начало'}</Nav.Link>
+            <Nav.Link as={NavLink} to="/"  style={linkStyle} className={styles.scale}> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
+              <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>
+            </svg>{isEnglish ? 'Home' : 'Начало'}</Nav.Link>
 
-            <Nav.Link as={NavLink} to="/products" style={linkStyle}>{isEnglish ? 'Products' : 'Продукти'}</Nav.Link>
+            <Nav.Link as={NavLink} to="/products" style={linkStyle} className={styles.scale}>{isEnglish ? 'Products' : 'Продукти'}</Nav.Link>
             {isLogged ?
               <div className={styles.user}>
-                <Nav.Link as={NavLink} to={`/my_products`} style={linkStyle}>{isEnglish ? 'My Products' : 'Моите Продукти'}</Nav.Link>
-                <Nav.Link as={NavLink} to="/add_product" style={linkStyle}>{isEnglish ? 'Add Products' : 'Добави Продукти'}</Nav.Link>
-                <Nav.Link as={NavLink} to="/profile" style={linkStyle}>{isEnglish ? 'Profile' : 'Профил'}</Nav.Link>
-                <Nav.Link as={NavLink} to="/" style={linkStyle} onClick={onUserLogOut}>{isEnglish ? 'Logout' : 'Изход'}</Nav.Link>
+                <Nav.Link as={NavLink} to={`/my_products`} style={linkStyle} className={styles.scale}>{isEnglish ? 'My Products' : 'Моите Продукти'}</Nav.Link>
+                <Nav.Link as={NavLink} to="/add_product" style={linkStyle} className={styles.scale}>{isEnglish ? 'Add Products' : 'Добави Продукти'}</Nav.Link>
+                <Nav.Link as={NavLink} to="/profile" style={linkStyle} className={styles.scale}>{isEnglish ? 'Profile' : 'Профил'}</Nav.Link>
+                <Nav.Link as={NavLink} to="/" style={linkStyle} className={styles.scale} onClick={onUserLogOut}>{isEnglish ? 'Logout' : 'Изход'}</Nav.Link>
 
               </div>
               :
               <div className={styles.guest}>
-                <Nav.Link as={NavLink} to="/Register" style={linkStyle}>{isEnglish ? 'Register' : 'Регистрация'}</Nav.Link>
-                <Nav.Link as={NavLink} to="/Login" style={linkStyle}>{isEnglish ? 'Login' : 'Вход'}</Nav.Link>
+                <Nav.Link as={NavLink} to="/Register" style={linkStyle} className={styles.scale}>{isEnglish ? 'Register' : 'Регистрация'}</Nav.Link>
+                <Nav.Link as={NavLink} to="/Login" style={linkStyle} className={styles.scale}>{isEnglish ? 'Login' : 'Вход'}</Nav.Link>
               </div>}
           </div>
         </Nav>
@@ -91,7 +86,7 @@ function NavigationBar({ cart }) {
           {isLogged && <div className={styles.cart}>
 
             <div className={` ${!isHidden ? styles.movingDiv : styles.hidden}`} role="alert">
-              {isEnglish ? 'This item has been added to the cart!' : 'Продуктът е добавен в кошницата!'}
+              {isEnglish ? 'This item has been added to the cart!' : 'Продуктът е добавен в количката!'}
             </div>
 
             <div className={styles.cartContainer}>
@@ -101,9 +96,9 @@ function NavigationBar({ cart }) {
               <div className={`${styles.cartCounter} ${cartCounter < 1 ? styles.hidden : ''}`}>{`${cartCounter < 1 ? 0 : cartCounter}`}</div>
             </div>
           </div>}
-          <div className={styles.language} onClick={setLanguage}></div>
+          <div className={styles.language} onClick={setLanguage} title={isEnglish ? "Смени езика на български (BG)" : "Change language to english (EN)"}></div>
           <Form className="d-flex my-2 my-lg-0">
-            <Form.Control type="text" id="searchBar" placeholder="Search" />
+            <Form.Control type="text" id="searchBar" placeholder={isEnglish ? 'Search' : 'Търсене'} />
             <Button variant="outline-light" className="my-2 my-sm-0" type="submit">
               {isEnglish ? 'Search' : 'Търсене'}
             </Button>

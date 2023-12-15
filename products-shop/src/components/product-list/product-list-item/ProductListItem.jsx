@@ -1,7 +1,12 @@
+import { useContext } from 'react';
 import styles from './ProductListItem.module.css'
 import { NavLink } from "react-router-dom";
+import { LanguageContext } from '../../../LanguageContext.jsx';
 
+LanguageContext
 const ProductListItem = ({ item }) => {
+
+    const {specsEnum} = useContext(LanguageContext);
 
     return (
         <li className={styles.wrapped}>
@@ -13,7 +18,7 @@ const ProductListItem = ({ item }) => {
                     <div className={styles.details}>
                         <div>{item.name}</div>
                         <div>{item.announced}</div>
-                        <div className={styles.price}>{item.price} bgn</div>
+                        <div className={styles.price}>{item.price} {specsEnum.currency}</div>
                     </div>
 
                 </div>

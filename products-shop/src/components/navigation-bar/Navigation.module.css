@@ -23,6 +23,18 @@
     display: none;
 }
 
+.scale {
+    color: 'white';
+    transition: 0.3s ease-out;
+}
+
+.scale:hover {
+
+    transform: scale(1.1);
+    transition: 0.3s ease-in;
+}
+
+
 @keyframes moveSouth {
     0% {
         transform: translateY(-100%);
@@ -60,27 +72,27 @@
     animation: moveSouth 1.5s
 }
 
-.language{
+.language {
     background-image: url('/images/bgenicon.png');
     background-size: cover;
     height: 20px;
-    width:30px;
+    width: 30px;
     margin: 10px;
 }
 
-.language:hover{
-    cursor:pointer;
+.language:hover {
+    cursor: pointer;
 }
 
 .cart {
-  
+
     display: flex;
     align-items: center;
     justify-content: center;
     width: fit-content;
 }
 
-.utilities{
+.utilities {
 
     display: flex;
     flex-direction: row;
@@ -114,7 +126,7 @@
 }
 
 .encapsulated {
-       
+
     display: flex;
     justify-content: start;
     align-items: center;
@@ -126,10 +138,11 @@
     .cart {
         width: 35%;
     }
-    .encapsulated{
+
+    .encapsulated {
 
         font-size: small;
-        gap:0px;
+        gap: 0px;
     }
 }
 
@@ -137,29 +150,12 @@
     .cart {
         width: 25%;
         display: flex;
-        
+
     }
 }
 
 @media (max-width: 576px) {
     .encapsulated {
-       
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    .user{
-
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        flex-direction: column;
-
-    }
-
-    .guest{
 
         display: flex;
         justify-content: start;
@@ -167,7 +163,24 @@
         flex-direction: column;
     }
 
-    .utilities{
+    .user {
+
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+
+    }
+
+    .guest {
+
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .utilities {
 
         display: flex;
         justify-content: start;
