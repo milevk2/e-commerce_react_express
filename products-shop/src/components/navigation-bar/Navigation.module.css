@@ -157,6 +157,7 @@
 @media (max-width: 576px) {
     .encapsulated {
 
+        font-size: medium;
         display: flex;
         justify-content: start;
         align-items: center;
