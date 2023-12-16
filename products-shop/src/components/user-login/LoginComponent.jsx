@@ -3,6 +3,7 @@ import { login } from '../../services/userService.js'
 import { useNavigate } from 'react-router-dom'
 import { useState, useContext } from 'react';
 import { LoggerContext } from '../../LoggerContext.jsx';
+import { LanguageContext } from '../../LanguageContext.jsx';
 
 
 const LoginComponent = ({ setIsLogged }) => {
@@ -10,6 +11,7 @@ const LoginComponent = ({ setIsLogged }) => {
   const navigate = useNavigate();
   const [logError, setLogError] = useState(false);
   const {logInLogOut} = useContext(LoggerContext);
+  const {isEnglish} = useContext(LanguageContext);
 
   async function handleSubmit(e) {
 
@@ -36,7 +38,7 @@ const LoginComponent = ({ setIsLogged }) => {
   return (
     <>
     <form className={styles.loginPanel} onSubmit={handleSubmit}>
-      <label htmlFor="email">Email:</label>
+      <label htmlFor="email">{isEnglish? 'Email:' : 'Имейл:'}</label>
       <input
         type="text"
         id="email"
@@ -44,7 +46,7 @@ const LoginComponent = ({ setIsLogged }) => {
         className={styles.rounded}
       />
 
-      <label htmlFor="password">Password:</label>
+      <label htmlFor="password">{isEnglish? 'Password:' : 'Парола:'}</label>
       <input
         type="password"
         id="password"
@@ -53,10 +55,10 @@ const LoginComponent = ({ setIsLogged }) => {
       />
 
       <button type="submit" className={styles.submitButton}>
-        Login
+      {isEnglish? 'Login' : 'Вход'}
       </button>
     </form>
-    {logError? <div className={logError ? styles.error : styles.hidden}>User email or password do not match!</div> : ''}
+    {logError? <div className={logError ? styles.error : styles.hidden}>{isEnglish? 'User email or password do not match!' : 'Неправилно потребителско име или парола!'}</div> : ''}
     </>
     )
 
