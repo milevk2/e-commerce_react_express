@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styles from './RegisterComponent.module.css'
 import { create } from '../../services/userService.js'
 import { useNavigate } from "react-router-dom";
-
+import { LanguageContext } from "../../LanguageContext.jsx";
 
 const RegisterComponent = () => {
 
@@ -13,6 +13,7 @@ const RegisterComponent = () => {
     const [passCharError, setPassCharError] = useState(false);
     const [equalError, setEqualError] = useState(false);
     const [success, setSuccess] = useState(false);
+    const {isEnglish} = useContext(LanguageContext);
     const navigate = useNavigate();
 
 
@@ -94,33 +95,33 @@ const RegisterComponent = () => {
             {success ? <div className={styles.layout}>
 
                 <div className={styles.success}>
-                    <h2>You have been registered successfully!</h2>
+                    <h2>{isEnglish ? 'You have been registered successfully!' : 'Вие се регистрирахте успешно!'}</h2>
                     <h3 onClick={redirectToLoginPage } style={{ cursor: 'pointer' }}>
-                        Click here to redirect to the login page!
+                    {isEnglish ? 'Click here to redirect to the login page!' : 'Натиснете тук, за да влезете в проила си!'}
                     </h3>
                 </div>
 
             </div> : ''}
             <form className={styles.registerPanel} onSubmit={onUserSubmit}>
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="username">{isEnglish? 'Username:' : 'Потребителско име:'}:</label>
                 <input type="text" id="username" name="userName" className={styles.rounded} onChange={inputHandler} value={userName} />
 
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email">{isEnglish? 'Email:' : 'Имейл:'}</label>
                 <input type="text" id="email" name="email" className={styles.rounded} onChange={inputHandler} value={email} />
 
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password">{isEnglish? 'Password:' : 'Парола:'}</label>
 
                 <div>
                     <input type="password" id="password" name="password" className={styles.rounded} onChange={inputHandler} value={password} onBlur={passwordValidator} />
-                    <div className={passCharError ? styles.error : styles.hidden} >Password must contain at least one special character $%&^#@! and at least one digit! </div>
+                    <div className={passCharError ? styles.error : styles.hidden} >{isEnglish? 'Password must contain at least one special character $%&^#@! and at least one digit!' : 'Паролата трябва да съдържа поне един специален символ $%&^#@! и поне едно число!'} </div>
                 </div>
-                <label htmlFor="repassword">Re-enter Password:</label>
+                <label htmlFor="repassword">{isEnglish? 'Re-enter Password:': 'Повторете паролата си:'}</label>
 
                 <div>
                     <input type="password" id="repassword" name="repassword" className={styles.rounded} onChange={inputHandler} value={repass} onBlur={passwordValidator} />
-                    <div className={equalError ? styles.error : styles.hidden} >Password and repassword do not match! </div>
+                    <div className={equalError ? styles.error : styles.hidden} >{isEnglish ? 'Passwords do not match!': 'Паролите не съвпадат!'}</div>
                 </div>
-                <button type="submit" className={styles.submitButton}>Register</button>
+                <button type="submit" className={styles.submitButton}>{isEnglish? 'Register': 'Регистрация'}</button>
             </form>
         </>
     )
