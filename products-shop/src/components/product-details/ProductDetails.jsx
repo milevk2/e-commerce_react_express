@@ -10,6 +10,7 @@ import ProductSpecs from './product-specs/ProductSpecs.jsx';
 import './ProductDetails.css'
 import { LoggerContext } from '../../LoggerContext.jsx';
 import { LanguageContext } from '../../LanguageContext.jsx';
+import { CartContext } from '../../CartContext.jsx';
 
 
 
@@ -21,6 +22,7 @@ const ProductDetails = ({ setCart }) => {
     const { toggleLoading } = useContext(LoadingContext);
     const { token, userId } = useContext(LoggerContext);
     const { isEnglish } = useContext(LanguageContext);
+    const { addItem } = useContext(CartContext);
     const [isZoomedIn, setIsZoomedIn] = useState(false);
     const [maxSize, setMaxSize] = useState(false);
     const [productDetails, setProductDetails] = useState({});
@@ -159,7 +161,7 @@ const ProductDetails = ({ setCart }) => {
                                 <div className="icon">
                                 </div>
                                 <div className="info-text">
-                                    <div>{isEnglish? 'Announced' : 'Обявен'}: {productDetails.announced}</div>
+                                    <div>{isEnglish ? 'Announced' : 'Обявен'}: {productDetails.announced}</div>
                                 </div>
                             </div>
 
@@ -169,7 +171,7 @@ const ProductDetails = ({ setCart }) => {
                                     <img src="/images/ram-icon.png" alt="RAM Icon" />
                                 </div>
                                 <div className="info-text">
-                                    <div>{isEnglish? 'RAM: ' : 'Рам памет: '}{productDetails.ram}</div>
+                                    <div>{isEnglish ? 'RAM: ' : 'Рам памет: '}{productDetails.ram}</div>
                                 </div>
                             </div>
 
@@ -179,7 +181,7 @@ const ProductDetails = ({ setCart }) => {
                                     <img src="/images/cpu-icon.png" alt="CPU Icon" />
                                 </div>
                                 <div className="info-text">
-                                    <div>{isEnglish? 'CPU: ' : 'Процесор: '} {productDetails.cpu}</div>
+                                    <div>{isEnglish ? 'CPU: ' : 'Процесор: '} {productDetails.cpu}</div>
                                 </div>
                             </div>
 
@@ -189,14 +191,21 @@ const ProductDetails = ({ setCart }) => {
                                     <img src="/images/os-icon.png" alt="OS Icon" />
                                 </div>
                                 <div className="info-text">
-                                    <div>{isEnglish? 'OS: ' : 'Операционна система: '} {productDetails.operating_system}</div>
+                                    <div>{isEnglish ? 'OS: ' : 'Операционна система: '} {productDetails.operating_system}</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className={`${styles.price} ${styles.heart}`}><p>{isEnglish? `Price: ${productDetails.price}bgn` : `Цена: ${productDetails.price}лв`} </p></div>
-                        {!isOwner ? <div className={styles.center}>{token && <button type="button" className="btn btn-success buy" onClick={() => { setCart(true); setTimeout(() => { setCart(false) }, 1700) }}>
-                        {isEnglish? 'Add to cart' : 'Добави в количката'}
+                        <div className={`${styles.price} ${styles.heart}`}><p>{isEnglish ? `Price: ${productDetails.price}bgn` : `Цена: ${productDetails.price}лв`} </p></div>
+                        {!isOwner ? <div className={styles.center}>{token && <button type="button" className="btn btn-success buy" onClick={() => {
+
+                            addItem(productDetails);
+                            setCart(true);
+                            setTimeout(() => { setCart(false) }, 1700)
+                        }
+
+                        }>
+                            {isEnglish ? 'Add to cart' : 'Добави в количката'}
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart" viewBox="0 0 16 16">
                                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z">
                                 </path>
@@ -205,12 +214,12 @@ const ProductDetails = ({ setCart }) => {
                         </div> : ''}
                         {isOwner && < div className="card-body">
                             <div className="row justify-content-around" id="adminPanel">
-                                <div className="price"><p>{isEnglish?'Available in stock': 'Налично количество'}: {productDetails.quantity}</p></div>
-                                <a className="btn btn-warning col-4" onClick={() => setIsEdit(true)}>{isEnglish? 'EDIT' : 'Промени'}</a>
+                                <div className="price"><p>{isEnglish ? 'Available in stock' : 'Налично количество'}: {productDetails.quantity}</p></div>
+                                <a className="btn btn-warning col-4" onClick={() => setIsEdit(true)}>{isEnglish ? 'EDIT' : 'Промени'}</a>
                                 <a className="btn btn-danger col-4" onClick={(e) => {
                                     toggleLoading();
                                     onProductDelete(e);
-                                }}>{isEnglish? 'DELETE' : 'Изтрий'}</a>
+                                }}>{isEnglish ? 'DELETE' : 'Изтрий'}</a>
                             </div>
                         </div>}
                     </div>
@@ -218,7 +227,7 @@ const ProductDetails = ({ setCart }) => {
                 </div>
 
                 <div className={styles.triggerContainer}>
-                    <button className={styles.triggerButton} onClick={() => setShowSpecs(showSpecs => showSpecs ? false : true)}>{isEnglish? 'Show Product Details' : 'Покажи допълнителни детайли'}</button>
+                    <button className={styles.triggerButton} onClick={() => setShowSpecs(showSpecs => showSpecs ? false : true)}>{isEnglish ? 'Show Product Details' : 'Покажи допълнителни детайли'}</button>
                 </div>
                 {showSpecs && <ProductSpecs product={productDetails} />}
             </div>}
