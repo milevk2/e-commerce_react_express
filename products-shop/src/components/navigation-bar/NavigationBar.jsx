@@ -1,10 +1,13 @@
+import styles from './Navigation.module.css';
 import React, { useEffect, useState, useContext } from 'react';
 import { Navbar, Nav, Form, Button } from 'react-bootstrap';
-import styles from './Navigation.module.css'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { logout } from '../../services/userService.js';
 import { LoggerContext } from '../../LoggerContext.jsx';
 import { LanguageContext } from '../../LanguageContext.jsx';
+import CartProducts from './cart-products/CartProducts.jsx';
+
+
 
 function NavigationBar({ cart }) {
 
@@ -12,8 +15,14 @@ function NavigationBar({ cart }) {
   const [cartCounter, setCartCounter] = useState(0);
   const { isLogged, logInLogOut, token } = useContext(LoggerContext);
   const { isEnglish, setLanguage } = useContext(LanguageContext);
-
+  const [cartProducts, setCartProducts] = useState(false);
   const navigate = useNavigate();
+
+  function toggleCartProducts() {
+
+    setCartProducts(cartProducts ? false : true) ;
+
+  }
 
   useEffect(() => {
 
@@ -83,7 +92,7 @@ function NavigationBar({ cart }) {
         </Nav>
         <div className={styles.utilities}>
 
-          {isLogged && <div className={styles.cart}>
+          {isLogged && <div className={styles.cart} onClick={toggleCartProducts}>
 
             <div className={` ${!isHidden ? styles.movingDiv : styles.hidden}`} role="alert">
               {isEnglish ? 'This item has been added to the cart!' : 'Продуктът е добавен в количката!'}
@@ -95,6 +104,9 @@ function NavigationBar({ cart }) {
               </svg>
               <div className={`${styles.cartCounter} ${cartCounter < 1 ? styles.hidden : ''}`}>{`${cartCounter < 1 ? 0 : cartCounter}`}</div>
             </div>
+
+            {cartProducts && <CartProducts cartCounter={cartCounter} setCartCounter={setCartCounter}/>}
+
           </div>}
           <div className={styles.language} onClick={setLanguage} title={isEnglish ? "Смени езика на български (BG)" : "Change language to english (EN)"}></div>
           <Form className="d-flex my-2 my-lg-0">
