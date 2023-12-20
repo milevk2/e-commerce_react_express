@@ -1,45 +1,22 @@
 import styles from './Navigation.module.css';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Navbar, Nav, Form, Button } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { logout } from '../../services/userService.js';
 import { LoggerContext } from '../../LoggerContext.jsx';
 import { LanguageContext } from '../../LanguageContext.jsx';
-import CartProducts from './cart-products/CartProducts.jsx';
+import { CartContext } from '../../CartContext.jsx';
+import CartComponent from '../cart/CartComponent.jsx';
 
 
+function NavigationBar() {
 
-function NavigationBar({ cart }) {
 
-  const [isHidden, setIsHidden] = useState(true);
-  const [cartCounter, setCartCounter] = useState(0);
   const { isLogged, logInLogOut, token } = useContext(LoggerContext);
   const { isEnglish, setLanguage } = useContext(LanguageContext);
-  const [cartProducts, setCartProducts] = useState(false);
+  const { resetContextState } = useContext(CartContext);
+
   const navigate = useNavigate();
-
-  function toggleCartProducts() {
-
-    setCartProducts(cartProducts ? false : true) ;
-
-  }
-
-  useEffect(() => {
-
-    if (cart) {
-
-      setCartCounter(cartCounter => cartCounter + 1)
-
-      setIsHidden(false)
-
-      setTimeout(() => {
-
-        setIsHidden(true);
-
-      }, 1600)
-    }
-  }, [cart])
-
 
   async function onUserLogOut() {
 
@@ -47,7 +24,7 @@ function NavigationBar({ cart }) {
     const isLoggedOut = await response.json();
 
     if (isLoggedOut) {
-
+      resetContextState();
       logInLogOut()
       navigate('/');
     }
@@ -64,13 +41,13 @@ function NavigationBar({ cart }) {
 
 
   return (
-    <Navbar bg="green" variant="green" expand="sm" style={{backgroundColor: '#4CAF50'}}>
+    <Navbar bg="green" variant="green" expand="sm" style={{ backgroundColor: '#4CAF50' }}>
 
       <Navbar.Toggle aria-controls="responsive-navbar-nav" style={linkStyle} />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           <div className={styles.encapsulated}>
-            <Nav.Link as={NavLink} to="/"  style={linkStyle} className={styles.scale}> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
+            <Nav.Link as={NavLink} to="/" style={linkStyle} className={styles.scale}> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>
             </svg>{isEnglish ? 'Home' : 'Начало'}</Nav.Link>
 
@@ -92,22 +69,8 @@ function NavigationBar({ cart }) {
         </Nav>
         <div className={styles.utilities}>
 
-          {isLogged && <div className={styles.cart} onClick={toggleCartProducts}>
+          {isLogged && <CartComponent />}
 
-            <div className={` ${!isHidden ? styles.movingDiv : styles.hidden}`} role="alert">
-              {isEnglish ? 'This item has been added to the cart!' : 'Продуктът е добавен в количката!'}
-            </div>
-
-            <div className={styles.cartContainer}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" className="bi bi-cart cart" viewBox="0 0 16 16">
-                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
-              </svg>
-              <div className={`${styles.cartCounter} ${cartCounter < 1 ? styles.hidden : ''}`}>{`${cartCounter < 1 ? 0 : cartCounter}`}</div>
-            </div>
-
-            {cartProducts && <CartProducts cartCounter={cartCounter} setCartCounter={setCartCounter}/>}
-
-          </div>}
           <div className={styles.language} onClick={setLanguage} title={isEnglish ? "Смени езика на български (BG)" : "Change language to english (EN)"}></div>
           <Form className="d-flex my-2 my-lg-0">
             <Form.Control type="text" id="searchBar" placeholder={isEnglish ? 'Search' : 'Търсене'} />

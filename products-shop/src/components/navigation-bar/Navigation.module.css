@@ -78,6 +78,7 @@
     height: 20px;
     width: 30px;
     margin: 10px;
+    z-index: 3;
 }
 
 .language:hover {
