@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import styles from './ProductDetails.module.css'
+import './ProductDetails.css'
 import PictureMaxSize from './PictureMaxSize.jsx';
 import UserComments from './Product comments/UserComments.jsx';
 import EditProduct from './EditProduct.jsx';
@@ -7,16 +8,12 @@ import { deleteProduct, getProduct } from '../../services/productService.js'
 import { useNavigate, useParams } from 'react-router-dom';
 import { LoadingContext } from '../../LoadingContext.jsx';
 import ProductSpecs from './product-specs/ProductSpecs.jsx';
-import './ProductDetails.css'
 import { LoggerContext } from '../../LoggerContext.jsx';
 import { LanguageContext } from '../../LanguageContext.jsx';
 import { CartContext } from '../../CartContext.jsx';
 
 
-
-//const image = "https://images.samsung.com/bg/smartphones/galaxy-s23-ultra/buy/03_Color_Selection/S23Ultra_Basic_Color/S23Ultra_Green_MO.jpg"
-
-const ProductDetails = ({ setCart }) => {
+const ProductDetails = ({isSmallScreen}) => {
 
     let { productId } = useParams();
     const { toggleLoading } = useContext(LoadingContext);
@@ -144,18 +141,7 @@ const ProductDetails = ({ setCart }) => {
 
                     <div className={styles.right1}>
                         <div className="headerDiv"><h4>{isEnglish ? 'Specifications' : 'Спецификации'}</h4></div>
-                        {/* <div className={styles.traitsTable}>
-
-                            <div className={styles.trait}><div className={styles.specHeader}> Category:</div> {productDetails.category}</div>
-                            <div className={styles.trait}><div className={styles.specHeader}>Announced:</div> {productDetails.announced}</div>
-                            <div className={styles.trait}><div className={styles.specHeader}>Display:</div> {productDetails.displaySize}</div>
-                            <div className={styles.trait}><div className={styles.specHeader}>RAM:</div> {productDetails.ram}</div>
-                            <div className={styles.trait}><div className={styles.specHeader}>CPU:</div> {productDetails.cpu}</div>
-                            <div className={styles.trait}><div className={styles.specHeader}>GPU:</div> {productDetails.gpu}</div>
-                            <div className={styles.trait}><div className={styles.specHeader}>Os:</div> {productDetails.operating_system}</div>
-                            <div className={styles.trait}><div className={styles.specHeader}>Battery:</div> {productDetails.battery}</div>
-
-                        </div> */}
+                        
                         <div className="info-container">
                             <div className="info-row">
                                 <div className="icon">
@@ -199,9 +185,7 @@ const ProductDetails = ({ setCart }) => {
                         <div className={`${styles.price} ${styles.heart}`}><p>{isEnglish ? `Price: ${productDetails.price}bgn` : `Цена: ${productDetails.price}лв`} </p></div>
                         {!isOwner ? <div className={styles.center}>{token && <button type="button" className="btn btn-success buy" onClick={() => {
 
-                            addItem(productDetails);
-                            setCart(true);
-                            setTimeout(() => { setCart(false) }, 1700)
+                            addItem(productDetails);       
                         }
 
                         }>
@@ -225,7 +209,7 @@ const ProductDetails = ({ setCart }) => {
                     </div>
 
                 </div>
-
+                
                 <div className={styles.triggerContainer}>
                     <button className={styles.triggerButton} onClick={() => setShowSpecs(showSpecs => showSpecs ? false : true)}>{isEnglish ? 'Show Product Details' : 'Покажи допълнителни детайли'}</button>
                 </div>
