@@ -1,6 +1,4 @@
-
-const Electronics = require('../models/Electronics.js')
-
+const {Electronics} = require('../models/Electronics.js')
 
 exports.create = async (data) => {
 
