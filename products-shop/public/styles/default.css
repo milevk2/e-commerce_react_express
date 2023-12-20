@@ -4,6 +4,44 @@ body {
   background-attachment: fixed;
 }
 
+.main {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 95vh;
+  position: relative;
+}
+
+.footer {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  background-color: aliceblue;
+  text-decoration: underline;
+  font-size: 1em;
+  font-style: italic;
+}
+
+.smallCart{
+
+  position: -webkit-sticky;
+  position: sticky;
+  top:5%;
+  left:40%;
+  background-color: #3e8e41;
+  border: 1px solid white;
+  z-index: 5;
+  border-radius: 100%;
+  height: fit-content;
+  width: fit-content;
+  padding: 10px;
+ 
+}
+
 .backButton {
 
   min-width: 100%;
