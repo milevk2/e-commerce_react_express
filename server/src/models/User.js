@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const {electronicsSchema} = require('./Electronics.js');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -8,6 +9,7 @@ const userSchema = new Schema({
   email: String,
   password: String,
   createdAt: Date,
+  cart: [electronicsSchema],
 });
 
 
