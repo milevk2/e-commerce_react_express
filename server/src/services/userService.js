@@ -18,7 +18,8 @@ exports.login = async (email, password) => {
 
             email,
             _id: user._id,
-            userName: user.userName
+            userName: user.userName,
+            cart: user.cart
         }
        const token =  await jwt.sign(payload, constants.SECRET, { expiresIn: '3d' });
         
@@ -40,7 +41,7 @@ exports.create = async (data) => {
     const uuid = uuidv4();
 
     try {
-        const newUser = { _id: uuid, ...data }
+        const newUser = { _id: uuid, ...data, cart: [] }
         return await User.create(newUser)
     }
     catch (err) {
