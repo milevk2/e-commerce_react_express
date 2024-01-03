@@ -22,6 +22,7 @@ const RegisterComponent = () => {
         e.preventDefault();
 
         if (passCharError || equalError) return;
+        if (userName == '' || email == '' || password == '' || repass == '') return  window.alert('All fields are required!');
 
         const data = { userName, email, password }
 
