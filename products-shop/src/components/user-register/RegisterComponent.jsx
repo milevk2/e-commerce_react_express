@@ -96,8 +96,8 @@ const RegisterComponent = () => {
             {success ? <div className={styles.layout}>
 
                 <div className={styles.success}>
-                    <h2>{isEnglish ? 'You have been registered successfully!' : 'Вие се регистрирахте успешно!'}</h2>
-                    <h3 onClick={redirectToLoginPage } style={{ cursor: 'pointer' }}>
+                    <h2 className={styles.registered}>{isEnglish ? 'You have been registered successfully!' : 'Вие се регистрирахте успешно!'}</h2>
+                    <h3 className={styles.registered} onClick={redirectToLoginPage } style={{ cursor: 'pointer' }}>
                     {isEnglish ? 'Click here to redirect to the login page!' : 'Натиснете тук, за да влезете в проила си!'}
                     </h3>
                 </div>

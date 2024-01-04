@@ -100,3 +100,35 @@
     margin-top: 10px;
     z-index: 1;
 }
+
+@media all and (max-width:438px) {
+
+    .registered{
+
+        font-size: medium;
+    }
+}
+
+@media all and (max-width:298px) {
+
+    .registered{
+
+        font-size: small;
+    }
+}
+
+@media all and (max-width:244px) {
+
+    .success{
+
+        width: 200px;
+    }
+    .registered{
+
+        margin-left: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: smaller;
+    }
+}
