@@ -18,7 +18,7 @@ const language = {
         image: 'Image link',
         category: 'Category',
         edit: 'EDIT',
-        currency: 'bgn',
+        currency: 'BGN',
         noProducts: 'Currently there are no products available...',
         description: 'Description',
       },
