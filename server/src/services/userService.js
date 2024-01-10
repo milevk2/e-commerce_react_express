@@ -19,13 +19,13 @@ exports.login = async (email, password) => {
             email,
             _id: user._id,
             userName: user.userName,
-            cart: user.cart
         }
-       const token =  await jwt.sign(payload, constants.SECRET, { expiresIn: '3d' });
-        
-        return token;
+        const token = await jwt.sign(payload, constants.SECRET, { expiresIn: '3d' });
+        const cart = user.cart;
+
+        return {token, cart};
     }
-    else{
+    else {
 
         throw new Error('Passwords do not match!');
     }
@@ -56,33 +56,25 @@ exports.getUser = async (id) => {
 
 }
 
-exports.updateUser = async (updated) => {
+exports.updateUser = async (userId, newCart) => {
+    try {
+        const result = await User.updateOne({ _id: userId }, {
+            $set: {
+                cart: newCart
+            }
+        })
 
+        if (result.nModified === 1) {
 
-    await User.updateOne({ _id: updated._id }, {
+            return `${userId}'s cart updated!`;
+        } else {
 
-        $set: {
-
-            firstName: updated.firstName,
-            lastName: updated.lastName,
-            email: updated.email,
-            imageUrl: updated.imageUrl,
-            phoneNumber: updated.phoneNumber,
-            updatedAt: updated.updatedAt,
-            address: updated.address
+            return `User with ID ${userId} not found or cart not updated!`;
         }
-    })
+    }
+    catch (err) {
 
-    return {
-
-        firstName: updated.firstName,
-        lastName: updated.lastName,
-        email: updated.email,
-        imageUrl: updated.imageUrl,
-        phoneNumber: updated.phoneNumber,
-        updatedAt: updated.updatedAt,
-        createdAt:updated.createdAt,
-        address: updated.address
+        console.log(err);
     }
 }
 
