@@ -4,14 +4,17 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useContext } from 'react';
 import { LoggerContext } from '../../LoggerContext.jsx';
 import { LanguageContext } from '../../LanguageContext.jsx';
+import { CartContext } from '../../CartContext.jsx';
+
 
 
 const LoginComponent = ({ setIsLogged }) => {
 
   const navigate = useNavigate();
   const [logError, setLogError] = useState(false);
-  const {logInLogOut} = useContext(LoggerContext);
-  const {isEnglish} = useContext(LanguageContext);
+  const { logInLogOut } = useContext(LoggerContext);
+  const { isEnglish } = useContext(LanguageContext);
+  const { setIsToken, setCartItems, setCartCounter, setTotalPrice } = useContext(CartContext);
 
   async function handleSubmit(e) {
 
@@ -22,8 +25,11 @@ const LoginComponent = ({ setIsLogged }) => {
 
       const response = await login(formData);
       if (!response.ok) return setLogError(true);
-      const token = await response.json();
-      logInLogOut(token);
+      const userData = await response.json();
+      setIsToken(userData.token); // forwards the token to the CartContext
+      logInLogOut(userData.token);
+      const cartItems = userData.cart;
+      setCartItems([...cartItems]);
       navigate('/my_products');
 
     }
@@ -37,30 +43,30 @@ const LoginComponent = ({ setIsLogged }) => {
 
   return (
     <>
-    <form className={styles.loginPanel} onSubmit={handleSubmit}>
-      <label htmlFor="email">{isEnglish? 'Email:' : 'Имейл:'}</label>
-      <input
-        type="text"
-        id="email"
-        name="email"
-        className={styles.rounded}
-      />
+      <form className={styles.loginPanel} onSubmit={handleSubmit}>
+        <label htmlFor="email">{isEnglish ? 'Email:' : 'Имейл:'}</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          className={styles.rounded}
+        />
 
-      <label htmlFor="password">{isEnglish? 'Password:' : 'Парола:'}</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        className={styles.rounded}
-      />
+        <label htmlFor="password">{isEnglish ? 'Password:' : 'Парола:'}</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          className={styles.rounded}
+        />
 
-      <button type="submit" className={styles.submitButton}>
-      {isEnglish? 'Login' : 'Вход'}
-      </button>
-    </form>
-    {logError? <div className={logError ? styles.error : styles.hidden}>{isEnglish? 'User email or password do not match!' : 'Неправилно потребителско име или парола!'}</div> : ''}
+        <button type="submit" className={styles.submitButton}>
+          {isEnglish ? 'Login' : 'Вход'}
+        </button>
+      </form>
+      {logError ? <div className={logError ? styles.error : styles.hidden}>{isEnglish ? 'User email or password do not match!' : 'Неправилно потребителско име или парола!'}</div> : ''}
     </>
-    )
+  )
 
 }
 
