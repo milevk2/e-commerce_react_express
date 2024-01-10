@@ -85,7 +85,7 @@ const ProductDetails = ({isSmallScreen}) => {
 
         }).catch(err => console.log(err));
 
-    }, []);
+    }, [productId]);
 
     useEffect(() => {
 
@@ -185,7 +185,15 @@ const ProductDetails = ({isSmallScreen}) => {
                         <div className={`${styles.price} ${styles.heart}`}><p>{isEnglish ? `Price: ${productDetails.price}bgn` : `Цена: ${productDetails.price}лв`} </p></div>
                         {!isOwner ? <div className={styles.center}>{token && <button type="button" className="btn btn-success buy" onClick={() => {
 
-                            addItem(productDetails);       
+                            const cartItem = {
+
+                                _id: productDetails._id,
+                                name:productDetails.name,
+                                price:productDetails.price,
+                                image: productDetails.image,
+                                buyQuantity: 1
+                            }
+                            addItem(cartItem);       
                         }
 
                         }>
