@@ -3,7 +3,6 @@ import styles from './ProductListItem.module.css'
 import { NavLink } from "react-router-dom";
 import { LanguageContext } from '../../../LanguageContext.jsx';
 
-LanguageContext
 const ProductListItem = ({ item }) => {
 
     const {specsEnum} = useContext(LanguageContext);
