@@ -29,15 +29,8 @@ const CartProvider = ({ children }) => {
 
       setCartCounter(temp_cartCounter);
       setTotalPrice(temp_totalPrice);
-
-      // setCartCounter(cartItems.reduce((acc, curr) => {
-
-      //   return acc + (curr.buyQuantity ? curr.buyQuantity : 1)
-
-      // }, 0));
-
     }
-
+    
     if (userId) updateCartDb();
 
   }, [cartItems])
@@ -69,7 +62,7 @@ const CartProvider = ({ children }) => {
 
     for (let currItem of cartItems) {
 
-      if (item._id === currItem._id ) {
+      if (item._id === currItem._id) {
 
         currItem.buyQuantity += 1;
         setCartItems(items => [...items]);
