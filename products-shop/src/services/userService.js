@@ -29,6 +29,12 @@ export const logout = async (token) => {
 
 }
 
+export const update = async ( body) => {
+
+    return await request.post(`${baseUrl}/cart`, null, body)
+
+}
+
 
 // export const getAll = async () => {
 
