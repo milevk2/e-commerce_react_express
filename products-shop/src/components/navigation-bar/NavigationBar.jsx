@@ -34,7 +34,6 @@ function NavigationBar() {
     }
   }
 
-
   const linkStyle = {
     color: 'white',
   };
