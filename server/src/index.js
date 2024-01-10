@@ -173,20 +173,20 @@ app.post('/users/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const token = await userService.login(email, password)
+        const userData = await userService.login(email, password);
+        const token = userData.token;
         sessions[token] = true;
-        res.json(token);
+        res.json(userData);
     }
     catch (err) {
         res.status(404).json(err);
     }
 })
 
-app.post('/users/logout', async (req, res) => {
+app.post('/users/logout',  (req, res) => {
 
     console.log('/users/logout post');
 
-    console.log(sessions);
     const { authToken } = req.body;
 
     try {
@@ -206,5 +206,34 @@ app.post('/users/logout', async (req, res) => {
     }
 })
 
+app.post('/users/cart',  async (req, res) => {
+
+    const {_id, cart} = req.body;
+
+    console.log(_id, cart);
+
+    try {
+        const updated = await userService.updateUser(_id, cart)
+
+        res.json(updated); // will be needed when 
+    }
+    catch (err) {
+        res.status(404).json(err);
+    }
+})
+
+app.get('/users/cart',  async (req, res) => {
+
+    const {_id, cart} = req.body;
+
+    try {
+        const updated = await userService.updateUser(_id, cart);
+
+        console.log(updated);
+    }
+    catch (err) {
+        res.status(404).json(err);
+    }
+})
 
 app.listen(constants.PORT, () => { console.log(`The server is listening on PORT  ${constants.PORT}`); })
