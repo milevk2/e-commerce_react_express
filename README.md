@@ -2,6 +2,7 @@
 
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
+- [React Contexts](#react-contexts)
 - [Technologies Used](#technologies-used)
 
 **Key Features:**
@@ -11,6 +12,7 @@
 - Mongoose as the MongoDB ODM for database integration.
 - Web-scraping service for generating dummy shop data.
 - User authentication and authorization for a personalized shopping experience.
+- Bulgarian version of the site available through LanguageContext.jsx. It takes the language from language enum in language.js.
 
 **API Integrations:**
 - Integration with https://weatherstack.com/ for user's convenience.
@@ -70,6 +72,24 @@ The react components are structured in the following way:
 Each component has its own corresponding .module.css file.
 
 add-product folder has two utility functions.
+
+## React Contexts
+
+ - `LanguageContext.jsx` - for handling language state across the App. It interacts with language enum from `language.js`;
+
+ - `LoggerContext.jsx` - for handling login/logout functionality and managing sessionStorage and thus managing the permissions of the user.
+
+ - `CartContext.jsx` - for handling user's cart functionality:
+    - adding new items to the cart state;
+    - deleting cart items;
+    - updating user's cart DB;
+    - tracking and updating thye total price of the cart state;
+    - triggering notifications upon adding new items in the cart;
+    **N.B! - The initial state of the cart is being updated from `LoginComponent.jsx` after a successfull login as the server's response returns user's cart along with their jwt token!**
+
+ - `LoadingContext.jsx` - Keeps the state of a loading spinner. If a prolonged task is being executed, the spinner appears and disappears on task completion.
+
+ `onSessionEnd.js` is a utility script that sends a session logout request to the server and deletes the session if user refreshes or closes the browser**
 
 ## Technologies Used
 
