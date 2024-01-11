@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import jwtParser from './lib/jwtParser.js';
 import { update } from './services/userService.js';
 import { LoggerContext } from './LoggerContext.jsx';
 
@@ -30,7 +29,7 @@ const CartProvider = ({ children }) => {
       setCartCounter(temp_cartCounter);
       setTotalPrice(temp_totalPrice);
     }
-    
+
     if (userId) updateCartDb();
 
   }, [cartItems])
@@ -72,11 +71,20 @@ const CartProvider = ({ children }) => {
     setCartItems(items => [...items, item]);
   };
 
-  const deleteItems = () => {
 
-    setCartItems([]);
-    setCartCounter(0);
-    setTotalPrice(0);
+  const removeItem = (itemId) => {
+
+    if (cartItems.length <= 1) return resetContextState(); 
+
+    for (let i = 0; i < cartItems.length; i++) {
+
+      if (cartItems[i]._id === itemId) {
+
+        cartItems.splice(i, 1);
+        setCartItems([...cartItems]);
+        return;
+      }
+    }
   }
 
   //   const removeItem = (itemId) => {
@@ -85,7 +93,20 @@ const CartProvider = ({ children }) => {
   //   }
 
   return (
-    <CartContext.Provider value={{ cartItems, setCartItems, cartCounter, setCartCounter, totalPrice, setTotalPrice, addItem, isNotification, setIsNotification, deleteItems, resetContextState, setIsToken }}>
+    <CartContext.Provider value={{
+      cartItems,
+      setCartItems,
+      cartCounter,
+      setCartCounter,
+      totalPrice,
+      setTotalPrice,
+      addItem,
+      removeItem,
+      isNotification,
+      setIsNotification,
+      resetContextState,
+      setIsToken
+    }}>
       {children}
     </CartContext.Provider>
   );
