@@ -2,12 +2,10 @@ import { useContext } from 'react';
 import styles from './CartProducts.module.css'
 import { CartContext } from '../../../CartContext.jsx';
 import CartItem from './cart-item/CartItem.jsx';
-import { NavLink } from 'react-router-dom';
-
 
 const CartProducts = () => {
 
-    const { cartItems, cartCounter, totalPrice, deleteItems } = useContext(CartContext);
+    const { cartItems, cartCounter, totalPrice, resetContextState } = useContext(CartContext);
 
     return (
         <>
@@ -17,7 +15,7 @@ const CartProducts = () => {
 
                 <div className={styles.total}>Total: {totalPrice.toFixed(2)} BGN</div>
                 <button className={styles.clearCart} onClick={() => {
-                    deleteItems();
+                    resetContextState();
                 }
                 }>Delete items</button>
             </div>}

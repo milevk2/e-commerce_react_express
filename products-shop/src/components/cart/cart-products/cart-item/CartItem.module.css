@@ -1,19 +1,26 @@
 .cartRow {
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 100px;
-    
+
 }
 
 .cartRow:hover .itemPrice {
     color: red;
 }
 
+.cartRow:hover .removeItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .link {
     opacity: 87%;
     border: 1px solid;
-    margin:1px;
+    margin: 1px;
     border-radius: 6px;
     border-color: aliceblue;
     background-color: lightgray;
@@ -68,5 +75,26 @@
     height: 90px;
     margin: 5px;
     color: grey;
+
+}
+
+.removeItem {
+
+    display: none;
+    font-weight: bold;
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    border: 2px solid;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+   
+}
+
+.removeItem:hover {
+    background-color: red;
+    color: white;
 
 }
