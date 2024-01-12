@@ -1,8 +1,8 @@
 const User = require('../models/User.js')
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
-const jwt = require('../lib/jwt.js')
-const constants = require('../constants.js')
+const jwt = require('../lib/jwt.js');
+const { secretWord } = require('../jwtSecret.js');
 
 exports.login = async (email, password) => {
 
@@ -20,7 +20,7 @@ exports.login = async (email, password) => {
             _id: user._id,
             userName: user.userName,
         }
-        const token = await jwt.sign(payload, constants.SECRET, { expiresIn: '3d' });
+        const token = await jwt.sign(payload, secretWord, { expiresIn: '3d' });
         const cart = user.cart;
 
         return {token, cart};

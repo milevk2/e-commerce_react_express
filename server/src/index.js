@@ -222,18 +222,18 @@ app.post('/users/cart',  async (req, res) => {
     }
 })
 
-app.get('/users/cart',  async (req, res) => {
+// app.get('/users/cart',  async (req, res) => {
 
-    const {_id, cart} = req.body;
+//     const {_id, cart} = req.body;
 
-    try {
-        const updated = await userService.updateUser(_id, cart);
+//     try {
+//         const updated = await userService.updateUser(_id, cart);
 
-        console.log(updated);
-    }
-    catch (err) {
-        res.status(404).json(err);
-    }
-})
+//         console.log(updated);
+//     }
+//     catch (err) {
+//         res.status(404).json(err);
+//     }
+// })
 
 app.listen(constants.PORT, () => { console.log(`The server is listening on PORT  ${constants.PORT}`); })
