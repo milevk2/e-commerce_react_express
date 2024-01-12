@@ -1,4 +1,4 @@
-const { secretWord } = require('../jwtSecret.js');
+const { secretWord } = require('../jwt-secret.js');
 const jwt = require('../lib/jwt.js')
 
 async function authMiddleWare(req, res, next) {

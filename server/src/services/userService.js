@@ -2,7 +2,7 @@ const User = require('../models/User.js')
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const jwt = require('../lib/jwt.js');
-const { secretWord } = require('../jwtSecret.js');
+const { secretWord } = require('../jwt-secret.js');
 
 exports.login = async (email, password) => {
 
