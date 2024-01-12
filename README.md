@@ -83,7 +83,7 @@ add-product folder has two utility functions.
     - adding new items to the cart state;
     - deleting cart items;
     - updating user's cart DB;
-    - tracking and updating thye total price of the cart state;
+    - tracking and updating the total price of the cart state;
     - triggering notifications upon adding new items in the cart;
     **N.B! - The initial state of the cart is being updated from `LoginComponent.jsx` after a successfull login as the server's response returns user's cart along with their jwt token!**
 
