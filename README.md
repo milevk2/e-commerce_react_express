@@ -1,5 +1,7 @@
 # E-Commerce React Express Project
 
+**This is my MERN project which I use to train my knowledge on. It is not perfect - there are still many bugs and not implemented functionalities and there are many things I have to work on. The main purpose is to train my frontend, backend, database, api and design skills.**
+
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
 - [React Contexts](#react-contexts)
