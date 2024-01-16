@@ -120,6 +120,9 @@ add-product folder has two utility functions.
  - Navigation bar to be made sticky - to stick on top of the view when the users scroll down;
  - Better implementation of form elements, especially when it comes to passwords;
  - Unique email check needs to be added on user registration, so we can not have multiple users registered with the same email (backend);
+ - Implement order functionality:
+      - The product quantity should be decreased on user order completion.
+      -  Implement SMS or email notification on order completion.
 
 ## Technologies Used
 
