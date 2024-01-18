@@ -115,6 +115,7 @@ add-product folder has two utility functions.
 
 ## To be done (In Progress)
  - Need a new implementation of the Weather Stack API - they have limited the free requests from 1000 to 100. The WeatherAPI data will be cached on the backend and it will be updated every 7'th hour. Thus the weather data will be available throughout the whole month. (19.01.2024);
+ - The comments styling needs a fix - the star rating system is being displaced in case of longer comment or username. (19.01.2024);
  - Implementation of CAPTCHA in order to avoid bots;
  - Search products bar functionality (Initially it will work only with product names and then more complex search/filtering will be added but probably this will be done on the backend);
  - Fix Login and Register components on small screens - in some cases the error notifications pop up on top of the form input fields. Also they are not directly visible and the users have to scroll down a bit (due to the weather API component); 
