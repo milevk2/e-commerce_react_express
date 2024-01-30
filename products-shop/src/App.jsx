@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
-import HomeLoad from './components/HomeLoad.jsx';
 import NotFound from './components/NotFound.jsx';
 import ProductDetails from './components/product-details/ProductDetails.jsx';
 import NavigationBar from './components/navigation-bar/NavigationBar.jsx';
@@ -16,6 +15,8 @@ import { LoggerContext } from './LoggerContext.jsx';
 import '../public/styles/default.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CartComponent from './components/cart/CartComponent.jsx';
+import AboutComponent from './components/about-page/AboutComponent.jsx';
+import HomeComponent from './components/home-page/HomeComponent.jsx';
 
 
 function App() {
@@ -46,9 +47,9 @@ function App() {
       {isSmallScreen && isLogged && <div className='smallCart'><CartComponent /></div>}
       {isLoading && <Spinner />}
       <div className='main'>
-        <WeatherApi />
+        {/* <WeatherApi /> */}
         <Routes>
-          <Route path="/" element={<HomeLoad />} />
+          <Route path="/" element={<HomeComponent />} />
           <Route path="/products/:productId" element={<ProductDetails isSmallScreen={isSmallScreen} />} />
           <Route path="/add_product" element={isLogged ? <AddProductForm /> : <NotFound />} />
           <Route path="/products" element={<ProductList />} />
@@ -56,6 +57,7 @@ function App() {
           <Route path="/Register" element={!isLogged ? <RegisterComponent /> : <NotFound />} />
           <Route path="/Login" element={!isLogged ? <LoginComponent /> : <NotFound />} />
           <Route path="/profile" element={isLogged && <UserProfile />} />
+          <Route path="/About" element={<AboutComponent />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
