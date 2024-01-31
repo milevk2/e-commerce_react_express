@@ -1,0 +1,66 @@
+.news {
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: stretch;
+    background-color: aliceblue;
+    opacity: 85%;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 15px;
+    gap: 10px;
+    margin: 5em;
+    padding: 5em;
+}
+
+.card {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 250px;
+    height: 350px;
+    border-radius: 8px;
+    background-color: grey;
+    border: 1px solid #ccc;
+    justify-content: stretch;
+}
+
+.card h5 {
+
+    display: inline;
+    font-size: 1em;
+    font-weight: 600;
+    overflow: hidden;
+
+}
+
+.card p {
+
+    display: inline;
+    font-size: 0.8em;
+
+}
+
+article img {
+
+    box-sizing: border-box;
+    width: 240px;
+    height: 115px;
+    padding: 0.8em 1em;
+    object-fit: cover; 
+}
+
+article a {
+
+    text-decoration: none;
+    text-align: center;
+
+}
+
+article p {
+
+    font-size: small;
+    overflow: hidden;
+}
