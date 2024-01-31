@@ -46,9 +46,7 @@ function NavigationBar() {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           <div className={styles.encapsulated}>
-            <Nav.Link as={NavLink} to="/" style={linkStyle} className={styles.scale}> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>
-            </svg>{isEnglish ? 'Home' : 'Начало'}</Nav.Link>
+            <Nav.Link as={NavLink} to="/" style={linkStyle} className={styles.scale}> <i className="fa-solid fa-bars"></i> {isEnglish ? 'Home' : 'Начало'}</Nav.Link>
 
             <Nav.Link as={NavLink} to="/products" style={linkStyle} className={styles.scale}>{isEnglish ? 'Products' : 'Продукти'}</Nav.Link>
             {isLogged ?
@@ -64,6 +62,7 @@ function NavigationBar() {
                 <Nav.Link as={NavLink} to="/Register" style={linkStyle} className={styles.scale}>{isEnglish ? 'Register' : 'Регистрация'}</Nav.Link>
                 <Nav.Link as={NavLink} to="/Login" style={linkStyle} className={styles.scale}>{isEnglish ? 'Login' : 'Вход'}</Nav.Link>
               </div>}
+              <Nav.Link as={NavLink} to="/About" style={linkStyle} className={styles.scale} >{isEnglish ? 'About' : 'Относно'}</Nav.Link>
           </div>
         </Nav>
         <div className={styles.utilities}>
