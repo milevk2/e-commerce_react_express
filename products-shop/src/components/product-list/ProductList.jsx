@@ -25,13 +25,21 @@ const ProductList = ({ myProducts }) => {
 
     return (
         <>
+
+            
             {
                 products.length == 0 ?
+                    
+                    myProducts ?<div className={styles.notFoundMine}>
+                    <h1>Currently you are noot selling any items!</h1>
+                    <button className="defaultButton">Click here to redirect to home page!</button>
+                </div> :
                     <div className={styles.notFound}>
                         <h1>{specsEnum.noProducts}</h1>
                     </div>
                     :
                     <div>
+                        {myProducts ? <span className="headerDiv">My Products</span> : ''}
                         <ul className={styles.shopWrapper}>
                             {products.map(product => <ProductListItem key={product._id} item={product} />)}
 

@@ -30,6 +30,16 @@
     opacity: 78%;
 }
 
+.notFoundMine{
+
+    border: 1px solid white;
+    border-radius: 1em;
+    text-align: center;
+    padding: 1em;
+    line-height: 20px;
+    background-color: #4caf50;
+    color: white;
+}
 
 @media all and (max-width:1142px) {
 
