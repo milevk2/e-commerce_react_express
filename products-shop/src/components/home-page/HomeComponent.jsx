@@ -12,7 +12,7 @@ const HomeComponent = () => {
         callUtilityService('news').then(data => data.json()).then(result => {
 
 
-            let arr = result["articles"]
+            let arr = result["articles"];
             setNews(arr.slice(1, 10));
         }
         ).catch(err => console.log('The news will not be updated! ', err))
@@ -23,7 +23,8 @@ const HomeComponent = () => {
 
     return (
 
-        <div className={styles.news}>
+        <>
+        {news.length > 1 ? <div className={styles.news}>
 
             <h2 className="headerDiv">LATEST TECH NEWS</h2>
             {news.map(article =>
@@ -35,6 +36,10 @@ const HomeComponent = () => {
                 <a href={article.url}>Read more</a>
                 </article>)}
         </div>
+        : 
+        ''
+        }
+        </>
     )
 }
 
