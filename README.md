@@ -13,9 +13,11 @@
 - Express.js server for handling backend logic and APIs.
 - Integration with a backend database for product management.
 - Mongoose as the MongoDB ODM for database integration.
-- Web-scraping service for generating dummy shop data.
+- Web-scraping service for generating dummy shop data (in development only).
 - User authentication and authorization for a personalized shopping experience.
 - Bulgarian version of the site available through LanguageContext.jsx. It takes the language from language enum in language.js.
+- Weather and News APIs integrated for user convenience.
+- Cache logic implemented on the backend for handling the limited API requests and data.
 
 **Functionalities:**
   
@@ -36,8 +38,9 @@
  
  - Language switch is availabe to both logged and non-logged users.
 
-**API Integrations:**
-- Integration with https://weatherstack.com/ for user's convenience.
+**API Integrations for user's convenience:**
+- Integration with https://weatherstack.com/
+- Integration with https://newsapi.org/ on the home page.
 
 ## Getting Started
 
@@ -53,6 +56,12 @@ To get started with this project, follow these steps:
 
 The react components are structured in the following way:
 
+- **home-page/**
+  - `HomeComponent.jsx`
+
+- **about-page/**
+  - `AboutComponent.jsx`
+  
 - **add-product/**
   - `AddProductForm.jsx` - controlled form used
   - **generate-dummy-data/**
