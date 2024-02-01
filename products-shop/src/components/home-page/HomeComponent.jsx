@@ -14,16 +14,14 @@ const HomeComponent = () => {
 
             let arr = result["articles"]
             setNews(arr.slice(1, 10));
-            console.log(arr);
         }
-        ).catch(err => console.log('The news will not be updated!'))
+        ).catch(err => console.log('The news will not be updated! ', err))
 
 
     }, [])
 
 
     return (
-
 
         <div className={styles.news}>
 
