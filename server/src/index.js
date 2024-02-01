@@ -5,7 +5,8 @@ const electonicsService = require('./services/electronicsService.js')
 const { dbConnect } = require('./lib/dataBase.js')
 const { expressConfig } = require('./configs/expressConfig.js')
 const { scrape } = require('../web-scrapper/gsmArena.js')
-const { APIkey } = require('./APIkey.js')
+const { APIkey } = require('./APIkey.js');
+const { CachedNewsManager } = require('./services/APIservices.js');
 
 const app = express();
 
@@ -21,8 +22,30 @@ catch (err) {
 }
 
 const sessions = {};
+const newsCache = new CachedNewsManager(8);
 
 // Endpoints:
+app.get('/news', async (req, res) => {
+
+    const reqDateTime = Date.now();
+
+    if (reqDateTime >= newsCache.getExpiryTime()) {
+
+        try {
+            const news = await newsCache.setCache(reqDateTime);
+            console.log('Sending fresh content!');
+            res.json(news);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+    else {
+        console.log('Sending cached content!');
+        res.send(newsCache.getCache());
+    }
+})
+
 app.get('/products', async (req, res) => {
 
     console.log(` GET ALL products`);
@@ -70,9 +93,9 @@ app.post('/products', async (req, res) => {
 
     try {
         const product = await electonicsService.create(req.body);
-        
-        setTimeout(()=>{res.send(JSON.stringify(product))},2000) //simulate delay
-        
+
+        setTimeout(() => { res.send(JSON.stringify(product)) }, 2000) //simulate delay
+
     }
     catch (err) {
         console.log(err);
@@ -183,7 +206,7 @@ app.post('/users/login', async (req, res) => {
     }
 })
 
-app.post('/users/logout',  (req, res) => {
+app.post('/users/logout', (req, res) => {
 
     console.log('/users/logout post');
 
@@ -192,7 +215,7 @@ app.post('/users/logout',  (req, res) => {
     try {
         if (sessions[authToken]) {
 
-            console.log('Deleting user session', authToken );
+            console.log('Deleting user session', authToken);
             delete sessions[authToken];
             res.json(true)
         }
@@ -206,9 +229,9 @@ app.post('/users/logout',  (req, res) => {
     }
 })
 
-app.post('/users/cart',  async (req, res) => {
+app.post('/users/cart', async (req, res) => {
 
-    const {_id, cart} = req.body;
+    const { _id, cart } = req.body;
 
     console.log(_id, cart);
 
