@@ -132,3 +132,20 @@
         font-size: smaller;
     }
 }
+
+@media all and (max-width: 572px) {
+
+    .registerPanel {
+
+        position: absolute;
+        top: 10px;
+    }
+}
+
+@media all and (max-width: 286px) {
+
+    .error {
+
+        font-size: small;
+    }
+}
