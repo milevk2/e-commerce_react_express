@@ -1,17 +1,17 @@
 .loginPanel {
 
+    box-sizing: border-box;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     margin: 15px;
     background-color: #3e8e41;
     color: antiquewhite;
     border-radius: 40px;
-    min-height: 50%;
     opacity: 83%;
-    width: fit-content;
+    width: 240px;
+    height: 230px;
     text-align: center;
     margin-top: 20px;
     padding: 20px;
@@ -102,4 +102,21 @@
     border-radius: 8px;
     margin-top: 10px;
     z-index: 1;
+}
+
+@media all and (max-width: 572px) {
+
+    .loginPanel {
+
+        position: absolute;
+        top: 10px;
+    }
+}
+
+@media all and (max-width: 286px) {
+
+    .error {
+
+        font-size: small;
+    }
 }
