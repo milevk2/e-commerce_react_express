@@ -106,7 +106,6 @@ td > div.error {
         display: flex;
         flex-direction: column;
     }
-
 }
 
 @media all and (max-width: 384px) {
