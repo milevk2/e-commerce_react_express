@@ -116,25 +116,26 @@ add-product folder has two utility functions.
     - updating user's cart DB;
     - tracking and updating the total price of the cart state;
     - triggering notifications upon adding new items in the cart;
-    **N.B! - The initial state of the cart is being updated from `LoginComponent.jsx` after a successfull login as the server's response returns user's cart along with their jwt token!**
+    > [!IMPORTANT]
+    >**N.B! - The initial state of the cart is being updated from `LoginComponent.jsx` after a successfull login as the server's response returns user's cart along with   their jwt token!**
 
  - `LoadingContext.jsx` - Keeps the state of a loading spinner. If a prolonged task is being executed, the spinner appears and disappears on task completion.
 
  `onSessionEnd.js` is a utility script that sends a session logout request to the server and deletes the session if user refreshes or closes the browser**
 
 ## To be done (In Progress)
- - Need a new implementation of the Weather Stack API - they have limited the free requests from 1000 to 100. The WeatherAPI data will be cached on the backend and it will be updated every 7'th hour. Thus the weather data will be available throughout the whole month. (19.01.2024);
- - The comments styling needs a fix - the star rating system is being displaced in case of longer comment or username. (19.01.2024);
- - Implementation of CAPTCHA in order to avoid bots;
- - Search products bar functionality (Initially it will work only with product names and then more complex search/filtering will be added but probably this will be done on the backend);
- - Fix Login and Register components on small screens - in some cases the error notifications pop up on top of the form input fields. Also they are not directly visible and the users have to scroll down a bit (due to the weather API component);  <span style="color:green; font-weight:bold;">FIXED ON 02.05.2024 ✓</span>
+ - [ ]Need a new implementation of the Weather Stack API - they have limited the free requests from 1000 to 100. The WeatherAPI data will be cached on the backend and it will be updated every 7'th hour. Thus the weather data will be available throughout the whole month. (19.01.2024);
+ - [ ]The comments styling needs a fix - the star rating system is being displaced in case of longer comment or username. (19.01.2024);
+ - [ ]Implementation of CAPTCHA in order to avoid bots;
+ - [ ]Search products bar functionality (Initially it will work only with product names and then more complex search/filtering will be added but probably this will be done on the backend);
+ - [x] **FIXED ON 02.05.2024 ✓** Fix Login and Register components on small screens - in some cases the error notifications pop up on top of the form input fields. Also they are not directly visible and the users have to scroll down a bit (due to the weather API component);  
 
- - Navigation bar to be made sticky - to stick on top of the view when the users scroll down;
- - Better implementation of form elements, especially when it comes to passwords;
- - Unique email check needs to be added on user registration, so we can not have multiple users registered with the same email (backend);
- - Implement order functionality:
-      - The product quantity should be decreased on user order completion.
-      -  Implement SMS or email notification on order completion.
+ - [ ]Navigation bar to be made sticky - to stick on top of the view when the users scroll down;
+ - [ ]Better implementation of form elements, especially when it comes to passwords;
+ - [ ]Unique email check needs to be added on user registration, so we can not have multiple users registered with the same email (backend);
+ - [ ]Implement order functionality:
+      - [ ]The product quantity should be decreased on user order completion.
+      - [ ]Implement SMS or email notification on order completion.
 
 ## Technologies Used
 
