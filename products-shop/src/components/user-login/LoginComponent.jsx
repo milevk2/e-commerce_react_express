@@ -63,8 +63,9 @@ const LoginComponent = ({ setIsLogged }) => {
         <button type="submit" className={styles.submitButton}>
           {isEnglish ? 'Login' : 'Вход'}
         </button>
+        {logError ? <div className={logError ? styles.error : styles.hidden}>{isEnglish ? 'User email or password do not match!' : 'Неправилно потребителско име или парола!'}</div> : ''}
       </form>
-      {logError ? <div className={logError ? styles.error : styles.hidden}>{isEnglish ? 'User email or password do not match!' : 'Неправилно потребителско име или парола!'}</div> : ''}
+      
     </>
   )
 
