@@ -4,6 +4,7 @@ import ProductListItem from "./product-list-item/ProductListItem.jsx"
 import styles from './ProductList.module.css'
 import { LoggerContext } from "../../LoggerContext.jsx";
 import { LanguageContext } from "../../LanguageContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 
 const ProductList = ({ myProducts }) => {
@@ -11,6 +12,7 @@ const ProductList = ({ myProducts }) => {
     const [products, setProducts] = useState([]);
     const {userId} = useContext(LoggerContext);
     const {specsEnum} = useContext(LanguageContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -32,7 +34,7 @@ const ProductList = ({ myProducts }) => {
                     
                     myProducts ?<div className={styles.notFoundMine}>
                     <h1>Currently you are noot selling any items!</h1>
-                    <button className="defaultButton">Click here to redirect to home page!</button>
+                    <button className="defaultButton" onClick={()=> navigate('/')}>Click here to redirect to home page!</button>
                 </div> :
                     <div className={styles.notFound}>
                         <h1>{specsEnum.noProducts}</h1>
