@@ -78,7 +78,10 @@ const RegisterComponent = () => {
 
         if (password !== repass) {
 
-            setEqualError(true);
+            if (!passCharError){
+                setEqualError(true);
+            }
+            
         }
         else {
             setEqualError(false);
