@@ -59,7 +59,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28.5%;
+    width: 200px;
     position: absolute;
     opacity: 1;
     background-color: #ffcccc;
@@ -87,6 +87,11 @@
     left: 45%;
 }
 
+td > div.error {
+
+    position: relative;
+}
+
 .managerSubmitBtn:hover {
 
     background-color:#3e8e41 ;
@@ -100,5 +105,17 @@
 
         display: flex;
         flex-direction: column;
+    }
+
+}
+
+@media all and (max-width: 384px) {
+
+    .error {
+
+        position: absolute;
+        width: 200px;
+        font-size: small;
+        bottom:-4%;
     }
 }
