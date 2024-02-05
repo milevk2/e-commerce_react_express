@@ -33,7 +33,7 @@ const ProductList = ({ myProducts }) => {
                 products.length == 0 ?
                     
                     myProducts ?<div className={styles.notFoundMine}>
-                    <h1>Currently you are noot selling any items!</h1>
+                    <h1>Currently you are not selling any items!</h1>
                     <button className="defaultButton" onClick={()=> navigate('/')}>Click here to redirect to home page!</button>
                 </div> :
                     <div className={styles.notFound}>
