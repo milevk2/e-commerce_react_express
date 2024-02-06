@@ -1,26 +1,24 @@
-const { newsAPI } = require("../APIkey.js");
+class CacheManager {
 
-class CachedNewsManager {
-
-    #cachedNews
+    #cache
     #expiryTime
     #hoursInterval
+    #fetchUrl
 
-    constructor(interval_in_hours) {
-        this.#cachedNews = null;
+    constructor(interval_in_hours, fetchUrl) {
+        this.#cache = null;
         this.#expiryTime = 0;
         this.#hoursInterval = interval_in_hours;
+        this.#fetchUrl = fetchUrl;
     }
-
 
     async setCache(reqDateTime) {
 
         try {
-
-            const news = await this.#fetchNews();
-            this.#cachedNews = news;
+            const freshData = await this.#fetchData(this.#fetchUrl);
+            this.#cache = freshData;
             this.#expiryTime = reqDateTime + this.#hoursInterval * 3600000 ; // 1 hour = 60 minutes * 60 seconds * 1000 milliseconds
-            return news;
+            return freshData;
         }
         catch (err) {
 
@@ -29,19 +27,18 @@ class CachedNewsManager {
         }
     }
 
-    async #fetchNews() {
+    async #fetchData(fetchUrl) {
 
-        const response = await fetch(`https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=${newsAPI}`);
+        const response = await fetch(fetchUrl);
 
         if (!response.ok) throw new Error(`Problem with news fetching! Status: ${response.status} - ${response.statusText}`);
 
         return await response.json();
-
     }
 
     getCache() {
 
-        return this.#cachedNews;
+        return this.#cache;
     }
 
     getExpiryTime() {
@@ -50,5 +47,5 @@ class CachedNewsManager {
     }
 }
 
-module.exports = { CachedNewsManager }
+module.exports = { CacheManager }
 
