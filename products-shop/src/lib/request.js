@@ -24,6 +24,8 @@ async function request(method, url=null, additionalHeaders=null, body=null) {
     try {
         const response =  await fetch(url, options);
 
+        if(!response.ok) console.log('Something went wrong with the response!', response.ok);
+
         return response;
     }
     catch (err) {
