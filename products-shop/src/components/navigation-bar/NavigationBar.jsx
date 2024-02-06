@@ -1,6 +1,6 @@
 import styles from './Navigation.module.css';
 import React, { useContext } from 'react';
-import { Navbar, Nav, Form, Button } from 'react-bootstrap';
+import { Navbar, Nav, Form, Button, Container } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { logout } from '../../services/userService.js';
 import { LoggerContext } from '../../LoggerContext.jsx';
@@ -40,7 +40,7 @@ function NavigationBar() {
 
 
   return (
-    <Navbar bg="green" variant="green" expand="sm" style={{ backgroundColor: '#4CAF50' }}>
+    <Navbar bg="green" variant="green" expand="sm" fixed="top" style={{ backgroundColor: '#4CAF50' } } >
 
       <Navbar.Toggle aria-controls="responsive-navbar-nav" style={linkStyle} />
       <Navbar.Collapse id="responsive-navbar-nav">
