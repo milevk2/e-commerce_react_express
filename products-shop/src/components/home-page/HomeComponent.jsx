@@ -27,9 +27,9 @@ const HomeComponent = () => {
         {news.length > 1 ? <div className={styles.news}>
 
             <h2 className="headerDiv">LATEST TECH NEWS</h2>
-            {news.map(article =>
+            {news.map((article, index)=>
             
-            <article className={styles.card}>
+            <article className={styles.card} key={index}>
                 <img  src={article.urlToImage} alt={article.title} />
                 <h5>{article.title}</h5>
                 <p>{article.description}</p>
