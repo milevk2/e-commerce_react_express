@@ -21,7 +21,7 @@ const Comment = ({ comment }) => {
     <div className={styles.comment}>
       <div className={styles.userDetails}>
         <div className={styles.avatar}>{comment.userName[0]}</div>
-        <div className={styles.userName}>{comment.userName}</div>
+        <div className={styles.userName} title={comment.userName}>{comment.userName}</div>
       </div>
 
       <div className={styles.commentText}>
