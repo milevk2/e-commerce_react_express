@@ -35,8 +35,8 @@ body {
 
   position: -webkit-sticky;
   position: sticky;
-  top:5%;
-  left:40%;
+  top:8%;
+  left:50%;
   background-color: #3e8e41;
   border: 1px solid white;
   z-index: 5;
