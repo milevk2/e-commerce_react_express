@@ -175,9 +175,7 @@ app.get('/getWeather', async (req, res) => {
 
         res.send(err.message).status(404)
     }
-
 })
-
 
 app.post('/users/register', async (req, res) => {
 
@@ -208,8 +206,6 @@ app.post('/users/login', async (req, res) => {
 
 app.post('/users/logout', (req, res) => {
 
-    console.log('/users/logout post');
-
     const { authToken } = req.body;
 
     try {
@@ -217,11 +213,12 @@ app.post('/users/logout', (req, res) => {
 
             console.log('Deleting user session', authToken);
             delete sessions[authToken];
-            res.json(true)
+            res.status(200).json(true);
         }
     }
-    catch (err) {
-        res.json(false);
+    catch (err) { 
+        console.log(`Error occured during logout: ${err}`);
+        res.status(404).json(false);
     }
     finally {
 
@@ -238,25 +235,11 @@ app.post('/users/cart', async (req, res) => {
     try {
         const updated = await userService.updateUser(_id, cart)
 
-        res.json(updated); // will be needed when 
+        res.json(updated);
     }
     catch (err) {
         res.status(404).json(err);
     }
 })
-
-// app.get('/users/cart',  async (req, res) => {
-
-//     const {_id, cart} = req.body;
-
-//     try {
-//         const updated = await userService.updateUser(_id, cart);
-
-//         console.log(updated);
-//     }
-//     catch (err) {
-//         res.status(404).json(err);
-//     }
-// })
 
 app.listen(constants.PORT, () => { console.log(`The server is listening on PORT  ${constants.PORT}`); })
