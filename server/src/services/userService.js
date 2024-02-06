@@ -8,7 +8,7 @@ exports.login = async (email, password) => {
 
     const user = await User.findOne({ email: email })
 
-    if (!user) throw new Error('Unable to find such user!');
+    if (!user) throw new Error(`Unable to find user with email ${email}`);
 
     const compare = await bcrypt.compare(password, user.password)
 
@@ -22,7 +22,7 @@ exports.login = async (email, password) => {
         }
         const token = await jwt.sign(payload, secretWord, { expiresIn: '3d' });
         const cart = user.cart;
-
+        console.log(`User ${email} logged in successfully!`);
         return {token, cart};
     }
     else {
@@ -63,6 +63,8 @@ exports.updateUser = async (userId, newCart) => {
                 cart: newCart
             }
         })
+
+        console.log('Cart updated!');
 
         if (result.nModified === 1) {
 
