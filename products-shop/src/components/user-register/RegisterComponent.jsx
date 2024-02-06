@@ -107,7 +107,7 @@ const RegisterComponent = () => {
 
             </div> : ''}
             <form className={styles.registerPanel} onSubmit={onUserSubmit}>
-                <label htmlFor="username">{isEnglish? 'Username:' : 'Потребителско име:'}:</label>
+                <label htmlFor="username">{isEnglish? 'Username' : 'Потребителско име'}:</label>
                 <input type="text" id="username" name="userName" className={styles.rounded} onChange={inputHandler} value={userName} />
 
                 <label htmlFor="email">{isEnglish? 'Email:' : 'Имейл:'}</label>
