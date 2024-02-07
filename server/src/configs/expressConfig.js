@@ -3,7 +3,9 @@ const cors = require('cors');
 const path = require('path');
 const cookieParse = require("cookie-parser");
 const {authMiddleWare} = require('../middlewares/authMiddleware.js')
-const {serverLogger} = require('../middlewares/serverLogger.js')
+const {serverLogger} = require('../middlewares/serverLogger.js');
+const router = require('../Router.js');
+
 
 const expressConfig = (app) => {
     app.use(express.static(path.resolve(__dirname, "public")));
@@ -13,6 +15,7 @@ const expressConfig = (app) => {
     app.use(cookieParse());
     app.use(authMiddleWare);
     app.use(serverLogger);
+    app.use(router);
 };
 
 module.exports = {expressConfig};

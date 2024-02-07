@@ -1,15 +1,13 @@
 const express = require('express');
 const constants = require('./constants.js')
-const userService = require('./services/userService.js');
 const electonicsService = require('./services/electronicsService.js')
 const { dbConnect } = require('./lib/dataBase.js')
 const { expressConfig } = require('./configs/expressConfig.js')
 const { scrape } = require('../web-scrapper/gsmArena.js')
-const { APIkey } = require('./APIkey.js');
-const { CachedNewsManager } = require('./services/APIservices.js');
+const { KEY_API_WEATHER, KEY_API_NEWS } = require('./APIkey.js');
+const { CacheManager } = require('./services/APIservices.js');
 
 const app = express();
-
 expressConfig(app);
 
 //connect to DB:
@@ -22,29 +20,11 @@ catch (err) {
 }
 
 const sessions = {};
-const newsCache = new CachedNewsManager(8);
+const newsCache = new CacheManager(8, `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=${KEY_API_NEWS}`);
+const weatherCache = new CacheManager(8, `http://api.weatherstack.com/current?access_key=${KEY_API_WEATHER}&query=Sofia`);
 
 // Endpoints:
-app.get('/news', async (req, res) => {
 
-    const reqDateTime = Date.now();
-
-    if (reqDateTime >= newsCache.getExpiryTime()) {
-
-        try {
-            const news = await newsCache.setCache(reqDateTime);
-            console.log('Sending fresh content!');
-            res.json(news);
-        }
-        catch (err) {
-            console.log(err);
-        }
-    }
-    else {
-        console.log('Sending cached content!');
-        res.send(newsCache.getCache());
-    }
-})
 
 app.get('/products', async (req, res) => {
 
@@ -145,6 +125,8 @@ app.delete('/products/:id', async (req, res) => {
 })
 
 
+
+
 app.post('/autofill', async (req, res) => {
 
     const { brand, quantity } = req.body;
@@ -173,73 +155,30 @@ app.get('/getWeather', async (req, res) => {
     }
     catch (err) {
 
-        res.send(err.message).status(404)
+        res.status(404).send(err.message);
     }
 })
 
-app.post('/users/register', async (req, res) => {
+app.get('/news', async (req, res) => {
 
-    try {
-        const user = await userService.create(req.body)
-        setTimeout(() => { res.send(JSON.stringify(user)) }, 3000) // simulate network delay
-    }
-    catch (err) {
-        console.log(err);
-        res.send(err)
-    }
-})
+    const reqDateTime = Date.now();
 
-app.post('/users/login', async (req, res) => {
+    if (reqDateTime >= newsCache.getExpiryTime()) {
 
-    const { email, password } = req.body;
-
-    try {
-        const userData = await userService.login(email, password);
-        const token = userData.token;
-        sessions[token] = true;
-        res.json(userData);
-    }
-    catch (err) {
-        res.status(404).json(err);
-    }
-})
-
-app.post('/users/logout', (req, res) => {
-
-    const { authToken } = req.body;
-
-    try {
-        if (sessions[authToken]) {
-
-            console.log('Deleting user session', authToken);
-            delete sessions[authToken];
-            res.status(200).json(true);
+        try {
+            const news = await newsCache.setCache(reqDateTime);
+            console.log('Sending fresh content!');
+            res.json(news);
+        }
+        catch (err) {
+            console.log(err);
         }
     }
-    catch (err) { 
-        console.log(`Error occured during logout: ${err}`);
-        res.status(404).json(false);
-    }
-    finally {
-
-        console.log('Current sessions: ', sessions);
+    else {
+        console.log('Sending cached content!');
+        res.send(newsCache.getCache());
     }
 })
 
-app.post('/users/cart', async (req, res) => {
-
-    const { _id, cart } = req.body;
-
-    console.log(_id, cart);
-
-    try {
-        const updated = await userService.updateUser(_id, cart)
-
-        res.json(updated);
-    }
-    catch (err) {
-        res.status(404).json(err);
-    }
-})
 
 app.listen(constants.PORT, () => { console.log(`The server is listening on PORT  ${constants.PORT}`); })
