@@ -3,7 +3,6 @@ const { scrape } = require("../../web-scrapper/gsmArena.js");
 const { CacheManager } = require("../services/APIservices.js");
 const { KEY_API_WEATHER, KEY_API_NEWS } = require('../APIkey.js');
 
-
 const apiRouter = Router();
 const newsCache = new CacheManager(8, `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=${KEY_API_NEWS}`, 'news');
 const weatherCache = new CacheManager(8, `http://api.weatherstack.com/current?access_key=${KEY_API_WEATHER}&query=Sofia`, 'weather');

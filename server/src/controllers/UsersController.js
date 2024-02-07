@@ -1,8 +1,6 @@
 const { Router } = require("express");
 const userRouter = Router();
 const userService = require('../services/userService.js')
-
-
 const sessions = {};
 
 userRouter.post('/register', async (req, res, next) => {
