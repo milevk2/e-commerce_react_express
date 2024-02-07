@@ -3,7 +3,7 @@ const productsRouter = Router();
 const productsService = require('../services/electronicsService.js');
 
 //get products owner by certain user
-productsRouter.get('/products/user/:id', async (req, res, next) => {
+productsRouter.get('/user/:id', async (req, res, next) => {
 
     const id = req.params.id;
     try {
@@ -18,7 +18,7 @@ productsRouter.get('/products/user/:id', async (req, res, next) => {
 })
 
 //get details for certain product by id
-productsRouter.get('/products/:id', async (req, res, next) => {
+productsRouter.get('/:id', async (req, res, next) => {
 
     const id = req.params.id;
 
@@ -33,8 +33,8 @@ productsRouter.get('/products/:id', async (req, res, next) => {
     next();
 })
 
-//edit certain product
-productsRouter.put('/products/:id', async (req, res, next) => {
+//edit certain product or add product comment
+productsRouter.put('/:id', async (req, res, next) => {
 
     const id = req.params.id;
 
@@ -48,7 +48,6 @@ productsRouter.put('/products/:id', async (req, res, next) => {
             console.log(err);
             res.send(err)
         }
-       
     }
     else {
         try {
@@ -63,12 +62,12 @@ productsRouter.put('/products/:id', async (req, res, next) => {
     next();
 })
 
-productsRouter.delete('/products/:id', async (req, res,  next) => {
+productsRouter.delete('/:id', async (req, res,  next) => {
 
-    console.log(`DELETE ${req.params.id}`);
+    console.log(`DELETE PRODUCT ID: ${req.params.id}`);
     try {
         await productsService.deleteOne(req.params.id);
-        setTimeout(() => { res.json({ response: `User ID ${req.params.id} successfully Deleted!` }) }, 2000);
+       res.json({ response: `User ID ${req.params.id} successfully Deleted!` });
     }
     catch (err) {
 
@@ -78,7 +77,7 @@ productsRouter.delete('/products/:id', async (req, res,  next) => {
     next();
 })
 
-productsRouter.get('/products', async (req, re,  next) => {
+productsRouter.get('/', async (req, res,  next) => {
 
     console.log(` GET ALL products`);
 
@@ -94,12 +93,12 @@ productsRouter.get('/products', async (req, re,  next) => {
     next();
 })
 
-productsRouter.post('/products', async (req, res, next) => {
+productsRouter.post('/', async (req, res, next) => {
 
     try {
         const product = await productsService.create(req.body);
 
-        setTimeout(() => { res.send(JSON.stringify(product)) }, 2000) //simulate delay
+        res.send(JSON.stringify(product));
     }
     catch (err) {
         console.log(err);

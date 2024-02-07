@@ -4,12 +4,19 @@ class CacheManager {
     #expiryTime
     #hoursInterval
     #fetchUrl
+    #serviceName
 
-    constructor(interval_in_hours, fetchUrl) {
+    constructor(interval_in_hours, fetchUrl, serviceName) {
         this.#cache = null;
         this.#expiryTime = 0;
         this.#hoursInterval = interval_in_hours;
         this.#fetchUrl = fetchUrl;
+        this.#serviceName = serviceName;
+    }
+
+    getServiceName() {
+
+        return this.#serviceName;
     }
 
     async setCache(reqDateTime) {
@@ -30,7 +37,6 @@ class CacheManager {
     async #fetchData(fetchUrl) {
 
         const response = await fetch(fetchUrl);
-
         if (!response.ok) throw new Error(`Problem with news fetching! Status: ${response.status} - ${response.statusText}`);
 
         return await response.json();

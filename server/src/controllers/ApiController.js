@@ -1,10 +1,34 @@
 const { Router } = require("express");
+const { scrape } = require("../../web-scrapper/gsmArena.js");
 const { CacheManager } = require("../services/APIservices.js");
 const { KEY_API_WEATHER, KEY_API_NEWS } = require('../APIkey.js');
 
+
 const apiRouter = Router();
-const newsCache = new CacheManager(8, `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=${KEY_API_NEWS}`);
-const weatherCache = new CacheManager(8, `http://api.weatherstack.com/current?access_key=${KEY_API_WEATHER}&query=Sofia`);
+const newsCache = new CacheManager(8, `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=${KEY_API_NEWS}`, 'news');
+const weatherCache = new CacheManager(8, `http://api.weatherstack.com/current?access_key=${KEY_API_WEATHER}&query=Sofia`, 'weather');
+
+async function cacheExpiredChecker(req, res, cacheObject) {
+
+    const reqDateTime = Date.now();
+
+    if (reqDateTime >= cacheObject.getExpiryTime()) {
+
+        try {
+            const data = await cacheObject.setCache(reqDateTime);
+            console.log(`Sending fresh ${cacheObject.getServiceName()} content!`);
+            res.json(data);
+        }
+        catch (err) {
+            res.status(404).json(err);
+            console.log(err);
+        }
+    }
+    else {
+        console.log(`Sending cached ${cacheObject.getServiceName()} content!`);
+        res.send(cacheObject.getCache());
+    }
+}
 
 
 apiRouter.post('/autofill', async (req, res) => {
@@ -25,37 +49,14 @@ apiRouter.post('/autofill', async (req, res) => {
 
 apiRouter.get('/getWeather', async (req, res) => {
 
-    const url = `http://api.weatherstack.com/current?access_key=${APIkey}&query=Sofia`
-
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        res.setHeader('Cache-Control', 'no-store, no-cache')// 'no-store, no-cache, must-revalidate, private')
-        res.send(data)
-    }
-    catch (err) {
-
-        res.status(404).send(err.message);
-    }
+    await cacheExpiredChecker(req, res, weatherCache);
+    
 })
 
 apiRouter.get('/news', async (req, res) => {
 
-    const reqDateTime = Date.now();
-
-    if (reqDateTime >= newsCache.getExpiryTime()) {
-
-        try {
-            const news = await newsCache.setCache(reqDateTime);
-            console.log('Sending fresh content!');
-            res.json(news);
-        }
-        catch (err) {
-            console.log(err);
-        }
-    }
-    else {
-        console.log('Sending cached content!');
-        res.send(newsCache.getCache());
-    }
+    await cacheExpiredChecker(req, res, newsCache)
+    
 })
+
+module.exports = apiRouter;
